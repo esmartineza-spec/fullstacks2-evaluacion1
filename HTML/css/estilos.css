@@ -1,0 +1,207 @@
+/* ==========================================================================
+   PASTELERÍA MIL SABORES - ESTILOS GLOBALES
+   Asignatura: Desarrollo Full Stack II (DSY1104) - Duoc UC
+   Paleta basada en Mockup: Dark Chocolate, Dorado Ámbar y Crema Pastel
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400&family=Pacifico&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap');
+@import url('cabecera.css');
+
+:root {
+  /* Paleta de Colores Oficial del Mockup */
+  --bg-main: #1f140e;            /* Chocolate oscuro principal */
+  --bg-card: #2c1d15;            /* Fondo de tarjetas y secciones */
+  --bg-card-hover: #36241b;      /* Hover en tarjetas */
+  --bg-card-soft: #281a13;       /* Contraste suave interno */
+  --bg-input: #271911;           /* Fondo de campos de formulario */
+  
+  --accent-gold: #e5a93c;        /* Dorado ámbar brillante del mockup */
+  --accent-gold-hover: #f3b952;  /* Dorado más claro para hover */
+  --accent-terracotta: #c87941;  /* Terracota cálido */
+  --accent-cream: #fff5e1;       /* Crema pastel */
+  --accent-rose: #ffc0cb;        /* Rosa suave para detalles */
+  --color-chocolate: #e5a93c;    /* Dorado del mockup para botones y acentos */
+  --color-rose: #e5a93c;         /* Acento dorado brillante */
+  
+  --text-main: #fbf5ef;          /* Blanco crema de alta legibilidad */
+  --text-secondary: #baa89b;     /* Texto beige / gris suave */
+  --text-muted: #8c786b;         /* Texto atenuado */
+  --text-dark: #271a11;          /* Texto para botones dorados */
+  --text-light: #ffffff;         /* Blanco puro */
+  
+  --border-color: rgba(229, 169, 60, 0.25);    /* Bordes dorados tenues */
+  --border-subtle: rgba(255, 255, 255, 0.08);  /* Bordes muy suaves */
+  
+  /* Tipografías del Mockup */
+  --font-sans: 'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;  /* Títulos elegantes del mockup */
+  --font-cursive: 'Pacifico', cursive;               /* Cursiva artística */
+  
+  /* Sombras y transiciones */
+  --shadow-sm: 0 4px 10px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 8px 25px rgba(0, 0, 0, 0.45);
+  --shadow-gold: 0 4px 20px rgba(229, 169, 60, 0.25);
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --radius-pill: 50px;
+  --transition: all 0.3s ease;
+}
+
+/* Reset básico y normalización */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Contenedor general */
+.container {
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Enlaces globales */
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+/* Botones comunes */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.6rem;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 0.95rem;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: var(--transition);
+  text-decoration: none;
+}
+
+.btn-primary {
+  background-color: var(--accent-gold);
+  color: var(--text-dark);
+  box-shadow: var(--shadow-gold);
+}
+
+.btn-primary:hover {
+  background-color: var(--accent-gold-hover);
+  color: var(--text-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(229, 169, 60, 0.4);
+}
+
+.btn-rose {
+  background-color: var(--accent-gold);
+  color: var(--text-dark);
+  font-weight: 700;
+  box-shadow: var(--shadow-gold);
+}
+
+.btn-rose:hover {
+  background-color: var(--accent-gold-hover);
+  transform: translateY(-2px);
+  color: var(--text-dark);
+}
+
+.btn-outline {
+  background-color: transparent;
+  border: 1px solid var(--accent-gold);
+  color: var(--accent-gold);
+}
+
+.btn-outline:hover {
+  background-color: rgba(229, 169, 60, 0.12);
+  color: var(--accent-gold-hover);
+  transform: translateY(-2px);
+}
+
+.btn-sm {
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+}
+
+/* Badges e insignias */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border-radius: var(--radius-pill);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.badge-gold {
+  background-color: var(--accent-gold);
+  color: var(--text-dark);
+}
+
+.badge-rose {
+  background-color: rgba(229, 169, 60, 0.15);
+  color: var(--accent-gold);
+  border: 1px solid rgba(229, 169, 60, 0.3);
+}
+
+.badge-outline {
+  border: 1px solid var(--accent-gold);
+  color: var(--accent-gold);
+}
+
+
+/* Estilos de títulos comunes */
+.section-title {
+  font-family: var(--font-serif);
+  font-size: 2.2rem;
+  color: var(--text-main);
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.section-title span {
+  color: var(--accent-gold);
+  font-style: italic;
+}
+
+.section-subtitle {
+  color: var(--text-secondary);
+  text-align: center;
+  max-width: 650px;
+  margin: 0 auto 2.5rem auto;
+  font-size: 1.05rem;
+}
+
+/* Divisor sutil */
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-color), transparent);
+  border: none;
+  margin: 3rem 0;
+}

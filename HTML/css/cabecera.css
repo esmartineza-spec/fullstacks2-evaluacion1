@@ -1,0 +1,412 @@
+/* ==========================================================================
+   CABECERA Y PIE DE PÁGINA (HEADER & FOOTER)
+   Pastelería Mil Sabores - Diseño basado en Mockup
+   ========================================================================== */
+
+/* Barra de Anuncios Superior */
+.top-announcement {
+  background-color: #160e0a;
+  border-bottom: 1px solid rgba(229, 169, 60, 0.15);
+  padding: 0.4rem 1rem;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.top-announcement .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.top-announcement a {
+  color: var(--accent-gold);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.top-announcement a:hover {
+  color: var(--accent-gold-hover);
+}
+
+.top-user-links {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.top-user-links a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.8rem;
+}
+
+.top-user-links a:hover {
+  color: var(--accent-gold);
+}
+
+/* Header Principal */
+header {
+  background-color: rgba(31, 20, 14, 0.95);
+  backdrop-filter: blur(8px);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 1px solid var(--border-color);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.barra-superior {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  gap: 1.5rem;
+}
+
+/* Logo */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-serif);
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--text-main);
+  white-space: nowrap;
+}
+
+.logo .logo-icon {
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+.logo .logo-title {
+  font-family: var(--font-serif);
+  font-style: italic;
+  letter-spacing: -0.5px;
+}
+
+.logo .badge-50 {
+  background: linear-gradient(135deg, #e5a93c, #c87941);
+  color: #1f140e;
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  font-weight: 900;
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius-pill);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px rgba(229, 169, 60, 0.3);
+}
+
+/* Navegación */
+nav ul {
+  display: flex;
+  list-style: none;
+  align-items: center;
+  gap: 1.8rem;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li a {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  padding: 0.4rem 0.1rem;
+  position: relative;
+  transition: var(--transition);
+}
+
+nav ul li a:hover,
+nav ul li a.active {
+  color: var(--text-main);
+}
+
+nav ul li a.active::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--accent-gold);
+  border-radius: 2px;
+}
+
+/* Botón de Carrito del Mockup */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.boton-carro {
+  background-color: var(--accent-gold);
+  color: var(--text-dark);
+  border: none;
+  border-radius: var(--radius-pill);
+  padding: 0.55rem 1.1rem;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  box-shadow: var(--shadow-gold);
+  transition: var(--transition);
+  text-decoration: none;
+}
+
+.boton-carro:hover {
+  background-color: var(--accent-gold-hover);
+  color: var(--text-dark);
+  transform: translateY(-2px);
+}
+
+.cont-carrito {
+  background-color: var(--text-dark);
+  color: var(--accent-gold);
+  font-size: 0.75rem;
+  font-weight: 900;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Botón Hamburguesa Móvil */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--text-main);
+  font-size: 1.6rem;
+  cursor: pointer;
+  padding: 0.2rem;
+}
+
+/* ==========================================================================
+   PIE DE PÁGINA (FOOTER)
+   ========================================================================== */
+footer {
+  background-color: #160e0a;
+  border-top: 1px solid var(--border-color);
+  margin-top: auto;
+  padding: 3.5rem 0 1.5rem 0;
+  color: var(--text-secondary);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
+  gap: 2.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.footer-col h4 {
+  font-family: var(--font-serif);
+  color: var(--text-main);
+  font-size: 1.15rem;
+  margin-bottom: 1.2rem;
+  position: relative;
+}
+
+.footer-col h4::after {
+  content: '';
+  display: block;
+  width: 30px;
+  height: 2px;
+  background-color: var(--accent-gold);
+  margin-top: 0.4rem;
+}
+
+.footer-col p {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+
+.footer-col ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-col ul li {
+  margin-bottom: 0.55rem;
+}
+
+.footer-col ul li a {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.footer-col ul li a:hover {
+  color: var(--accent-gold);
+  padding-left: 4px;
+}
+
+.footer-social-links {
+  display: flex;
+  gap: 0.8rem;
+  margin-top: 1rem;
+}
+
+.footer-social-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-main);
+  font-size: 1rem;
+  transition: var(--transition);
+}
+
+.footer-social-btn:hover {
+  background-color: var(--accent-gold);
+  color: var(--text-dark);
+  transform: translateY(-3px);
+}
+
+.duoc-seal {
+  display: inline-block;
+  background: rgba(229, 169, 60, 0.1);
+  border: 1px dashed var(--accent-gold);
+  padding: 0.5rem 0.8rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  color: var(--accent-gold);
+  margin-top: 0.5rem;
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding-top: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+/* Media Queries para Responsive */
+@media (max-width: 992px) {
+  .footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 860px) {
+  .top-announcement .container {
+    justify-content: center;
+    text-align: center;
+    gap: 0.3rem;
+  }
+
+  .top-user-links {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .logo {
+    font-size: 1.2rem;
+  }
+
+  .logo .badge-50 {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: rgba(22, 14, 10, 0.98);
+    backdrop-filter: blur(10px);
+    border-bottom: 2px solid var(--accent-gold);
+    padding: 1.2rem 1.5rem;
+    display: none;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7);
+  }
+
+  nav.nav-open {
+    display: block;
+  }
+
+  nav ul {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+
+  nav ul li {
+    width: 100%;
+  }
+
+  nav ul li a {
+    display: block;
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius-sm);
+    font-size: 1rem;
+    color: var(--text-main);
+  }
+
+  nav ul li a:hover,
+  nav ul li a.active {
+    background-color: rgba(229, 169, 60, 0.15);
+    color: var(--accent-gold);
+  }
+
+  nav ul li a.active::after {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .barra-superior {
+    padding: 0.8rem 0;
+  }
+
+  .logo .logo-title {
+    font-size: 1.05rem;
+  }
+
+  .boton-carro span:first-child {
+    font-size: 0.85rem;
+  }
+
+  .boton-carro {
+    padding: 0.45rem 0.8rem;
+    gap: 0.35rem;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.5rem;
+  }
+}
+

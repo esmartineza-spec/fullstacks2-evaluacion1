@@ -1,0 +1,358 @@
+/* =============================================================================
+   ARCHIVO: carrito.css
+   PROPÓSITO: Estilos exclusivos de la página carrito.html
+   DEPENDE DE: estilos.css (variables globales)
+   ============================================================================= */
+
+/* ---------------------------------------------------------------------------
+   1. TÍTULO DE LA PÁGINA
+   --------------------------------------------------------------------------- */
+.cart-title {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  color: var(--text-main);
+  margin: 2rem 0 1.5rem;
+  text-align: center;
+}
+
+/* El <span> dentro del título va en dorado */
+.cart-title span {
+  color: var(--accent-gold);
+}
+
+/* ---------------------------------------------------------------------------
+   2. LAYOUT DE DOS COLUMNAS (items + resumen)
+   --------------------------------------------------------------------------- */
+.cart-layout {
+  display: grid;
+  /* Columna izquierda flexible, derecha fija de 340px */
+  grid-template-columns: 1fr 340px;
+  gap: 2rem;
+  align-items: start;
+  margin-bottom: 4rem;
+}
+
+/* En pantallas pequeñas, todo en una sola columna */
+@media (max-width: 800px) {
+  .cart-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   3. COLUMNA IZQUIERDA: Lista de items
+   --------------------------------------------------------------------------- */
+.cart-items-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Cada fila de producto en el carrito */
+.cart-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background-color: var(--surface-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  padding: 1rem;
+}
+
+/* Imagen/emoji del producto */
+.cart-item-img {
+  width: 70px;
+  height: 70px;
+  border-radius: 8px;
+  object-fit: cover;
+  background-color: var(--surface-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  flex-shrink: 0;
+}
+
+/* Información del producto (nombre, personalización) */
+.cart-item-info {
+  flex: 1; /* Ocupa todo el espacio disponible */
+}
+
+.cart-item-name {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-main);
+  margin: 0 0 0.3rem;
+}
+
+.cart-item-personalizacion {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+/* Cantidad del producto (x2, x3...) */
+.cart-item-cantidad {
+  font-size: 0.85rem;
+  color: var(--accent-gold);
+  font-weight: 600;
+  margin-top: 0.25rem;
+}
+
+/* Precio del item */
+.cart-item-precio {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--accent-gold);
+  white-space: nowrap;
+}
+
+/* Botón de eliminar (✕) */
+.cart-item-eliminar {
+  background: transparent;
+  border: 1px solid rgba(255, 100, 100, 0.4);
+  color: #ff8080;
+  font-size: 1rem;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+  flex-shrink: 0;
+}
+
+.cart-item-eliminar:hover {
+  background-color: rgba(255, 80, 80, 0.2);
+}
+
+/* ---------------------------------------------------------------------------
+   4. ESTADO: CARRITO VACÍO
+   --------------------------------------------------------------------------- */
+.cart-empty {
+  text-align: center;
+  padding: 3rem 1rem;
+  background-color: var(--surface-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+}
+
+.empty-icon {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+
+.empty-title {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--text-main);
+  margin-bottom: 0.5rem;
+}
+
+.empty-desc {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+/* ---------------------------------------------------------------------------
+   5. COLUMNA DERECHA: Tarjeta de resumen
+   --------------------------------------------------------------------------- */
+.cart-summary-col {
+  position: sticky; /* Se queda fija al hacer scroll */
+  top: 80px;
+}
+
+.summary-card {
+  background-color: var(--surface-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.summary-title {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  color: var(--text-main);
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+/* Fila de resumen (subtotal, envío, total) */
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+/* Fila de total destacada */
+.total-row {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-main);
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--border-subtle);
+  margin-top: 0.2rem;
+}
+
+/* ---------------------------------------------------------------------------
+   6. SECCIÓN DE CÓDIGO DE DESCUENTO
+   --------------------------------------------------------------------------- */
+.promo-section {
+  margin-top: 0.5rem;
+}
+
+.promo-label {
+  display: block;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.4rem;
+}
+
+.promo-input-row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.promo-input {
+  flex: 1;
+  background-color: var(--surface-dark);
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+  padding: 0.5rem 0.75rem;
+  color: var(--text-main);
+  font-size: 0.9rem;
+}
+
+.promo-input:focus {
+  outline: none;
+  border-color: var(--accent-gold);
+}
+
+/* Botón "Aplicar" del código */
+.btn-promo {
+  background-color: transparent;
+  border: 1px solid var(--accent-gold);
+  color: var(--accent-gold);
+  padding: 0.5rem 0.9rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-promo:hover {
+  background-color: rgba(229, 169, 60, 0.15);
+}
+
+/* Mensaje de resultado del código (éxito o error) */
+.promo-msg {
+  font-size: 0.82rem;
+  margin-top: 0.4rem;
+  font-weight: 600;
+}
+
+/* ---------------------------------------------------------------------------
+   7. NOTA INFORMATIVA Y BOTONES
+   --------------------------------------------------------------------------- */
+.summary-note {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  border-left: 2px solid var(--accent-gold);
+  padding-left: 0.75rem;
+}
+
+/* Botón principal "Confirmar Pedido" */
+.btn-checkout {
+  background-color: var(--accent-gold);
+  color: var(--bg-dark);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.1s;
+  width: 100%;
+  margin-top: 0.3rem;
+}
+
+.btn-checkout:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+/* Enlace "Seguir comprando" */
+.link-seguir {
+  display: block;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  text-decoration: none;
+  margin-top: 0.25rem;
+  transition: color 0.2s;
+}
+
+.link-seguir:hover {
+  color: var(--accent-gold);
+}
+
+/* ---------------------------------------------------------------------------
+   8. RESPONSIVE PARA CARRITO
+   --------------------------------------------------------------------------- */
+@media (max-width: 800px) {
+  .cart-summary-col {
+    position: static;
+  }
+}
+
+@media (max-width: 520px) {
+  .cart-item {
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    position: relative;
+  }
+
+  .cart-item-img {
+    width: 55px;
+    height: 55px;
+    font-size: 1.6rem;
+  }
+
+  .cart-item-info {
+    flex: 1 1 calc(100% - 100px);
+  }
+
+  .cart-item-precio {
+    width: 100%;
+    text-align: right;
+    font-size: 1.1rem;
+    border-top: 1px dashed var(--border-subtle);
+    padding-top: 0.5rem;
+  }
+
+  .cart-item-eliminar {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+  }
+
+  .promo-input-row {
+    flex-direction: column;
+  }
+
+  .btn-promo {
+    width: 100%;
+    padding: 0.65rem;
+  }
+}

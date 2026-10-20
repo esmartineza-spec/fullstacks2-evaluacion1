@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Seguimiento de pedidos en tiempo real - Pastelería Mil Sabores. Conoce el estado de preparación, decoración y despacho refrigerado de tu torta.">
+  <meta name="author" content="Estudiantes Duoc UC - Desarrollo Full Stack II">
+  <title>Seguimiento de Pedido | Pastelería Mil Sabores</title>
+
+  <!-- Hojas de Estilos Externas -->
+  <link rel="stylesheet" href="css/estilos.css">
+  <link rel="stylesheet" href="css/cabecera.css">
+
+  <style>
+    /* Estilos del Stepper de Seguimiento */
+    .tracking-timeline {
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+      margin: 2.5rem 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .tracking-timeline::before {
+      content: '';
+      position: absolute;
+      top: 24px;
+      left: 30px;
+      right: 30px;
+      height: 4px;
+      background: var(--border-subtle);
+      z-index: 1;
+    }
+
+    .tracking-step-item {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      flex: 1;
+    }
+
+    .tracking-icon-circle {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: var(--bg-card);
+      border: 3px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 0.8rem;
+      font-size: 1.3rem;
+      transition: all 0.3s ease;
+    }
+
+    .tracking-step-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin: 0;
+    }
+
+    /* Estado Activo / Completado */
+    .tracking-step-item.completed .tracking-icon-circle {
+      background: #2e7d32;
+      border-color: #2e7d32;
+      color: #fff;
+    }
+    .tracking-step-item.completed .tracking-step-title {
+      color: #2e7d32;
+    }
+
+    .tracking-step-item.active .tracking-icon-circle {
+      background: var(--color-chocolate);
+      border-color: var(--color-chocolate);
+      color: #FFF5E1;
+      transform: scale(1.15);
+      box-shadow: 0 0 15px rgba(139, 69, 19, 0.4);
+    }
+    .tracking-step-item.active .tracking-step-title {
+      color: var(--color-chocolate);
+      font-weight: 800;
+    }
+
+    @media (max-width: 650px) {
+      .tracking-timeline {
+        flex-direction: column;
+        gap: 1.5rem;
+        margin-left: 20px;
+      }
+      .tracking-timeline::before {
+        top: 20px;
+        bottom: 20px;
+        left: 25px;
+        width: 4px;
+        height: auto;
+      }
+      .tracking-step-item {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        text-align: left;
+      }
+      .tracking-icon-circle {
+        margin: 0;
+        flex-shrink: 0;
+      }
+    }
+  </style>
+
+  <!-- Scripts Modulares Diferidos -->
+  <script src="js/productos.js" defer></script>
+  <script src="js/usuarios.js" defer></script>
+  <script src="js/carrito.js" defer></script>
+  <script src="js/main.js" defer></script>
+</head>
+
+<body>
+
+  <!-- ======================================================================= -->
+  <!-- 1. BARRA SUPERIOR DE AVISOS Y ACCESOS RÁPIDOS                         -->
+  <!-- ======================================================================= -->
+  <aside class="top-announcement" aria-label="Avisos destacados">
+    <div class="container">
+      <div>
+        <span>🎉 Celebramos 50 años: Descuento del <strong>50%</strong> para mayores de 50 años | Código <strong>FELICES50</strong></span>
+      </div>
+      <div class="top-user-links">
+        <a href="login.html">Iniciar sesión</a>
+        <span>|</span>
+        <a href="registro.html">Registrar usuario</a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ======================================================================= -->
+  <!-- 2. CABECERA PRINCIPAL Y NAVEGACIÓN                                      -->
+  <!-- ======================================================================= -->
+  <header>
+    <div class="container barra-superior">
+      <a href="index.html" class="logo" aria-label="Ir a inicio de Pastelería Mil Sabores">
+        <span class="logo-icon">🧁</span>
+        <span class="logo-title">Pastelería Mil Sabores</span>
+        <span class="badge-50">50 AÑOS</span>
+      </a>
+
+      <nav aria-label="Navegación principal del sitio">
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="categoria.html">Catálogo</a></li>
+          <li><a href="producto.html">Producto</a></li>
+          <li><a href="nosotros.html">Nosotros</a></li>
+          <li><a href="blogs.html">Blogs</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <a href="carrito.html" class="boton-carro" aria-label="Ver carrito de compras">
+          <span>🛒 Carrito</span>
+          <span class="cont-carrito" id="num-cont-carrito">0</span>
+        </a>
+        <button class="menu-toggle" aria-label="Abrir menú de navegación" aria-expanded="false">
+          ☰
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ======================================================================= -->
+  <!-- 3. RUTA DE NAVEGACIÓN (BREADCRUMB)                                      -->
+  <!-- ======================================================================= -->
+  <nav class="breadcrumb-section" aria-label="Miga de pan" style="background-color: var(--bg-card-soft); padding: 1rem 0; border-bottom: 1px solid var(--border-subtle);">
+    <div class="container">
+      <div style="font-size: 0.88rem; color: var(--text-secondary); display: flex; gap: 0.5rem;">
+        <a href="index.html" style="color: var(--color-chocolate); font-weight: 600;">Inicio</a>
+        <span style="color: var(--text-muted);">/</span>
+        <a href="perfil.html" style="color: var(--color-chocolate); font-weight: 600;">Mi Perfil</a>
+        <span style="color: var(--text-muted);">/</span>
+        <span style="color: var(--text-main); font-weight: 700;">Seguimiento en Vivo</span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ======================================================================= -->
+  <!-- 4. CONTENIDO PRINCIPAL: SEGUIMIENTO EN TIEMPO REAL                      -->
+  <!-- ======================================================================= -->
+  <main id="seguimiento-container" style="padding: 3rem 0 5rem;">
+    <div class="container" style="max-width: 860px;">
+
+      <div style="text-align: center; margin-bottom: 2rem;">
+        <span class="badge badge-rose" style="font-size: 0.85rem; padding: 0.35rem 0.9rem;">Despacho Refrigerado Garantizado</span>
+        <h1 style="font-family: var(--font-serif); color: var(--color-chocolate); font-size: 2.3rem; margin: 0.5rem 0;">Seguimiento de tu Pedido</h1>
+        <p style="color: var(--text-secondary); font-size: 0.95rem;">
+          Monitorea cada etapa desde el horneado artesanal hasta que tu torta llega fresca a tu puerta.
+        </p>
+      </div>
+
+      <!-- Tarjeta Principal del Estado -->
+      <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 16px; padding: 2.5rem; box-shadow: 0 10px 30px rgba(93, 64, 55, 0.08); margin-bottom: 2rem;">
+
+        <!-- Datos del Pedido -->
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-subtle); padding-bottom: 1.2rem; flex-wrap: wrap; gap: 1rem;">
+          <div>
+            <span style="font-size: 0.85rem; color: var(--text-muted); display: block;">Número de Boleta / Folio:</span>
+            <strong id="seg-folio-display" style="font-size: 1.3rem; color: var(--color-chocolate);">MS-501995</strong>
+          </div>
+          <div>
+            <span style="font-size: 0.85rem; color: var(--text-muted); display: block;">Destinatario:</span>
+            <strong id="seg-cliente-display" style="color: var(--text-main);">Cliente</strong>
+          </div>
+          <div>
+            <span style="font-size: 0.85rem; color: var(--text-muted); display: block;">Dirección de Entrega:</span>
+            <strong id="seg-destino-display" style="color: var(--text-main);">Av. Concha y Toro #1234</strong>
+          </div>
+          <div>
+            <span style="font-size: 0.85rem; color: var(--text-muted); display: block;">Horario Estimado:</span>
+            <strong id="seg-horario-display" style="color: #2e7d32;">14:00 a 18:00 hrs</strong>
+          </div>
+        </div>
+
+        <!-- Banner Dinámico del Estado Actual -->
+        <div id="seg-status-banner" style="background: rgba(229, 169, 60, 0.12); border-left: 5px solid var(--accent-gold); padding: 1.2rem; border-radius: 8px; margin: 1.8rem 0; border: 1px solid var(--border-color); border-left-width: 5px;">
+          <!-- Inyectado dinámicamente por main.js -->
+        </div>
+
+        <!-- Línea de Tiempo (Stepper 5 Estados) -->
+        <ol class="tracking-timeline">
+          <!-- Paso 1 -->
+          <li class="tracking-step-item completed">
+            <div class="tracking-icon-circle">📝</div>
+            <p class="tracking-step-title">1. Confirmado</p>
+          </li>
+          <!-- Paso 2 -->
+          <li class="tracking-step-item completed">
+            <div class="tracking-icon-circle">🔥</div>
+            <p class="tracking-step-title">2. Horneado</p>
+          </li>
+          <!-- Paso 3 -->
+          <li class="tracking-step-item active">
+            <div class="tracking-icon-circle">🎂</div>
+            <p class="tracking-step-title">3. Decoración</p>
+          </li>
+          <!-- Paso 4 -->
+          <li class="tracking-step-item">
+            <div class="tracking-icon-circle">🚚</div>
+            <p class="tracking-step-title">4. En Ruta</p>
+          </li>
+          <!-- Paso 5 -->
+          <li class="tracking-step-item">
+            <div class="tracking-icon-circle">✨</div>
+            <p class="tracking-step-title">5. Entregado</p>
+          </li>
+        </ol>
+
+        <!-- Información del Repartidor y Vehículo -->
+        <div style="background: var(--bg-card-soft); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 1.2rem; margin-top: 2rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
+          <div style="display: flex; align-items: center; gap: 1rem;">
+            <div style="width: 55px; height: 55px; border-radius: 50%; background: var(--accent-gold); color: var(--text-dark); display: flex; align-items: center; justify-content: center; font-size: 1.6rem;">
+              👨‍🍳
+            </div>
+            <div>
+              <p style="margin: 0; font-weight: 700; color: var(--text-main);">Carlos Valenzuela — Conductor Pastelería Mil Sabores</p>
+              <p style="margin: 0.2rem 0 0; font-size: 0.85rem; color: var(--text-secondary);">Furgón Refrigerado Especial para Tortas y Postres · Patente MS-5095</p>
+            </div>
+          </div>
+          <div>
+            <button type="button" class="btn btn-outline btn-sm" onclick="alert('📞 Conectando con Carlos Valenzuela (+56 9 8765 4321)...')" style="display: inline-flex; align-items: center; gap: 0.4rem;">
+              📞 Contactar Repartidor
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Controles de Simulación para Evaluación del Profesor -->
+      <div style="background: rgba(229, 169, 60, 0.08); border: 1px dashed var(--accent-gold); border-radius: 16px; padding: 1.5rem; text-align: center;">
+        <h3 style="font-family: var(--font-serif); color: var(--accent-gold); margin-bottom: 0.5rem; font-size: 1.15rem;">
+          🕹️ Simulación Interactiva del Proceso 
+        </h3>
+        <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem;">
+          Haz clic en cada estado para ver cómo cambia la línea de tiempo y la información para el cliente en tiempo real:
+        </p>
+
+        <div style="display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap;">
+          <button type="button" class="btn btn-sm btn-simular-estado" data-step="0" style="background: var(--bg-card); border: 1px solid var(--accent-gold); color: var(--accent-gold);">
+            1. Confirmado
+          </button>
+          <button type="button" class="btn btn-sm btn-simular-estado" data-step="1" style="background: var(--bg-card); border: 1px solid var(--accent-gold); color: var(--accent-gold);">
+            2. En Horneado
+          </button>
+          <button type="button" class="btn btn-sm btn-simular-estado" data-step="2" style="background: var(--accent-gold); color: var(--text-dark);">
+            3. Decoración
+          </button>
+          <button type="button" class="btn btn-sm btn-simular-estado" data-step="3" style="background: var(--bg-card); border: 1px solid var(--accent-gold); color: var(--accent-gold);">
+            4. En Ruta
+          </button>
+          <button type="button" class="btn btn-sm btn-simular-estado" data-step="4" style="background: var(--bg-card); border: 1px solid var(--accent-gold); color: var(--accent-gold);">
+            5. Entregado
+          </button>
+        </div>
+      </div>
+
+      <!-- Enlaces Inferiores -->
+      <div style="text-align: center; margin-top: 2rem; display: flex; justify-content: center; gap: 1.5rem;">
+        <a href="boleta.html" class="link-seguir">📄 Ver Boleta del Pedido</a>
+        <a href="perfil.html" class="link-seguir">👤 Volver a Mi Perfil</a>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ======================================================================= -->
+  <!-- 5. PIE DE PÁGINA (FOOTER INFORMATIVO)                                   -->
+  <!-- ======================================================================= -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>Pastelería Mil Sabores</h4>
+          <p>
+            Celebrando medio siglo de tradición pastelera en Chile. Entregamos momentos dulces con la máxima calidad, higiene y pasión artesanal.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Navegación</h4>
+          <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="categoria.html">Catálogo Completo</a></li>
+            <li><a href="producto.html">Detalle de Producto</a></li>
+            <li><a href="carrito.html">Carrito de Compras</a></li>
+            <li><a href="nosotros.html">Sobre Nosotros</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Especialidades</h4>
+          <ul>
+            <li><a href="categoria.html?cat=cuadradas">Tortas Cuadradas</a></li>
+            <li><a href="categoria.html?cat=circulares">Tortas Circulares</a></li>
+            <li><a href="categoria.html?cat=individuales">Postres Individuales</a></li>
+            <li><a href="categoria.html?cat=sin-azucar">Productos Sin Azúcar</a></li>
+            <li><a href="categoria.html?cat=sin-gluten">Productos Sin Gluten</a></li>
+            <li><a href="categoria.html?cat=vegana">Productos Veganos</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Horarios y Atención</h4>
+          <p>📍 Av. Concha y Toro #1234, Santiago, Chile</p>
+          <p>🕒 Lunes a Sábado: 09:00 - 20:00 hrs</p>
+          <p>🕒 Domingo: 10:00 - 16:00 hrs</p>
+          <p>📞 Teléfono: +56 2 2987 6543</p>
+          <p>✉️ contacto@pasteleriamilsabores.cl</p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2024 Pastelería Mil Sabores - 50 Aniversario. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>

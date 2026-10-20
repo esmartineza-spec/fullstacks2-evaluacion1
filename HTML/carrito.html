@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Revisa y confirma los productos en tu carrito de compras. Pastelería Mil Sabores.">
+  <meta name="author" content="Estudiantes Duoc UC - Desarrollo Full Stack II">
+  <title>Carrito de Compras | Pastelería Mil Sabores</title>
+
+  <!-- Hojas de Estilos Externas (Rubro IE1.1.2) -->
+  <link rel="stylesheet" href="css/estilos.css">
+  <link rel="stylesheet" href="css/carrito.css">
+
+  <!-- Scripts Modulares Diferidos -->
+  <script src="js/productos.js" defer></script>
+  <script src="js/usuarios.js" defer></script>
+  <script src="js/carrito.js" defer></script>
+  <script src="js/main.js" defer></script>
+</head>
+
+<body>
+
+  <!-- ======================================================================= -->
+  <!-- 1. BARRA SUPERIOR DE AVISOS Y ACCESOS RÁPIDOS                         -->
+  <!-- ETIQUETA: <aside> para avisos complementarios                           -->
+  <!-- ======================================================================= -->
+  <aside class="top-announcement" aria-label="Avisos destacados">
+    <div class="container">
+      <div>
+        <span>🎉 Celebramos 50 años: Usa el código <strong>FELICES50</strong> para 10% de descuento</span>
+      </div>
+      <div class="top-user-links">
+        <a href="login.html">Iniciar sesión</a>
+        <span>|</span>
+        <a href="registro.html">Registrar usuario</a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ======================================================================= -->
+  <!-- 2. CABECERA PRINCIPAL Y NAVEGACIÓN                                      -->
+  <!-- ETIQUETA: <header> para el logo y la barra de navegación                -->
+  <!-- ======================================================================= -->
+  <header>
+    <div class="container barra-superior">
+      <!-- Logotipo -->
+      <a href="index.html" class="logo" aria-label="Ir a inicio de Pastelería Mil Sabores">
+        <span class="logo-icon">🧁</span>
+        <span class="logo-title">Pastelería Mil Sabores</span>
+        <span class="badge-50">50 AÑOS</span>
+      </a>
+
+      <!-- Menú de Navegación con 'Carrito' activo -->
+      <nav aria-label="Navegación principal del sitio">
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="categoria.html">Catálogo</a></li>
+          <li><a href="producto.html">Producto</a></li>
+          <li><a href="carrito.html" class="active">Carrito</a></li>
+          <li><a href="nosotros.html">Nosotros</a></li>
+          <li><a href="blogs.html">Blogs</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+      </nav>
+
+
+      <!-- Botón del Carrito con su contador -->
+      <div class="header-actions">
+        <a href="carrito.html" class="boton-carro" aria-label="Ver carrito de compras">
+          <span>🛒 Carrito</span>
+          <span class="cont-carrito" id="num-cont-carrito">0</span>
+        </a>
+        <button class="menu-toggle" aria-label="Abrir menú de navegación" aria-expanded="false">
+          ☰
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ======================================================================= -->
+  <!-- 3. RUTA DE NAVEGACIÓN (BREADCRUMB)                                      -->
+  <!-- ======================================================================= -->
+  <nav class="breadcrumb-section" aria-label="Miga de pan" style="background-color: var(--bg-card-soft); padding: 1rem 0; border-bottom: 1px solid var(--border-subtle);">
+    <div class="container">
+      <div style="font-size: 0.88rem; color: var(--text-secondary); display: flex; gap: 0.5rem;">
+        <a href="index.html" style="color: var(--color-chocolate); font-weight: 600;">Inicio</a>
+        <span style="color: var(--text-muted);">/</span>
+        <span style="color: var(--text-main); font-weight: 700;">Carrito de Compras</span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ======================================================================= -->
+  <!-- 4. CONTENIDO PRINCIPAL: CARRITO DE COMPRAS                              -->
+  <!-- ETIQUETA: <main> nucleo central de la pagina                            -->
+  <!-- ======================================================================= -->
+  <main>
+    <div class="container">
+      <h1 class="cart-title">Tu <span>Carrito</span></h1>
+
+      <!-- Layout de dos columnas: lista de productos + resumen -->
+      <div class="cart-layout">
+
+        <!-- ============================================================ -->
+        <!-- COLUMNA IZQUIERDA: Lista de productos en el carrito          -->
+        <!-- ============================================================ -->
+        <div class="cart-items-col">
+
+          <!-- Mensaje cuando el carrito esta vacio -->
+          <div id="carrito-vacio" class="cart-empty" style="display: none;">
+            <p class="empty-icon">🛒</p>
+            <p class="empty-title">Tu carrito está vacío</p>
+            <p class="empty-desc">Aún no has agregado ningún producto. ¡Visita nuestro catálogo y elige tu delicia favorita!</p>
+            <a href="categoria.html" class="btn-primary">Ver Catálogo</a>
+          </div>
+
+          <!-- Contenedor donde el JS inyectara las filas de productos -->
+          <div id="lista-items-carrito">
+            <!-- Los productos se agregan aqui dinamicamente desde main.js -->
+          </div>
+
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- COLUMNA DERECHA: Resumen y opciones de pago                  -->
+        <!-- ============================================================ -->
+        <aside class="cart-summary-col" aria-label="Resumen del pedido">
+          <!-- Aviso Dinámico de Beneficios del Usuario -->
+          <div id="aviso-beneficio-usuario" class="cart-benefit-banner" style="display: none; background: rgba(229, 169, 60, 0.12); border: 1px solid var(--accent-gold); padding: 0.9rem; border-radius: 10px; margin-bottom: 1.2rem; font-size: 0.9rem; color: var(--accent-gold); line-height: 1.5; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);"></div>
+
+          <div class="summary-card">
+            <h2 class="summary-title">Resumen del Pedido</h2>
+
+            <!-- Subtotal (actualizado dinamicamente) -->
+            <div class="summary-row">
+              <span>Subtotal</span>
+              <span id="resumen-subtotal">$0 CLP</span>
+            </div>
+
+            <!-- Descuento (aparece solo si se aplica cupon o beneficio) -->
+            <div class="summary-row descuento-row" id="fila-descuento" style="display: none;">
+              <span id="label-descuento">Descuento</span>
+              <span id="resumen-descuento" style="color: #2e7d32; font-weight: 700;">-$0 CLP</span>
+            </div>
+
+            <!-- Envio fijo -->
+            <div class="summary-row">
+              <span>Envío (Santiago)</span>
+              <span>$3.500 CLP</span>
+            </div>
+
+            <!-- Total final -->
+            <div class="summary-row total-row">
+              <span>Total</span>
+              <span id="resumen-total">$3.500 CLP</span>
+            </div>
+
+            <!-- Programación de Entrega y Despacho -->
+            <div class="delivery-section" style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border-subtle);">
+              <h3 style="font-size: 0.95rem; font-family: var(--font-serif); color: var(--text-main); margin-bottom: 0.8rem;">📅 Programar Entrega</h3>
+              
+              <label for="input-fecha-entrega" class="promo-label">Fecha de entrega deseada:</label>
+              <input type="date" id="input-fecha-entrega" class="promo-input" style="width: 100%; margin-bottom: 0.8rem;" required>
+
+              <label for="select-horario-entrega" class="promo-label">Bloque horario preferido:</label>
+              <select id="select-horario-entrega" class="promo-input" style="width: 100%; margin-bottom: 0.8rem;">
+                <option value="10:00 a 14:00 hrs">Mañana (10:00 a 14:00 hrs)</option>
+                <option value="14:00 a 18:00 hrs" selected>Tarde (14:00 a 18:00 hrs)</option>
+                <option value="18:00 a 21:00 hrs">Vespertino (18:00 a 21:00 hrs)</option>
+              </select>
+
+              <label for="input-direccion-despacho" class="promo-label">Dirección de entrega (o retiro en tienda):</label>
+              <input type="text" id="input-direccion-despacho" class="promo-input" placeholder="Ej: Av. Concha y Toro #1234, Puente Alto" style="width: 100%;">
+            </div>
+
+            <!-- Campo de codigo de descuento -->
+            <div class="promo-section">
+              <label for="input-codigo" class="promo-label">¿Tienes un código de descuento?</label>
+              <div class="promo-input-row">
+                <input type="text"
+                       id="input-codigo"
+                       class="promo-input"
+                       placeholder="Ej: FELICES50"
+                       aria-label="Código de descuento">
+                <button type="button" id="btn-aplicar-codigo" class="btn-promo">Aplicar</button>
+              </div>
+              <!-- Mensaje de resultado del codigo (OK o error) -->
+              <p id="msg-codigo" class="promo-msg" style="display: none;"></p>
+            </div>
+
+            <!-- Nota de descuentos especiales -->
+            <p class="summary-note">
+              🎂 <strong>Beneficio 50 Años:</strong> Personas mayores de 50 años acceden al 50% de descuento automático en todos los productos al registrarse.
+            </p>
+
+            <!-- Boton de confirmar pedido -->
+            <button type="button" id="btn-confirmar" class="btn-checkout">
+              Confirmar Pedido y Ver Boleta &rarr;
+            </button>
+
+            <!-- Enlace para seguir comprando -->
+            <a href="categoria.html" class="link-seguir">&larr; Seguir comprando en Catálogo</a>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- ======================================================================= -->
+  <!-- 5. PIE DE PÁGINA (FOOTER INFORMATIVO COMPARTIDO)                        -->
+  <!-- ======================================================================= -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Columna 1: Identidad de Marca -->
+        <div class="footer-col">
+          <h4>Pastelería Mil Sabores</h4>
+          <p>
+            Celebrando medio siglo de tradición pastelera en Chile. Entregamos momentos dulces con la máxima calidad, higiene y pasión artesanal.
+          </p>
+        </div>
+
+        <!-- Columna 2: Navegación Rapida -->
+        <div class="footer-col">
+          <h4>Navegación</h4>
+          <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="categoria.html">Catálogo Completo</a></li>
+            <li><a href="producto.html">Detalle de Producto</a></li>
+            <li><a href="carrito.html">Carrito de Compras</a></li>
+            <li><a href="nosotros.html">Sobre Nosotros</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+          </ul>
+        </div>
+
+        <!-- Columna 3: Categorias Rapidas -->
+        <div class="footer-col">
+          <h4>Especialidades</h4>
+          <ul>
+            <li><a href="categoria.html?cat=cuadradas">Tortas Cuadradas</a></li>
+            <li><a href="categoria.html?cat=circulares">Tortas Circulares</a></li>
+            <li><a href="categoria.html?cat=individuales">Postres Individuales</a></li>
+            <li><a href="categoria.html?cat=sin-azucar">Productos Sin Azúcar</a></li>
+            <li><a href="categoria.html?cat=sin-gluten">Productos Sin Gluten</a></li>
+            <li><a href="categoria.html?cat=vegana">Productos Veganos</a></li>
+          </ul>
+        </div>
+
+        <!-- Columna 4: Atencion y Horarios -->
+        <div class="footer-col">
+          <h4>Horarios y Atención</h4>
+          <p>📍 Av. Concha y Toro #1234, Santiago, Chile</p>
+          <p>🕒 Lunes a Sábado: 09:00 - 20:00 hrs</p>
+          <p>🕒 Domingo: 10:00 - 16:00 hrs</p>
+          <p>📞 Teléfono: +56 2 2987 6543</p>
+          <p>✉️ contacto@pasteleriamilsabores.cl</p>
+        </div>
+      </div>
+
+      <!-- Barra de Copyright Inferior -->
+      <div class="footer-bottom">
+        <p>&copy; 2024 Pastelería Mil Sabores - 50 Aniversario. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>

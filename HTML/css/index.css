@@ -1,0 +1,438 @@
+/* ==========================================================================
+   ESTILOS ESPECÍFICOS PARA LA PÁGINA PRINCIPAL (INDEX.HTML)
+   Pastelería Mil Sabores - 50 Aniversario
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   HERO SECTION (MOCKUP EXACTO)
+   -------------------------------------------------------------------------- */
+.hero-section {
+  padding: 3.5rem 0 2.5rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.95fr;
+  gap: 3.5rem;
+  align-items: center;
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+.hero-kicker {
+  color: var(--accent-gold);
+  font-size: 0.82rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.hero-title {
+  font-family: var(--font-serif);
+  font-size: 3.2rem;
+  line-height: 1.15;
+  color: var(--text-main);
+  font-weight: 700;
+}
+
+.hero-title .highlight-cursive {
+  font-style: italic;
+  color: var(--accent-gold);
+  font-weight: 600;
+  display: block;
+}
+
+.hero-description {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  line-height: 1.7;
+  max-width: 520px;
+}
+
+.hero-buttons {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  margin-top: 0.5rem;
+  flex-wrap: wrap;
+}
+
+/* Tarjeta de Imagen del Hero con Ribbon "-10% FELICES50" */
+.hero-image-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.hero-card {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  aspect-ratio: 4/4.5;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(229, 169, 60, 0.25);
+  background: var(--bg-card);
+}
+
+.hero-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s ease;
+}
+
+.hero-card:hover img {
+  transform: scale(1.03);
+}
+
+/* Cinta Diagonal (Ribbon) del Mockup */
+.ribbon-discount {
+  position: absolute;
+  top: 24px;
+  right: -38px;
+  background: linear-gradient(135deg, #e5a93c, #c87941);
+  color: #1f140e;
+  font-weight: 900;
+  font-size: 0.78rem;
+  letter-spacing: 0.5px;
+  padding: 0.35rem 3.5rem;
+  transform: rotate(45deg);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  text-transform: uppercase;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* --------------------------------------------------------------------------
+   BARRA DE ESTADÍSTICAS (STATS BAR) DEL MOCKUP
+   -------------------------------------------------------------------------- */
+.stats-section {
+  padding: 2.2rem 0;
+  border-top: 1px dashed rgba(229, 169, 60, 0.35);
+  border-bottom: 1px dashed rgba(229, 169, 60, 0.35);
+  background-color: rgba(31, 20, 14, 0.6);
+  margin-top: 1rem;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  text-align: left;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.stat-number {
+  font-family: var(--font-serif);
+  font-size: 2.8rem;
+  font-style: italic;
+  font-weight: 700;
+  color: var(--accent-gold);
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  font-weight: 400;
+}
+
+/* --------------------------------------------------------------------------
+   PROMOCIONES Y DESCUENTOS DEL 50 ANIVERSARIO (CASO DUOC)
+   -------------------------------------------------------------------------- */
+.promos-section {
+  padding: 4.5rem 0 3rem 0;
+}
+
+.promos-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.8rem;
+}
+
+.promo-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.promo-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background-color: var(--accent-gold);
+  opacity: 0.8;
+}
+
+.promo-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--accent-gold);
+}
+
+.promo-badge {
+  align-self: flex-start;
+  margin-bottom: 1rem;
+}
+
+.promo-card h3 {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  color: var(--text-main);
+  margin-bottom: 0.6rem;
+}
+
+.promo-card p {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.55;
+  margin-bottom: 1.2rem;
+}
+
+.promo-card .code-box {
+  background-color: rgba(0, 0, 0, 0.35);
+  border: 1px dashed var(--accent-gold);
+  border-radius: var(--radius-sm);
+  padding: 0.4rem 0.8rem;
+  font-family: monospace;
+  font-size: 0.9rem;
+  color: var(--accent-gold);
+  font-weight: bold;
+  display: inline-block;
+  margin-top: auto;
+}
+
+/* --------------------------------------------------------------------------
+   PRODUCTOS DESTACADOS (FIGURA 3 Y 4 DEL DOCUMENTO)
+   -------------------------------------------------------------------------- */
+.featured-section {
+  padding: 4rem 0;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.8rem;
+}
+
+.product-card {
+  background-color: var(--bg-card);
+  border: 1px solid rgba(229, 169, 60, 0.15);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: var(--transition);
+  box-shadow: var(--shadow-sm);
+}
+
+.product-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--accent-gold);
+  box-shadow: var(--shadow-md);
+}
+
+.product-image-box {
+  position: relative;
+  aspect-ratio: 1;
+  background-color: #1a100a;
+  overflow: hidden;
+}
+
+.product-image-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.product-card:hover .product-image-box img {
+  transform: scale(1.06);
+}
+
+.product-category-tag {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: rgba(31, 20, 14, 0.85);
+  backdrop-filter: blur(4px);
+  color: var(--accent-gold);
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.25rem 0.6rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(229, 169, 60, 0.3);
+}
+
+.product-info {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-between;
+}
+
+.product-title {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text-main);
+  margin-bottom: 0.4rem;
+  line-height: 1.3;
+}
+
+.product-desc {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.product-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.product-price {
+  font-weight: 800;
+  font-size: 1.15rem;
+  color: var(--accent-gold);
+}
+
+.product-card .btn-add-cart {
+  background: linear-gradient(135deg, var(--accent-gold), #c87941);
+  color: var(--text-dark);
+  border: none;
+  border-radius: var(--radius-pill);
+  padding: 0.5rem 1rem;
+  font-family: var(--font-sans);
+  font-size: 0.84rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 3px 10px rgba(229, 169, 60, 0.25);
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  white-space: nowrap;
+}
+
+.product-card .btn-add-cart:hover {
+  background: linear-gradient(135deg, var(--accent-gold-hover), #d9884e);
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 6px 16px rgba(229, 169, 60, 0.4);
+}
+
+.product-card .btn-add-cart:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: 0 2px 6px rgba(229, 169, 60, 0.2);
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE (TABLETS & SMARTPHONES)
+   -------------------------------------------------------------------------- */
+@media (max-width: 1100px) {
+  .products-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 860px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 2.5rem;
+  }
+
+  .hero-content {
+    align-items: center;
+  }
+
+  .hero-description {
+    margin: 0 auto;
+  }
+
+  .hero-buttons {
+    justify-content: center;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 1.5rem;
+  }
+
+  .promos-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 520px) {
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .hero-kicker {
+    font-size: 0.75rem;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .hero-buttons .btn {
+    width: 100%;
+  }
+
+  .stat-number {
+    font-size: 2.2rem;
+  }
+
+  .section-title {
+    font-size: 1.8rem;
+  }
+
+  .products-grid {
+    grid-template-columns: 1fr;
+  }
+}

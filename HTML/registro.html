@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Regístrate en Pastelería Mil Sabores. Accede a descuentos de hasta 50% por nuestros 50 años y beneficios exclusivos para la comunidad Duoc UC.">
+  <meta name="author" content="Estudiantes Duoc UC - Desarrollo Full Stack II">
+  <title>Registro de Usuario | Pastelería Mil Sabores</title>
+
+  <!-- Hojas de Estilos Externas -->
+  <link rel="stylesheet" href="css/estilos.css">
+  <link rel="stylesheet" href="css/cabecera.css">
+
+  <!-- Scripts Modulares Diferidos -->
+  <script src="js/productos.js" defer></script>
+  <script src="js/usuarios.js" defer></script>
+  <script src="js/carrito.js" defer></script>
+  <script src="js/main.js" defer></script>
+</head>
+
+<body>
+
+  <!-- ======================================================================= -->
+  <!-- 1. BARRA SUPERIOR DE AVISOS Y ACCESOS RÁPIDOS                         -->
+  <!-- ======================================================================= -->
+  <aside class="top-announcement" aria-label="Avisos destacados">
+    <div class="container">
+      <div>
+        <span>🎉 Celebramos 50 años: Descuento del <strong>50%</strong> para mayores de 50 años | Código <strong>FELICES50</strong> (10% adicional)</span>
+      </div>
+      <div class="top-user-links">
+        <a href="login.html">Iniciar sesión</a>
+        <span>|</span>
+        <a href="registro.html">Registrar usuario</a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ======================================================================= -->
+  <!-- 2. CABECERA PRINCIPAL Y NAVEGACIÓN                                      -->
+  <!-- ======================================================================= -->
+  <header>
+    <div class="container barra-superior">
+      <a href="index.html" class="logo" aria-label="Ir a inicio de Pastelería Mil Sabores">
+        <span class="logo-icon">🧁</span>
+        <span class="logo-title">Pastelería Mil Sabores</span>
+        <span class="badge-50">50 AÑOS</span>
+      </a>
+
+      <nav aria-label="Navegación principal del sitio">
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="categoria.html">Catálogo</a></li>
+          <li><a href="producto.html">Producto</a></li>
+          <li><a href="nosotros.html">Nosotros</a></li>
+          <li><a href="blogs.html">Blogs</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <a href="carrito.html" class="boton-carro" aria-label="Ver carrito de compras">
+          <span>🛒 Carrito</span>
+          <span class="cont-carrito" id="num-cont-carrito">0</span>
+        </a>
+        <button class="menu-toggle" aria-label="Abrir menú de navegación" aria-expanded="false">
+          ☰
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ======================================================================= -->
+  <!-- 3. RUTA DE NAVEGACIÓN (BREADCRUMB)                                      -->
+  <!-- ======================================================================= -->
+  <nav class="breadcrumb-section" aria-label="Miga de pan" style="background-color: var(--bg-card-soft); padding: 1rem 0; border-bottom: 1px solid var(--border-subtle);">
+    <div class="container">
+      <div style="font-size: 0.88rem; color: var(--text-secondary); display: flex; gap: 0.5rem;">
+        <a href="index.html" style="color: var(--color-chocolate); font-weight: 600;">Inicio</a>
+        <span style="color: var(--text-muted);">/</span>
+        <span style="color: var(--text-main); font-weight: 700;">Registro de Usuario</span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ======================================================================= -->
+  <!-- 4. CONTENIDO PRINCIPAL: FORMULARIO DE REGISTRO                          -->
+  <!-- ======================================================================= -->
+  <main style="padding: 3rem 0 5rem;">
+    <div class="container" style="max-width: 680px;">
+
+      <div style="text-align: center; margin-bottom: 2rem;">
+        <span class="badge badge-rose" style="font-size: 0.85rem; padding: 0.35rem 0.9rem;">50 Años Endulzando Vidas</span>
+        <h1 style="font-family: var(--font-serif); color: var(--color-chocolate); font-size: 2.3rem; margin: 0.5rem 0;">Crear Cuenta de Usuario</h1>
+        <p style="color: var(--text-secondary); font-size: 0.95rem;">
+          Únete a nuestra comunidad y disfruta de beneficios automáticos por edad y convenios académicos.
+        </p>
+      </div>
+
+      <!-- Tarjeta del Formulario -->
+      <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 16px; padding: 2.5rem; box-shadow: 0 10px 30px rgba(93, 64, 55, 0.08);">
+
+        <!-- Alertas Dinámicas de Beneficios -->
+        <div id="alert-senior-benefit" class="alert-box" style="display: none; background: rgba(229, 169, 60, 0.12); border: 1px solid var(--accent-gold); border-left: 5px solid var(--accent-gold); padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem; color: var(--accent-gold); font-size: 0.92rem; line-height: 1.5;"></div>
+
+        <div id="alert-duoc-benefit" class="alert-box" style="display: none; background: rgba(255, 192, 203, 0.12); border: 1px solid var(--accent-rose); border-left: 5px solid var(--accent-rose); padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem; color: var(--text-main); font-size: 0.92rem; line-height: 1.5;"></div>
+
+        <form id="form-registro" novalidate>
+
+          <!-- 1. Nombre Completo -->
+          <div style="margin-bottom: 1.2rem;">
+            <label for="reg-nombre" style="display: block; font-weight: 700; color: var(--text-main); margin-bottom: 0.4rem; font-size: 0.9rem;">Nombre Completo *</label>
+            <input type="text" id="reg-nombre" required placeholder="Ej: Marcela Paz Valenzuela" style="width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--border-subtle); border-radius: 8px; font-size: 0.95rem; background: var(--bg-card-soft); color: var(--text-main);">
+          </div>
+
+          <!-- 2. RUT -->
+          <div style="margin-bottom: 1.2rem;">
+            <label for="reg-rut" style="display: block; font-weight: 700; color: var(--text-main); margin-bottom: 0.4rem; font-size: 0.9rem;">RUT *</label>
+            <input type="text" id="reg-rut" required placeholder="Ej: 12.345.678-9" style="width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--border-subtle); border-radius: 8px; font-size: 0.95rem; background: var(--bg-card-soft); color: var(--text-main);">
+          </div>
+
+          <!-- 3. Correo Electrónico -->
+          <div style="margin-bottom: 1.2rem;">
+            <label for="reg-email" style="display: block; font-weight: 700; color: var(--text-main); margin-bottom: 0.4rem; font-size: 0.9rem;">
+              Correo Electrónico * <small style="color: var(--text-muted); font-weight: normal;">(Usa tu correo @duocuc.cl para beneficios exclusivos)</small>
+            </label>
+            <input type="email" id="reg-email" required placeholder="usuario@duocuc.cl o correo@gmail.com" style="width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--border-subtle); border-radius: 8px; font-size: 0.95rem; background: var(--bg-card-soft); color: var(--text-main);">
+          </div>
+
+          <!-- 4. Fecha de Nacimiento (Detección automática de mayores de 50 años) -->
+          <div style="margin-bottom: 1.2rem;">
+            <label for="reg-fecha-nac" style="display: block; font-weight: 700; color: var(--text-main); margin-bottom: 0.4rem; font-size: 0.9rem;">
+              Fecha de Nacimiento * <small style="color: var(--text-muted); font-weight: normal;">(Calcula automáticamente tu descuento por edad)</small>
+            </label>
+            <input type="date" id="reg-fecha-nac" required style="width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--border-subtle); border-radius: 8px; font-size: 0.95rem; background: var(--bg-card-soft); color: var(--text-main);">
+          </div>
+
+          <!-- 5. Teléfono de Contacto -->
+          <div style="margin-bottom: 1.2rem;">
+            <label for="reg-telefono" style="display: block; font-weight: 700; color: var(--text-main); margin-bottom: 0.4rem; font-size: 0.9rem;">Teléfono de Contacto</label>
+            <input type="tel" id="reg-telefono" placeholder="+56 9 1234 5678" style="width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--border-subtle); border-radius: 8px; font-size: 0.95rem; background: var(--bg-card-soft); color: var(--text-main);">
+          </div>
+
+          <!-- 6. Dirección de Despacho Habitual -->
+          <div style="margin-bottom: 1.2rem;">
+            <label for="reg-direccion" style="display: block; font-weight: 700; color: var(--text-main); margin-bottom: 0.4rem; font-size: 0.9rem;">Dirección de Despacho Habitual</label>
+            <input type="text" id="reg-direccion" placeholder="Ej: Av. Concha y Toro #1234, Puente Alto" style="width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--border-subtle); border-radius: 8px; font-size: 0.95rem; background: var(--bg-card-soft); color: var(--text-main);">
+          </div>
+
+          <!-- 7. Código Promocional Opcional -->
+          <div style="margin-bottom: 1.2rem;">
+            <label for="reg-codigo" style="display: block; font-weight: 700; color: var(--text-main); margin-bottom: 0.4rem; font-size: 0.9rem;">
+              Código de Invitación / Aniversario <small style="color: var(--text-muted); font-weight: normal;">(Ej: FELICES50)</small>
+            </label>
+            <input type="text" id="reg-codigo" placeholder="FELICES50" style="width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--border-subtle); border-radius: 8px; font-size: 0.95rem; background: var(--bg-card-soft); color: var(--text-main); text-transform: uppercase;">
+          </div>
+
+          <!-- 8. Contraseña -->
+          <div style="margin-bottom: 1.2rem;">
+            <label for="reg-pass" style="display: block; font-weight: 700; color: var(--text-main); margin-bottom: 0.4rem; font-size: 0.9rem;">Contraseña de Acceso *</label>
+            <input type="password" id="reg-pass" required placeholder="Mínimo 6 caracteres" minlength="6" style="width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--border-subtle); border-radius: 8px; font-size: 0.95rem; background: var(--bg-card-soft); color: var(--text-main);">
+          </div>
+
+          <!-- 9. Confirmar Contraseña -->
+          <div style="margin-bottom: 1.8rem;">
+            <label for="reg-pass2" style="display: block; font-weight: 700; color: var(--text-main); margin-bottom: 0.4rem; font-size: 0.9rem;">Confirmar Contraseña *</label>
+            <input type="password" id="reg-pass2" required placeholder="Repite tu contraseña" minlength="6" style="width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--border-subtle); border-radius: 8px; font-size: 0.95rem; background: var(--bg-card-soft); color: var(--text-main);">
+          </div>
+
+          <!-- Botón de Envío -->
+          <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.9rem; font-size: 1.05rem; font-weight: 700;">
+            🧁 Registrarme y Crear Cuenta
+          </button>
+
+
+          <p style="text-align: center; margin-top: 1.5rem; font-size: 0.9rem; color: var(--text-secondary);">
+            ¿Ya tienes una cuenta creada? <a href="login.html" style="color: var(--color-chocolate); font-weight: 700; text-decoration: underline;">Inicia sesión aquí</a>
+          </p>
+
+        </form>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ======================================================================= -->
+  <!-- 5. PIE DE PÁGINA (FOOTER INFORMATIVO)                                   -->
+  <!-- ======================================================================= -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>Pastelería Mil Sabores</h4>
+          <p>
+            Celebrando medio siglo de tradición pastelera en Chile. Entregamos momentos dulces con la máxima calidad, higiene y pasión artesanal.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Navegación</h4>
+          <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="categoria.html">Catálogo Completo</a></li>
+            <li><a href="producto.html">Detalle de Producto</a></li>
+            <li><a href="carrito.html">Carrito de Compras</a></li>
+            <li><a href="nosotros.html">Sobre Nosotros</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Especialidades</h4>
+          <ul>
+            <li><a href="categoria.html?cat=cuadradas">Tortas Cuadradas</a></li>
+            <li><a href="categoria.html?cat=circulares">Tortas Circulares</a></li>
+            <li><a href="categoria.html?cat=individuales">Postres Individuales</a></li>
+            <li><a href="categoria.html?cat=sin-azucar">Productos Sin Azúcar</a></li>
+            <li><a href="categoria.html?cat=sin-gluten">Productos Sin Gluten</a></li>
+            <li><a href="categoria.html?cat=vegana">Productos Veganos</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Horarios y Atención</h4>
+          <p>📍 Av. Concha y Toro #1234, Santiago, Chile</p>
+          <p>🕒 Lunes a Sábado: 09:00 - 20:00 hrs</p>
+          <p>🕒 Domingo: 10:00 - 16:00 hrs</p>
+          <p>📞 Teléfono: +56 2 2987 6543</p>
+          <p>✉️ contacto@pasteleriamilsabores.cl</p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2024 Pastelería Mil Sabores - 50 Aniversario. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>

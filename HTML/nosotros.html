@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Conoce la historia, misión, visión y valores de Pastelería Mil Sabores. 50 años endulzando momentos en Chile.">
+  <meta name="author" content="Estudiantes Duoc UC - Desarrollo Full Stack II">
+  <title>Sobre Nosotros | Pastelería Mil Sabores</title>
+
+  <!-- Hojas de Estilos Externas (Rubro IE1.1.2) -->
+  <link rel="stylesheet" href="css/estilos.css">
+  <link rel="stylesheet" href="css/nosotros.css">
+
+  <!-- Scripts Modulares Diferidos -->
+  <script src="js/productos.js" defer></script>
+  <script src="js/usuarios.js" defer></script>
+  <script src="js/carrito.js" defer></script>
+  <script src="js/main.js" defer></script>
+</head>
+
+<body>
+
+  <!-- ======================================================================= -->
+  <!-- 1. BARRA SUPERIOR DE AVISOS Y ACCESOS RÁPIDOS                         -->
+  <!-- ETIQUETA: <aside> para avisos complementarios                           -->
+  <!-- ======================================================================= -->
+  <aside class="top-announcement" aria-label="Avisos destacados">
+    <div class="container">
+      <div>
+        <span>🎉 Celebramos 50 años: Usa el código <strong>FELICES50</strong> para 10% de descuento</span>
+      </div>
+      <div class="top-user-links">
+        <a href="login.html">Iniciar sesión</a>
+        <span>|</span>
+        <a href="registro.html">Registrar usuario</a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ======================================================================= -->
+  <!-- 2. CABECERA PRINCIPAL Y NAVEGACIÓN                                      -->
+  <!-- ETIQUETA: <header> para el logo y la barra de navegación                -->
+  <!-- ======================================================================= -->
+  <header>
+    <div class="container barra-superior">
+      <!-- Logotipo -->
+      <a href="index.html" class="logo" aria-label="Ir a inicio de Pastelería Mil Sabores">
+        <span class="logo-icon">🧁</span>
+        <span class="logo-title">Pastelería Mil Sabores</span>
+        <span class="badge-50">50 AÑOS</span>
+      </a>
+
+      <nav aria-label="Navegación principal del sitio">
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="categoria.html">Catálogo</a></li>
+          <li><a href="producto.html">Producto</a></li>
+          <li><a href="carrito.html">Carrito</a></li>
+          <li><a href="nosotros.html" class="active">Nosotros</a></li>
+          <li><a href="blogs.html">Blogs</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+      </nav>
+
+
+      <!-- Botón del Carrito con su contador -->
+      <div class="header-actions">
+        <a href="carrito.html" class="boton-carro" aria-label="Ver carrito de compras">
+          <span>🛒 Carrito</span>
+          <span class="cont-carrito" id="num-cont-carrito">0</span>
+        </a>
+        <button class="menu-toggle" aria-label="Abrir menú de navegación" aria-expanded="false">
+          ☰
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ======================================================================= -->
+  <!-- 3. RUTA DE NAVEGACIÓN (BREADCRUMB)                                      -->
+  <!-- ======================================================================= -->
+  <nav class="breadcrumb-section" aria-label="Miga de pan" style="background-color: rgba(22, 14, 10, 0.5); padding: 1rem 0; border-bottom: 1px solid var(--border-subtle);">
+    <div class="container">
+      <div style="font-size: 0.88rem; color: var(--text-secondary); display: flex; gap: 0.5rem;">
+        <a href="index.html" style="color: var(--accent-gold);">Inicio</a>
+        <span style="color: var(--text-muted);">/</span>
+        <span style="color: var(--text-main); font-weight: 600;">Sobre Nosotros</span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ======================================================================= -->
+  <!-- 4. CONTENIDO PRINCIPAL: SOBRE NOSOTROS                                  -->
+  <!-- ETIQUETA: <main> núcleo central de la página                            -->
+  <!-- ======================================================================= -->
+  <main>
+    <div class="container">
+
+      <!-- Encabezado de la página -->
+      <section class="nosotros-header">
+        <h1 class="nosotros-title">Nuestra <span>Historia y Pasión</span></h1>
+        <p class="nosotros-subtitle">
+          Medio siglo horneando con amor, dedicación y las mejores recetas tradicionales de Chile.
+        </p>
+      </section>
+
+      <!-- Sección 1: Historia y Récord Guinness (2 columnas sencillas) -->
+      <section class="nosotros-historia">
+        <div class="historia-grid">
+          <div class="historia-texto">
+            <h2>50 Años de Tradición Pastelera</h2>
+            <p>
+              Pastelería Mil Sabores nació en 1974 como un pequeño taller familiar en Santiago de Chile. Con recetas heredadas de generación en generación, fuimos conquistando los paladares de nuestros vecinos gracias a la calidad de los ingredientes y el cariño puesto en cada preparación.
+            </p>
+            <p>
+              A lo largo de cinco décadas, hemos sido parte de los cumpleaños, matrimonios y celebraciones más importantes de miles de familias chilenas, manteniendo siempre intacto nuestro sello artesanal.
+            </p>
+
+            <!-- Destacado del Récord Guinness 1995 (Caso Duoc UC) -->
+            <div class="guinness-box">
+              <span class="guinness-icon">🏆</span>
+              <div>
+                <h3>Récord Guinness 1995</h3>
+                <p>
+                  Orgullosos poseedores del récord a la torta de frutas más grande del mundo, elaborada en conjunto con la comunidad en nuestro 21° aniversario.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="historia-imagen">
+            <img src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=800&q=80" 
+                 alt="Taller de repostería artesanal de Pastelería Mil Sabores" 
+                 loading="lazy">
+          </div>
+        </div>
+      </section>
+
+      <!-- Sección 2: Misión y Visión (Tarjetas explicativas) -->
+      <section class="mision-vision-section">
+        <div class="mv-grid">
+          <!-- Tarjeta Misión -->
+          <article class="mv-card">
+            <div class="mv-icon">🎯</div>
+            <h2>Nuestra Misión</h2>
+            <p>
+              Elaborar productos de pastelería y repostería artesanal con los más altos estándares de calidad, higiene y sabor, ofreciendo alternativas para todos: tradicionales, sin azúcar, sin gluten y veganas, creando momentos dulces inolvidables para cada cliente.
+            </p>
+          </article>
+
+          <!-- Tarjeta Visión -->
+          <article class="mv-card">
+            <div class="mv-icon">🌟</div>
+            <h2>Nuestra Visión</h2>
+            <p>
+              Ser la pastelería artesanal líder y más querida de la Región Metropolitana, reconocida por nuestra constante innovación culinaria, el respeto a las tradiciones chilenas y nuestro compromiso social con la comunidad y los estudiantes.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <!-- Sección 3: Nuestros Valores Clave -->
+      <section class="valores-section">
+        <h2 class="valores-title">Nuestros <span>Valores</span></h2>
+        <div class="valores-grid">
+          <div class="valor-card">
+            <span class="valor-emoji">🌾</span>
+            <h3>Ingredientes Naturales</h3>
+            <p>Seleccionamos materias primas frescas de productores locales de nuestro país.</p>
+          </div>
+          <div class="valor-card">
+            <span class="valor-emoji">🤝</span>
+            <h3>Compromiso Social</h3>
+            <p>Descuento del 50% para adultos mayores y apoyo constante a estudiantes de Duoc UC.</p>
+          </div>
+          <div class="valor-card">
+            <span class="valor-emoji">🎂</span>
+            <h3>Inclusión Pastelera</h3>
+            <p>Opciones aptas para celíacos, diabéticos y personas veganas con recetas balanceadas.</p>
+          </div>
+          <div class="valor-card">
+            <span class="valor-emoji">❤️</span>
+            <h3>Cariño Artesanal</h3>
+            <p>Cada torta y pastel se decora a mano por maestros pasteleros con amplia experiencia.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sección 4: Llamado a la acción (Catálogo) -->
+      <section class="nosotros-cta">
+        <h2>¿Quieres celebrar con nosotros?</h2>
+        <p>Explora nuestras 8 categorías de pastelería y encuentra tu sabor ideal.</p>
+        <a href="categoria.html" class="btn-primary">Ver Catálogo de Productos</a>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ======================================================================= -->
+  <!-- 5. PIE DE PÁGINA (FOOTER INFORMATIVO COMPARTIDO)                        -->
+  <!-- ======================================================================= -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Columna 1: Identidad de Marca -->
+        <div class="footer-col">
+          <h4>Pastelería Mil Sabores</h4>
+          <p>
+            Celebrando medio siglo de tradición pastelera en Chile. Entregamos momentos dulces con la máxima calidad, higiene y pasión artesanal.
+          </p>
+        </div>
+
+        <!-- Columna 2: Navegación Rápida -->
+        <div class="footer-col">
+          <h4>Navegación</h4>
+          <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="categoria.html">Catálogo Completo</a></li>
+            <li><a href="producto.html">Detalle de Producto</a></li>
+            <li><a href="carrito.html">Carrito de Compras</a></li>
+            <li><a href="nosotros.html">Sobre Nosotros</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+          </ul>
+        </div>
+
+        <!-- Columna 3: Categorías Rápidas -->
+        <div class="footer-col">
+          <h4>Especialidades</h4>
+          <ul>
+            <li><a href="categoria.html?cat=cuadradas">Tortas Cuadradas</a></li>
+            <li><a href="categoria.html?cat=circulares">Tortas Circulares</a></li>
+            <li><a href="categoria.html?cat=individuales">Postres Individuales</a></li>
+            <li><a href="categoria.html?cat=sin-azucar">Productos Sin Azúcar</a></li>
+            <li><a href="categoria.html?cat=sin-gluten">Productos Sin Gluten</a></li>
+            <li><a href="categoria.html?cat=vegana">Productos Veganos</a></li>
+          </ul>
+        </div>
+
+        <!-- Columna 4: Atención y Horarios -->
+        <div class="footer-col">
+          <h4>Horarios y Atención</h4>
+          <p>📍 Av. Concha y Toro #1234, Santiago, Chile</p>
+          <p>🕒 Lunes a Sábado: 09:00 - 20:00 hrs</p>
+          <p>🕒 Domingo: 10:00 - 16:00 hrs</p>
+          <p>📞 Teléfono: +56 2 2987 6543</p>
+          <p>✉️ contacto@pasteleriamilsabores.cl</p>
+        </div>
+      </div>
+
+      <!-- Barra de Copyright Inferior -->
+      <div class="footer-bottom">
+        <p>&copy; 2024 Pastelería Mil Sabores - 50 Aniversario. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>

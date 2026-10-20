@@ -1,0 +1,258 @@
+/* =============================================================================
+   ARCHIVO: contacto.css
+   PROPÓSITO: Estilos exclusivos de la página contacto.html
+   PROYECTO: Pastelería Mil Sabores - Duoc UC
+   ============================================================================= */
+
+/* ---------------------------------------------------------------------------
+   1. ENCABEZADO DE LA PÁGINA
+   --------------------------------------------------------------------------- */
+.contacto-header {
+  padding: 3rem 0 1.5rem 0;
+  text-align: center;
+}
+
+.contacto-title {
+  font-family: var(--font-serif);
+  font-size: 2.6rem;
+  color: var(--text-main);
+  margin-bottom: 0.5rem;
+}
+
+.contacto-title span {
+  color: var(--accent-gold);
+  font-style: italic;
+}
+
+.contacto-subtitle {
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+/* ---------------------------------------------------------------------------
+   2. LAYOUT DE DOS COLUMNAS (Formulario + Información)
+   --------------------------------------------------------------------------- */
+.contacto-layout {
+  display: grid;
+  grid-template-columns: 1.25fr 0.95fr;
+  gap: 2.5rem;
+  align-items: start;
+  margin-bottom: 4.5rem;
+  margin-top: 1.5rem;
+}
+
+/* ---------------------------------------------------------------------------
+   3. COLUMNA 1: FORMULARIO DE CONTACTO
+   --------------------------------------------------------------------------- */
+.contacto-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 2.2rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.contacto-card h2 {
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  color: var(--text-main);
+  margin-bottom: 0.3rem;
+}
+
+.form-instruction {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 1.8rem;
+}
+
+.form-group {
+  margin-bottom: 1.3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.form-group label {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.form-group .required {
+  color: var(--accent-gold);
+}
+
+/* Campos de entrada, select y textarea */
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  background-color: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 0.8rem 1rem;
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  outline: none;
+  transition: var(--transition);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--accent-gold);
+  box-shadow: 0 0 0 2px rgba(229, 169, 60, 0.2);
+}
+
+.form-group select {
+  cursor: pointer;
+}
+
+.form-group select option {
+  background-color: #271911;
+  color: var(--text-main);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.btn-submit {
+  width: 100%;
+  padding: 0.9rem 1.5rem;
+  font-size: 1rem;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  margin-top: 0.5rem;
+}
+
+/* ---------------------------------------------------------------------------
+   4. COLUMNA 2: INFORMACIÓN DE ATENCIÓN Y PROMOCIONES
+   --------------------------------------------------------------------------- */
+.contacto-info-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.info-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 2rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.info-card h2 {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  color: var(--text-main);
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.info-item {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.4rem;
+  align-items: flex-start;
+}
+
+.info-item:last-child {
+  margin-bottom: 0;
+}
+
+.info-icon {
+  font-size: 1.6rem;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+
+.info-item strong {
+  display: block;
+  font-size: 0.95rem;
+  color: var(--accent-gold);
+  margin-bottom: 0.2rem;
+}
+
+.info-item p {
+  font-size: 0.92rem;
+  color: var(--text-main);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.info-detail {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+/* Tarjeta informativa de beneficios */
+.info-promo-card {
+  background: linear-gradient(135deg, rgba(44, 29, 21, 0.9), rgba(39, 25, 17, 0.9));
+  border: 1px dashed var(--accent-gold);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+}
+
+.info-promo-card h3 {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  color: var(--accent-gold);
+  margin-bottom: 0.8rem;
+}
+
+.info-promo-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.info-promo-card li {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+
+.info-promo-card strong {
+  color: var(--text-main);
+}
+
+.info-promo-card em {
+  color: var(--accent-gold);
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* ---------------------------------------------------------------------------
+   5. RESPONSIVE
+   --------------------------------------------------------------------------- */
+@media (max-width: 860px) {
+  .contacto-layout {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .contacto-title {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 520px) {
+  .contacto-card,
+  .info-card {
+    padding: 1.5rem 1.1rem;
+  }
+
+  .contacto-title {
+    font-size: 1.8rem;
+  }
+}

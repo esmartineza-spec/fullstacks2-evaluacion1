@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Pastelería Mil Sabores - 50 años de tradición en repostería chilena. Creadores de la torta más grande del mundo (Récord Guinness 1995). Tortas artesanales, sin azúcar, veganas y sin gluten.">
+  <meta name="author" content="Estudiantes Duoc UC - Desarrollo Full Stack II">
+  <title>Pastelería Mil Sabores | 50 Años de Tradición y Dulzura</title>
+  
+  <!-- Hojas de Estilos Externas  -->
+  <link rel="stylesheet" href="css/estilos.css">
+  <link rel="stylesheet" href="css/index.css">
+  
+  <!-- Scripts Modulares Diferidos -->
+  <script src="js/productos.js" defer></script>
+  <script src="js/usuarios.js" defer></script>
+  <script src="js/carrito.js" defer></script>
+  <script src="js/main.js" defer></script>
+</head>
+
+<body>
+
+  <!-- Barra de Anuncios y Acceso de Usuarios -->
+  <aside class="top-announcement" aria-label="Avisos destacados">
+    <div class="container">
+      <div>
+        <span>🎉 Celebramos 50 años: Usa el código <strong>FELICES50</strong> para 10% de descuento</span>
+      </div>
+      <div class="top-user-links">
+        <a href="login.html">Iniciar sesión</a>
+        <span>|</span>
+        <a href="registro.html">Registrar usuario</a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Encabezado Principal y Barra de Navegación -->
+  <header>
+    <div class="container barra-superior">
+      <!-- Logotipo -->
+      <a href="index.html" class="logo" aria-label="Ir a inicio de Pastelería Mil Sabores">
+        <span class="logo-icon">🧁</span>
+        <span class="logo-title">Pastelería Mil Sabores</span>
+        <span class="badge-50">50 AÑOS</span>
+      </a>
+
+      <!-- Menú de Navegación Principal -->
+      <nav aria-label="Navegación principal del sitio">
+        <ul>
+          <li><a href="index.html" class="active">Inicio</a></li>
+          <li><a href="categoria.html">Catálogo</a></li>
+          <li><a href="producto.html">Producto</a></li>
+          <li><a href="carrito.html">Carrito</a></li>
+          <li><a href="nosotros.html">Nosotros</a></li>
+          <li><a href="blogs.html">Blogs</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+      </nav>
+
+      <!-- Acciones de Cabecera: Carrito y Menú Móvil -->
+      <div class="header-actions">
+        <a href="carrito.html" class="boton-carro" aria-label="Ver carrito de compras">
+          <span>🛒 Carrito</span>
+          <span class="cont-carrito" id="num-cont-carrito">0</span>
+        </a>
+        <button class="menu-toggle" aria-label="Abrir menú de navegación" aria-expanded="false">
+          ☰
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Contenido Principal -->
+  <main>
+
+    <!-- 1. SECCIÓN HERO (Basada en el Mockup) -->
+    <section class="hero-section" aria-label="Bienvenida e historia">
+      <div class="container hero-grid">
+        <!-- Columna Izquierda: Información y llamados a la acción -->
+        <div class="hero-content">
+          <div class="hero-kicker">
+            <span>——</span>
+            <span>RÉCORD GUINNESS 1995 · TRADICIÓN DESDE 1978</span>
+          </div>
+          <h1 class="hero-title">
+            50 años endulzando
+            <span class="highlight-cursive">momentos inolvidables</span>
+          </h1>
+          <p class="hero-description">
+            Tortas y repostería artesanal, hechas con las mismas recetas que nos llevaron a crear la torta más grande del mundo. Ahora, a un clic de tu casa.
+          </p>
+          <div class="hero-buttons">
+            <a href="categoria.html" class="btn btn-primary">Ver catálogo</a>
+            <a href="producto.html" class="btn btn-outline">Personalizar torta</a>
+          </div>
+        </div>
+
+        <!-- Columna Derecha: Tarjeta con imagen del mockup -->
+        <div class="hero-image-wrapper">
+          <div class="hero-card">
+            <img src="img/hero_mockup.png" 
+                 alt="Torta artesanal de celebración de Pastelería Mil Sabores" 
+                 loading="eager">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. BARRA DE ESTADÍSTICAS Y HITOS (Mockup) -->
+    <section class="stats-section" aria-label="Hitos y estadísticas">
+      <div class="container">
+        <div class="stats-grid">
+          <article class="stat-item">
+            <span class="stat-number">50%</span>
+            <span class="stat-label">Descuento para mayores de 50 años</span>
+          </article>
+          <article class="stat-item">
+            <span class="stat-number">8</span>
+            <span class="stat-label">Categorías de productos</span>
+          </article>
+          <article class="stat-item">
+            <span class="stat-number">1995</span>
+            <span class="stat-label">Récord Guinness a la torta más grande</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. BENEFICIOS Y PROMOCIONES DEL 50 ANIVERSARIO -->
+    <section class="promos-section" aria-labelledby="promos-title">
+      <div class="container">
+        <h2 id="promos-title" class="section-title">Beneficios Exclusivos <span>50 Aniversario</span></h2>
+        <p class="section-subtitle">
+          Premiamos la lealtad de nuestra comunidad con descuentos permanentes y beneficios diseñados para todas las edades.
+        </p>
+
+        <div class="promos-grid">
+          <!-- Promo 1: Mayores de 50 años -->
+          <article class="promo-card">
+            <div class="promo-badge badge badge-gold">Beneficio Senior</div>
+            <h3>50% de Descuento</h3>
+            <p>
+              Si tienes 50 años o más, te reconocemos con un 50% de descuento en todos nuestros productos. Válido presentando tu documento de identidad en tu perfil de usuario.
+            </p>
+            <span class="code-box">DESCUENTO AUTOMÁTICO EN PERFIL</span>
+          </article>
+
+          <!-- Promo 2: Código FELICES50 -->
+          <article class="promo-card">
+            <div class="promo-badge badge badge-gold">Comunidad Mil Sabores</div>
+            <h3>10% Descuento de por Vida</h3>
+            <p>
+              Regístrate en nuestra tienda e introduce el código promocional conmemorativo para disfrutar de un 10% de rebaja en cada uno de tus pedidos.
+            </p>
+            <span class="code-box">CÓDIGO: FELICES50</span>
+          </article>
+
+          <!-- Promo 3: Alumnos Duoc UC -->
+          <article class="promo-card">
+            <div class="promo-badge badge badge-gold">Convenio Estudiantil</div>
+            <h3>Torta Gratis de Cumpleaños</h3>
+            <p>
+              Estudiantes de Duoc UC que se registren con su correo institucional (@duocuc.cl o @profesor.duoc.cl) reciben una torta de cortesía en el día de su cumpleaños.
+            </p>
+            <span class="code-box">CORREO: @duocuc.cl</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. PRODUCTOS DESTACADOS (Requerimiento de Home - Lista con imagen, nombre y precio) -->
+    <section class="featured-section" aria-labelledby="featured-title">
+      <div class="container">
+        <h2 id="featured-title" class="section-title">Nuestras <span>Creaciones Destacadas</span></h2>
+        <p class="section-subtitle">
+          Descubre los sabores favoritos de nuestra clientela, horneados a diario con recetas tradicionales y productos de origen nacional.
+        </p>
+
+        <div class="products-grid">
+          <!-- Producto 1 -->
+          <article class="product-card" data-codigo="TC001" data-nombre="Torta Cuadrada de Chocolate" data-precio="45000">
+            <a href="producto.html?id=TC001" class="product-image-box" aria-label="Ver detalle de Torta Cuadrada de Chocolate">
+              <span class="product-category-tag">Tortas Cuadradas</span>
+              <img src="img/producto_TC001.avif" 
+                   alt="Torta Cuadrada de Chocolate con ganache y avellanas" 
+                   loading="lazy">
+            </a>
+            <div class="product-info">
+              <h3 class="product-title"><a href="producto.html?id=TC001">Torta Cuadrada de Chocolate</a></h3>
+              <p class="product-desc">Deliciosa torta de chocolate con capas de ganache y un toque de avellanas. Personalizable con mensajes especiales.</p>
+              <div class="product-footer">
+                <span class="product-price">$45.000 CLP</span>
+                <button type="button" class="btn-add-cart" aria-label="Añadir Torta Cuadrada de Chocolate al carrito">
+                  + Añadir
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Producto 2 -->
+          <article class="product-card" data-codigo="TT002" data-nombre="Torta Circular de Manjar" data-precio="42000">
+            <a href="producto.html?id=TT002" class="product-image-box" aria-label="Ver detalle de Torta Circular de Manjar">
+              <span class="product-category-tag">Tortas Circulares</span>
+              <img src="img/producto_TT002.avif" 
+                   alt="Torta Circular de Manjar y nueces chilenas" 
+                   loading="lazy">
+            </a>
+            <div class="product-info">
+              <h3 class="product-title"><a href="producto.html?id=TT002">Torta Circular de Manjar</a></h3>
+              <p class="product-desc">Torta tradicional chilena con manjar artesanal y nueces seleccionadas, un deleite para los amantes de los sabores clásicos.</p>
+              <div class="product-footer">
+                <span class="product-price">$42.000 CLP</span>
+                <button type="button" class="btn-add-cart" aria-label="Añadir Torta Circular de Manjar al carrito">
+                  + Añadir
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Producto 3 -->
+          <article class="product-card" data-codigo="PSA002" data-nombre="Cheesecake Sin Azúcar" data-precio="47000">
+            <a href="producto.html?id=PSA002" class="product-image-box" aria-label="Ver detalle de Cheesecake Sin Azúcar">
+              <span class="product-category-tag">Sin Azúcar</span>
+              <img src="img/producto_PSA002.avif" 
+                   alt="Cheesecake horneado sin azúcar con salsa de frutos rojos" 
+                   loading="lazy">
+            </a>
+            <div class="product-info">
+              <h3 class="product-title"><a href="producto.html?id=PSA002">Cheesecake Sin Azúcar</a></h3>
+              <p class="product-desc">Suave y cremoso cheesecake sobre base de frutos secos, endulzado naturalmente para disfrutar sin culpa.</p>
+              <div class="product-footer">
+                <span class="product-price">$47.000 CLP</span>
+                <button type="button" class="btn-add-cart" aria-label="Añadir Cheesecake Sin Azúcar al carrito">
+                  + Añadir
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Producto 4 -->
+          <article class="product-card" data-codigo="TE001" data-nombre="Torta Especial de Cumpleaños" data-precio="55000">
+            <a href="producto.html?id=TE001" class="product-image-box" aria-label="Ver detalle de Torta Especial de Cumpleaños">
+              <span class="product-category-tag">Tortas Especiales</span>
+              <img src="img/producto_TE001.avif" 
+                   alt="Torta de cumpleaños con decoración artística de colores" 
+                   loading="lazy">
+            </a>
+            <div class="product-info">
+              <h3 class="product-title"><a href="producto.html?id=TE001">Torta Especial Cumpleaños</a></h3>
+              <p class="product-desc">Diseñada especialmente para celebraciones únicas, completamente personalizable con dedicatorias y diseño a elección.</p>
+              <div class="product-footer">
+                <span class="product-price">$55.000 CLP</span>
+                <button type="button" class="btn-add-cart" aria-label="Añadir Torta Especial de Cumpleaños al carrito">
+                  + Añadir
+                </button>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div style="text-align: center; margin-top: 3rem;">
+          <a href="categoria.html" class="btn btn-primary" style="padding: 0.85rem 2.2rem;">
+            Explorar las 8 Categorías Completas →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    
+  </main>
+
+  <!-- PIE DE PÁGINA (FOOTER INFORMATIVO - IE1.1.1) -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Columna 1: Identidad de Marca -->
+        <div class="footer-col">
+          <h4>Pastelería Mil Sabores</h4>
+          <p>
+            Celebrando medio siglo de tradición pastelera en Chile. Entregamos momentos dulces con la máxima calidad, higiene y pasión artesanal.
+          </p>
+        </div>
+
+        <!-- Columna 2: Navegación Rápida -->
+        <div class="footer-col">
+          <h4>Navegación</h4>
+          <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="categoria.html">Catálogo Completo</a></li>
+            <li><a href="producto.html">Detalle de Producto</a></li>
+            <li><a href="carrito.html">Carrito de Compras</a></li>
+            <li><a href="nosotros.html">Sobre Nosotros</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+          </ul>
+        </div>
+
+        <!-- Columna 3: Categorías -->
+        <div class="footer-col">
+          <h4>Especialidades</h4>
+          <ul>
+            <li><a href="categoria.html?cat=cuadradas">Tortas Cuadradas</a></li>
+            <li><a href="categoria.html?cat=circulares">Tortas Circulares</a></li>
+            <li><a href="categoria.html?cat=individuales">Postres Individuales</a></li>
+            <li><a href="categoria.html?cat=sin-azucar">Productos Sin Azúcar</a></li>
+            <li><a href="categoria.html?cat=sin-gluten">Productos Sin Gluten</a></li>
+            <li><a href="categoria.html?cat=vegana">Productos Veganos</a></li>
+          </ul>
+        </div>
+
+        <!-- Columna 4: Atención y Horarios -->
+        <div class="footer-col">
+          <h4>Horarios y Atención</h4>
+          <p>📍 Av. Concha y Toro #1234, Santiago, Chile</p>
+          <p>🕒 Lunes a Sábado: 09:00 - 20:00 hrs</p>
+          <p>🕒 Domingo: 10:00 - 16:00 hrs</p>
+          <p>📞 Teléfono: +56 2 2987 6543</p>
+          <p>✉️ contacto@pasteleriamilsabores.cl</p>
+        </div>
+      </div>
+
+      <!-- Barra de Copyright Inferior -->
+      <div class="footer-bottom">
+        <p>&copy; 2024 Pastelería Mil Sabores - 50 Aniversario. Todos los derechos reservados.</p>
+        
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>

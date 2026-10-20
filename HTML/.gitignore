@@ -1,0 +1,8 @@
+# IntelliJ IDEA
+.idea/
+*.iml
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+Desktop.ini

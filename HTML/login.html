@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Inicia sesión en Pastelería Mil Sabores para disfrutar de tus pedidos, historial y beneficios personalizados de nuestros 50 años.">
+  <meta name="author" content="Estudiantes Duoc UC - Desarrollo Full Stack II">
+  <title>Iniciar Sesión | Pastelería Mil Sabores</title>
+
+  <!-- Hojas de Estilos Externas -->
+  <link rel="stylesheet" href="css/estilos.css">
+  <link rel="stylesheet" href="css/cabecera.css">
+
+  <!-- Scripts Modulares Diferidos -->
+  <script src="js/productos.js" defer></script>
+  <script src="js/usuarios.js" defer></script>
+  <script src="js/carrito.js" defer></script>
+  <script src="js/main.js" defer></script>
+</head>
+
+<body>
+
+  <!-- ======================================================================= -->
+  <!-- 1. BARRA SUPERIOR DE AVISOS Y ACCESOS RÁPIDOS                         -->
+  <!-- ======================================================================= -->
+  <aside class="top-announcement" aria-label="Avisos destacados">
+    <div class="container">
+      <div>
+        <span>🎉 Celebramos 50 años: Descuento del <strong>50%</strong> para mayores de 50 años | Código <strong>FELICES50</strong></span>
+      </div>
+      <div class="top-user-links">
+        <a href="login.html">Iniciar sesión</a>
+        <span>|</span>
+        <a href="registro.html">Registrar usuario</a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ======================================================================= -->
+  <!-- 2. CABECERA PRINCIPAL Y NAVEGACIÓN                                      -->
+  <!-- ======================================================================= -->
+  <header>
+    <div class="container barra-superior">
+      <a href="index.html" class="logo" aria-label="Ir a inicio de Pastelería Mil Sabores">
+        <span class="logo-icon">🧁</span>
+        <span class="logo-title">Pastelería Mil Sabores</span>
+        <span class="badge-50">50 AÑOS</span>
+      </a>
+
+      <nav aria-label="Navegación principal del sitio">
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="categoria.html">Catálogo</a></li>
+          <li><a href="producto.html">Producto</a></li>
+          <li><a href="nosotros.html">Nosotros</a></li>
+          <li><a href="blogs.html">Blogs</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <a href="carrito.html" class="boton-carro" aria-label="Ver carrito de compras">
+          <span>🛒 Carrito</span>
+          <span class="cont-carrito" id="num-cont-carrito">0</span>
+        </a>
+        <button class="menu-toggle" aria-label="Abrir menú de navegación" aria-expanded="false">
+          ☰
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ======================================================================= -->
+  <!-- 3. RUTA DE NAVEGACIÓN (BREADCRUMB)                                      -->
+  <!-- ======================================================================= -->
+  <nav class="breadcrumb-section" aria-label="Miga de pan" style="background-color: var(--bg-card-soft); padding: 1rem 0; border-bottom: 1px solid var(--border-subtle);">
+    <div class="container">
+      <div style="font-size: 0.88rem; color: var(--text-secondary); display: flex; gap: 0.5rem;">
+        <a href="index.html" style="color: var(--color-chocolate); font-weight: 600;">Inicio</a>
+        <span style="color: var(--text-muted);">/</span>
+        <span style="color: var(--text-main); font-weight: 700;">Iniciar Sesión</span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ======================================================================= -->
+  <!-- 4. CONTENIDO PRINCIPAL: INICIO DE SESIÓN Y DEMO RÁPIDO                  -->
+  <!-- ======================================================================= -->
+  <main style="padding: 3rem 0 5rem;">
+    <div class="container" style="max-width: 520px;">
+
+      <div style="text-align: center; margin-bottom: 2rem;">
+        <span class="badge badge-gold" style="font-size: 0.85rem; padding: 0.35rem 0.9rem;">Área de Clientes</span>
+        <h1 style="font-family: var(--font-serif); color: var(--color-chocolate); font-size: 2.3rem; margin: 0.5rem 0;">Iniciar Sesión</h1>
+        <p style="color: var(--text-secondary); font-size: 0.95rem;">
+          Ingresa a tu cuenta para gestionar tus pedidos y acceder a tus beneficios exclusivos.
+        </p>
+      </div>
+
+      <!-- Tarjeta del Formulario -->
+      <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 16px; padding: 2.5rem; box-shadow: 0 10px 30px rgba(93, 64, 55, 0.08); margin-bottom: 2rem;">
+
+        <form id="form-login">
+
+          <div style="margin-bottom: 1.2rem;">
+            <label for="login-email" style="display: block; font-weight: 700; color: var(--text-main); margin-bottom: 0.4rem; font-size: 0.9rem;">Correo Electrónico</label>
+            <input type="email" id="login-email" required placeholder="tu.correo@ejemplo.cl" style="width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--border-subtle); border-radius: 8px; font-size: 0.95rem; background: var(--bg-card-soft); color: var(--text-main);">
+          </div>
+
+          <div style="margin-bottom: 1.8rem;">
+            <label for="login-pass" style="display: block; font-weight: 700; color: var(--text-main); margin-bottom: 0.4rem; font-size: 0.9rem;">Contraseña</label>
+            <input type="password" id="login-pass" required placeholder="Ingresa tu contraseña" style="width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--border-subtle); border-radius: 8px; font-size: 0.95rem; background: var(--bg-card-soft); color: var(--text-main);">
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.9rem; font-size: 1.05rem; font-weight: 700;">
+            Acceder a Mi Cuenta &rarr;
+          </button>
+
+          <p style="text-align: center; margin-top: 1.5rem; font-size: 0.9rem; color: var(--text-secondary);">
+            ¿Aún no tienes cuenta? <a href="registro.html" style="color: var(--color-chocolate); font-weight: 700; text-decoration: underline;">Regístrate aquí</a>
+          </p>
+
+        </form>
+
+      </div>
+
+      <!-- Tarjeta de Demostración Rápida para Evaluación / Profesor -->
+      <div style="background: rgba(229, 169, 60, 0.08); border: 1px dashed var(--accent-gold); border-radius: 16px; padding: 1.5rem; text-align: center;">
+        <h3 style="font-family: var(--font-serif); color: var(--accent-gold); margin-bottom: 0.5rem; font-size: 1.15rem;">
+          ⚡ Accesos Rápidos de Demostración
+        </h3>
+        <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1.2rem;">
+          Presiona uno de estos botones para probar inmediatamente los beneficios de la rúbrica sin rellenar formularios:
+        </p>
+
+        <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+          <button type="button" id="btn-demo-senior" class="btn btn-primary" style="font-size: 0.9rem; padding: 0.75rem;">
+            👵 Probar como Adulto Mayor (+50 años) — 50% DCTO
+          </button>
+          <button type="button" id="btn-demo-duoc" class="btn btn-outline" style="font-size: 0.9rem; padding: 0.75rem;">
+            🎓 Probar como Estudiante Duoc UC — Torta de Cumpleaños
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ======================================================================= -->
+  <!-- 5. PIE DE PÁGINA (FOOTER INFORMATIVO)                                   -->
+  <!-- ======================================================================= -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>Pastelería Mil Sabores</h4>
+          <p>
+            Celebrando medio siglo de tradición pastelera en Chile. Entregamos momentos dulces con la máxima calidad, higiene y pasión artesanal.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Navegación</h4>
+          <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="categoria.html">Catálogo Completo</a></li>
+            <li><a href="producto.html">Detalle de Producto</a></li>
+            <li><a href="carrito.html">Carrito de Compras</a></li>
+            <li><a href="nosotros.html">Sobre Nosotros</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Especialidades</h4>
+          <ul>
+            <li><a href="categoria.html?cat=cuadradas">Tortas Cuadradas</a></li>
+            <li><a href="categoria.html?cat=circulares">Tortas Circulares</a></li>
+            <li><a href="categoria.html?cat=individuales">Postres Individuales</a></li>
+            <li><a href="categoria.html?cat=sin-azucar">Productos Sin Azúcar</a></li>
+            <li><a href="categoria.html?cat=sin-gluten">Productos Sin Gluten</a></li>
+            <li><a href="categoria.html?cat=vegana">Productos Veganos</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Horarios y Atención</h4>
+          <p>📍 Av. Concha y Toro #1234, Santiago, Chile</p>
+          <p>🕒 Lunes a Sábado: 09:00 - 20:00 hrs</p>
+          <p>🕒 Domingo: 10:00 - 16:00 hrs</p>
+          <p>📞 Teléfono: +56 2 2987 6543</p>
+          <p>✉️ contacto@pasteleriamilsabores.cl</p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2024 Pastelería Mil Sabores - 50 Aniversario. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>

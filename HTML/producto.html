@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Detalle de producto - Torta Especial de Cumpleaños en Pastelería Mil Sabores. Personaliza la forma, el tamaño y añade una dedicatoria especial.">
+  <meta name="author" content="Estudiantes Duoc UC - Desarrollo Full Stack II">
+  <title>Torta Especial de Cumpleaños | Pastelería Mil Sabores</title>
+
+  <!-- Hojas de Estilos Externas (Rubro IE1.1.2) -->
+  <link rel="stylesheet" href="css/estilos.css">
+  <link rel="stylesheet" href="css/producto.css">
+
+  <!-- Scripts Modulares Diferidos -->
+  <script src="js/productos.js" defer></script>
+  <script src="js/usuarios.js" defer></script>
+  <script src="js/carrito.js" defer></script>
+  <script src="js/main.js" defer></script>
+</head>
+
+<body>
+
+  <!-- ======================================================================= -->
+  <!-- 1. BARRA SUPERIOR DE AVISOS Y ACCESOS RÁPIDOS                         -->
+  <!-- ETIQUETA: <aside> para información complementaria                       -->
+  <!-- ======================================================================= -->
+  <aside class="top-announcement" aria-label="Avisos destacados">
+    <div class="container">
+      <div>
+        <span>🎉 Celebramos 50 años: Usa el código <strong>FELICES50</strong> para 10% de descuento</span>
+      </div>
+      <div class="top-user-links">
+        <a href="login.html">Iniciar sesión</a>
+        <span>|</span>
+        <a href="registro.html">Registrar usuario</a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ======================================================================= -->
+  <!-- 2. CABECERA PRINCIPAL Y NAVEGACIÓN                                      -->
+  <!-- ETIQUETA: <header> agrupa el logo, el menú y el carrito                 -->
+  <!-- ======================================================================= -->
+  <header>
+    <div class="container barra-superior">
+      <!-- Logotipo -->
+      <a href="index.html" class="logo" aria-label="Ir a inicio de Pastelería Mil Sabores">
+        <span class="logo-icon">🧁</span>
+        <span class="logo-title">Pastelería Mil Sabores</span>
+        <span class="badge-50">50 AÑOS</span>
+      </a>
+
+      <!-- Menú de Navegación -->
+      <nav aria-label="Navegación principal del sitio">
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="categoria.html">Catálogo</a></li>
+          <li><a href="producto.html" class="active">Producto</a></li>
+          <li><a href="carrito.html">Carrito</a></li>
+          <li><a href="nosotros.html">Nosotros</a></li>
+          <li><a href="blogs.html">Blogs</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+      </nav>
+
+
+      <!-- Botón del Carrito con su contador -->
+      <div class="header-actions">
+        <a href="carrito.html" class="boton-carro" aria-label="Ver carrito de compras">
+          <span>🛒 Carrito</span>
+          <span class="cont-carrito" id="num-cont-carrito">0</span>
+        </a>
+        <button class="menu-toggle" aria-label="Abrir menú de navegación" aria-expanded="false">
+          ☰
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ======================================================================= -->
+  <!-- 3. RUTA DE NAVEGACIÓN (BREADCRUMB - FIGURA 9 DEL DOCUMENTO)             -->
+  <!-- ======================================================================= -->
+  <nav class="breadcrumb-section" aria-label="Miga de pan" style="background-color: var(--bg-card-soft); padding: 1rem 0; border-bottom: 1px solid var(--border-subtle);">
+    <div class="container">
+      <div style="font-size: 0.88rem; color: var(--text-secondary); display: flex; gap: 0.5rem; flex-wrap: wrap;">
+        <a href="index.html" style="color: var(--color-chocolate); font-weight: 600;">Inicio</a>
+        <span style="color: var(--text-muted);">/</span>
+        <a href="categoria.html" style="color: var(--color-chocolate); font-weight: 600;" id="breadcrumb-categoria">Catálogo</a>
+        <span style="color: var(--text-muted);">/</span>
+        <span id="breadcrumb-producto" style="color: var(--text-main); font-weight: 700;">Cargando...</span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ======================================================================= -->
+  <!-- 4. CONTENIDO PRINCIPAL: DETALLE DEL PRODUCTO                            -->
+  <!-- ETIQUETA: <main> núcleo central de la página                            -->
+  <!-- ======================================================================= -->
+  <main>
+    <section class="product-detail-section" aria-labelledby="product-name">
+      <div class="container product-detail-grid">
+
+        <!-- Columna Izquierda: Galería de Fotos (Figura 9) -->
+        <div class="product-gallery">
+          <!-- Foto Principal Grande -->
+          <div class="main-image-box">
+            <img id="img-principal" 
+                 src="img/producto_TE001.avif" 
+                 alt="Torta Especial de Cumpleaños decorada para celebraciones">
+          </div>
+
+          <!-- 3 Fotos Miniatura (Thumbnails): se actualizan dinámicamente con JS -->
+          <div class="thumbnails-row" id="thumbnails-row">
+            <div class="thumbnail-item active" onclick="cambiarFoto('img/producto_TE001.avif', this)">
+              <img src="img/producto_TE001.avif" alt="Vista frontal torta de cumpleaños">
+            </div>
+            <div class="thumbnail-item" onclick="cambiarFoto('img/producto_TE001_velas.jpg', this)">
+              <img src="img/producto_TE001_velas.jpg" alt="Vista con velas de cumpleaños y celebración">
+            </div>
+            <div class="thumbnail-item" onclick="cambiarFoto('img/producto_TE001_chocolate.jpg', this)">
+              <img src="img/producto_TE001_chocolate.jpg" alt="Detalle del bizcocho y chocolate">
+            </div>
+          </div>
+        </div>
+
+        <!-- Columna Derecha: Información y Personalización (Requisitos del Caso Duoc) -->
+        <div class="product-detail-info">
+          
+          <div class="detail-header">
+            <span class="badge badge-gold product-tag" id="product-tag">Tortas Especiales · Código: TE001</span>
+            <h1 id="product-name" class="detail-title">Torta Especial de Cumpleaños</h1>
+            <div class="detail-price" id="precio-torta">$55.000 CLP</div>
+          </div>
+
+          <p class="detail-description" id="product-desc">
+            Diseñada especialmente para celebraciones únicas. Elaborada sobre un suave bizcocho tradicional con doble relleno de manjar artesanal y crema chantilly, decorada a mano con flores de azúcar y detalles personalizados para homenajear a esa persona especial.
+          </p>
+
+          <!-- 1. Opción: Forma de la Torta (Requisito: cuadrada o circular) -->
+          <div class="option-group">
+            <label for="select-forma" class="option-label">1. Forma de la Torta:</label>
+            <select id="select-forma" class="option-select">
+              <option value="Circular" selected>Circular (Clásica y elegante)</option>
+              <option value="Cuadrada">Cuadrada (Fácil de porcionar)</option>
+            </select>
+          </div>
+
+          <!-- 2. Opción: Tamaño / Porciones (Requisito: diferentes tamaños) -->
+          <div class="option-group">
+            <label for="select-tamano" class="option-label">2. Tamaño y Porciones:</label>
+            <select id="select-tamano" class="option-select">
+              <option value="Chica" data-precio="38000">Chica (6 a 8 porciones) - $38.000 CLP</option>
+              <option value="Mediana" data-precio="55000" selected>Mediana (12 a 15 porciones) - $55.000 CLP</option>
+              <option value="Grande" data-precio="72000">Grande (20 a 25 porciones) - $72.000 CLP</option>
+              <option value="Familiar" data-precio="89000">Familiar (30 a 35 porciones) - $89.000 CLP</option>
+            </select>
+          </div>
+
+          <!-- 3. Opción: Mensaje Especial (Requisito: detalles de personalización) -->
+          <div class="option-group">
+            <label for="input-dedicatoria" class="option-label">3. Mensaje en la Torta (Opcional):</label>
+            <input type="text" 
+                   id="input-dedicatoria" 
+                   class="option-input" 
+                   maxlength="60" 
+                   placeholder="Ej: ¡Feliz Cumpleaños Mamá! Te queremos">
+          </div>
+
+          <!-- 4. Controles de Compra: Cantidad y Botón Añadir -->
+          <div class="purchase-row">
+            <div class="quantity-control" aria-label="Control de cantidad">
+              <button type="button" id="btn-restar" class="btn-qty" aria-label="Restar una unidad">-</button>
+              <input type="number" id="input-cantidad" class="qty-input" value="1" min="1" max="99" readonly>
+              <button type="button" id="btn-sumar" class="btn-qty" aria-label="Sumar una unidad">+</button>
+            </div>
+
+            <button type="button" class="btn btn-primary btn-add-detail" id="btn-comprar-detalle">
+              🛒 Añadir al Carrito
+            </button>
+          </div>
+
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- SECCIÓN: COMENTARIOS DEL PRODUCTO (Requisito pizarra profesor)         -->
+    <!-- Ver comentarios e ingresar nuevo comentario                            -->
+    <!-- ===================================================================== -->
+    <section class="container" style="margin-bottom: 3.5rem;">
+      <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 16px; padding: 2.2rem; box-shadow: 0 4px 15px rgba(93, 64, 55, 0.04);">
+        <h2 style="font-family: var(--font-serif); color: var(--color-chocolate); font-size: 1.5rem; margin-bottom: 1.5rem; border-bottom: 2px solid var(--border-subtle); padding-bottom: 0.6rem;">
+          ⭐ Opiniones y Comentarios de Clientes
+        </h2>
+
+        <!-- Lista de comentarios -->
+        <div id="lista-comentarios-producto" style="display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem;">
+          <!-- Inyectado dinámicamente por main.js -->
+        </div>
+
+        <!-- Formulario para ingresar comentario -->
+        <div style="background: var(--bg-card-soft); border-radius: 12px; padding: 1.5rem; border: 1px dashed var(--border-color);">
+          <h3 style="font-family: var(--font-serif); font-size: 1.2rem; color: var(--color-chocolate); margin-bottom: 1rem;">
+            ✍️ Deja tu Opinión sobre este Producto
+          </h3>
+          <form id="form-comentario-producto">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1rem;">
+              <div>
+                <label for="com-nombre" style="display: block; font-weight: 700; font-size: 0.88rem; margin-bottom: 0.3rem;">Tu Nombre</label>
+                <input type="text" id="com-nombre" required placeholder="Ej: Ana María" style="width: 100%; padding: 0.7rem; border-radius: 8px; border: 1px solid var(--border-subtle); background: var(--bg-card); color: var(--text-main);">
+              </div>
+              <div>
+                <label for="com-estrellas" style="display: block; font-weight: 700; font-size: 0.88rem; margin-bottom: 0.3rem;">Puntuación</label>
+                <select id="com-estrellas" style="width: 100%; padding: 0.7rem; border-radius: 8px; border: 1px solid var(--border-subtle); background: var(--bg-card); color: var(--text-main);">
+                  <option value="⭐⭐⭐⭐⭐">⭐⭐⭐⭐⭐ (5/5 Excelente)</option>
+                  <option value="⭐⭐⭐⭐">⭐⭐⭐⭐ (4/5 Muy Buena)</option>
+                  <option value="⭐⭐⭐">⭐⭐⭐ (3/5 Buena)</option>
+                </select>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem;">
+              <label for="com-texto" style="display: block; font-weight: 700; font-size: 0.88rem; margin-bottom: 0.3rem;">Tu Comentario</label>
+              <textarea id="com-texto" rows="3" required placeholder="Cuéntanos qué te pareció el sabor, la frescura y la presentación..." style="width: 100%; padding: 0.7rem; border-radius: 8px; border: 1px solid var(--border-subtle); background: var(--bg-card); color: var(--text-main);"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-sm">Publicar Comentario</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- 5. PRODUCTOS RECOMENDADAS (FIGURA 9 DEL DOCUMENTO)                     -->
+    <!-- ETIQUETA: <article> para cada sugerencia de compra                     -->
+    <!-- ===================================================================== -->
+    <section class="related-section" aria-labelledby="related-heading">
+      <div class="container">
+        <h2 id="related-heading" class="related-title">Productos Recomendadas</h2>
+
+        <div class="related-grid">
+          <!-- Producto Relacionado 1 -->
+          <article class="related-card">
+            <div class="related-img-box">
+              <img src="img/producto_TC001.avif" alt="Torta de Chocolate">
+            </div>
+            <div class="related-content">
+              <h4>Torta de Chocolate</h4>
+              <span class="related-price">$45.000 CLP</span>
+              <a href="producto.html?id=TC001" class="btn btn-outline btn-sm">Ver detalle</a>
+            </div>
+          </article>
+
+          <!-- Producto Relacionado 2 -->
+          <article class="related-card">
+            <div class="related-img-box">
+              <img src="img/producto_TT002.avif" alt="Torta Circular de Manjar">
+            </div>
+            <div class="related-content">
+              <h4>Torta Circular de Manjar</h4>
+              <span class="related-price">$42.000 CLP</span>
+              <a href="producto.html?id=TT002" class="btn btn-outline btn-sm">Ver detalle</a>
+            </div>
+          </article>
+
+          <!-- Producto Relacionado 3 -->
+          <article class="related-card">
+            <div class="related-img-box">
+              <img src="img/producto_PSA002.avif" alt="Cheesecake Sin Azúcar">
+            </div>
+            <div class="related-content">
+              <h4>Cheesecake Sin Azúcar</h4>
+              <span class="related-price">$47.000 CLP</span>
+              <a href="producto.html?id=PSA002" class="btn btn-outline btn-sm">Ver detalle</a>
+            </div>
+          </article>
+
+          <!-- Producto Relacionado 4 -->
+          <article class="related-card">
+            <div class="related-img-box">
+              <img src="img/producto_TE002.jpg" alt="Torta Especial de Boda">
+            </div>
+            <div class="related-content">
+              <h4>Torta Especial de Boda</h4>
+              <span class="related-price">$60.000 CLP</span>
+              <a href="producto.html?id=TE002" class="btn btn-outline btn-sm">Ver detalle</a>
+            </div>
+          </article>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- ======================================================================= -->
+  <!-- 6. PIE DE PÁGINA (FOOTER INFORMATIVO)                                   -->
+  <!-- ======================================================================= -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Columna 1: Identidad -->
+        <div class="footer-col">
+          <h4>Pastelería Mil Sabores</h4>
+          <p>
+            Celebrando medio siglo de tradición pastelera en Chile. Entregamos momentos dulces con la máxima calidad, higiene y pasión artesanal.
+          </p>
+        </div>
+
+        <!-- Columna 2: Navegación Rápida -->
+        <div class="footer-col">
+          <h4>Navegación</h4>
+          <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="categoria.html">Catálogo Completo</a></li>
+            <li><a href="producto.html">Detalle de Producto</a></li>
+            <li><a href="carrito.html">Carrito de Compras</a></li>
+            <li><a href="nosotros.html">Sobre Nosotros</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+          </ul>
+        </div>
+
+        <!-- Columna 3: Categorías -->
+        <div class="footer-col">
+          <h4>Especialidades</h4>
+          <ul>
+            <li><a href="categoria.html?cat=cuadradas">Tortas Cuadradas</a></li>
+            <li><a href="categoria.html?cat=circulares">Tortas Circulares</a></li>
+            <li><a href="categoria.html?cat=individuales">Postres Individuales</a></li>
+            <li><a href="categoria.html?cat=sin-azucar">Productos Sin Azúcar</a></li>
+            <li><a href="categoria.html?cat=sin-gluten">Productos Sin Gluten</a></li>
+            <li><a href="categoria.html?cat=vegana">Productos Veganos</a></li>
+          </ul>
+        </div>
+
+        <!-- Columna 4: Atención y Horarios -->
+        <div class="footer-col">
+          <h4>Horarios y Atención</h4>
+          <p>📍 Av. Concha y Toro #1234, Santiago, Chile</p>
+          <p>🕒 Lunes a Sábado: 09:00 - 20:00 hrs</p>
+          <p>🕒 Domingo: 10:00 - 16:00 hrs</p>
+          <p>📞 Teléfono: +56 2 2987 6543</p>
+          <p>✉️ contacto@pasteleriamilsabores.cl</p>
+        </div>
+      </div>
+
+      <!-- Barra de Copyright -->
+      <div class="footer-bottom">
+        <p>&copy; 2024 Pastelería Mil Sabores - 50 Aniversario. Todos los derechos reservados.</p>
+        
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>

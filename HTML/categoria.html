@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Catálogo de productos de Pastelería Mil Sabores. 8 categorías: Tortas cuadradas, circulares, postres individuales, sin azúcar, sin gluten, veganas, tradicionales y especiales.">
+  <meta name="author" content="Estudiantes Duoc UC - Desarrollo Full Stack II">
+  <title>Catálogo de Productos | Pastelería Mil Sabores</title>
+
+  <!-- Hojas de Estilos Externas (Rubro IE1.1.2) -->
+  <link rel="stylesheet" href="css/estilos.css">
+  <link rel="stylesheet" href="css/categoria.css">
+
+  <!-- Scripts Modulares Diferidos -->
+  <script src="js/productos.js" defer></script>
+  <script src="js/usuarios.js" defer></script>
+  <script src="js/carrito.js" defer></script>
+  <script src="js/main.js" defer></script>
+</head>
+
+<body>
+
+  <!-- ======================================================================= -->
+  <!-- 1. BARRA SUPERIOR DE AVISOS Y ACCESOS RÁPIDOS                         -->
+  <!-- ETIQUETA: <aside> para avisos complementarios                           -->
+  <!-- ======================================================================= -->
+  <aside class="top-announcement" aria-label="Avisos destacados">
+    <div class="container">
+      <div>
+        <span>🎉 Celebramos 50 años: Usa el código <strong>FELICES50</strong> para 10% de descuento</span>
+      </div>
+      <div class="top-user-links">
+        <a href="login.html">Iniciar sesión</a>
+        <span>|</span>
+        <a href="registro.html">Registrar usuario</a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ======================================================================= -->
+  <!-- 2. CABECERA PRINCIPAL Y NAVEGACIÓN                                      -->
+  <!-- ETIQUETA: <header> para el logo y la barra de navegación                -->
+  <!-- ======================================================================= -->
+  <header>
+    <div class="container barra-superior">
+      <!-- Logotipo -->
+      <a href="index.html" class="logo" aria-label="Ir a inicio de Pastelería Mil Sabores">
+        <span class="logo-icon">🧁</span>
+        <span class="logo-title">Pastelería Mil Sabores</span>
+        <span class="badge-50">50 AÑOS</span>
+      </a>
+
+      <nav aria-label="Navegación principal del sitio">
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="categoria.html" class="active">Catálogo</a></li>
+          <li><a href="producto.html">Producto</a></li>
+          <li><a href="carrito.html">Carrito</a></li>
+          <li><a href="nosotros.html">Nosotros</a></li>
+          <li><a href="blogs.html">Blogs</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+      </nav>
+
+
+      <!-- Botón del Carrito con su contador -->
+      <div class="header-actions">
+        <a href="carrito.html" class="boton-carro" aria-label="Ver carrito de compras">
+          <span>🛒 Carrito</span>
+          <span class="cont-carrito" id="num-cont-carrito">0</span>
+        </a>
+        <button class="menu-toggle" aria-label="Abrir menú de navegación" aria-expanded="false">
+          ☰
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ======================================================================= -->
+  <!-- 3. RUTA DE NAVEGACIÓN (BREADCRUMB)                                      -->
+  <!-- ======================================================================= -->
+  <nav class="breadcrumb-section" aria-label="Miga de pan" style="background-color: var(--bg-card-soft); padding: 1rem 0; border-bottom: 1px solid var(--border-subtle);">
+    <div class="container">
+      <div style="font-size: 0.88rem; color: var(--text-secondary); display: flex; gap: 0.5rem;">
+        <a href="index.html" style="color: var(--color-chocolate); font-weight: 600;">Inicio</a>
+        <span style="color: var(--text-muted);">/</span>
+        <span style="color: var(--text-main); font-weight: 700;">Catálogo de Productos</span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ======================================================================= -->
+  <!-- 4. CONTENIDO PRINCIPAL: CATÁLOGO Y FILTROS (FIGURA 8 DEL DOCUMENTO)     -->
+  <!-- ETIQUETA: <main> núcleo central de la página                            -->
+  <!-- ======================================================================= -->
+  <main>
+    <div class="container">
+
+      <!-- Encabezado de la Sección y Buscador en Vivo -->
+      <section class="catalog-header-section" aria-labelledby="catalog-title">
+        <h1 id="catalog-title" class="catalog-title">Nuestro <span>Catálogo Completo</span></h1>
+        <p class="catalog-description">
+          Descubre nuestras 8 categorías de pastelería y repostería artesanal chilena. Utiliza los filtros por categoría, forma de la torta o el buscador para encontrar rápidamente tu delicia favorita.
+        </p>
+
+        <!-- Barra de Búsqueda Interactiva y Filtro por Forma -->
+        <div style="display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; justify-content: center; margin: 1.5rem 0 1rem;">
+          <div class="search-container" style="margin: 0; flex: 1; min-width: 260px; max-width: 500px;">
+            <span class="search-icon">🔍</span>
+            <input type="text" 
+                   id="buscador-productos" 
+                   class="search-input" 
+                   placeholder="Buscar por nombre, código o ingrediente...">
+          </div>
+
+          <!-- Selector de Forma de la Torta (Requerimiento de la pauta) -->
+          <div class="shape-filter-box" style="display: inline-flex; align-items: center; gap: 0.5rem; background: var(--bg-card-soft); padding: 0.5rem 0.9rem; border-radius: 8px; border: 1px solid var(--border-subtle);">
+            <label for="filtro-forma" style="font-size: 0.9rem; font-weight: 700; color: var(--color-chocolate);">🎂 Forma:</label>
+            <select id="filtro-forma" style="padding: 0.4rem 0.8rem; border-radius: 6px; border: 1px solid var(--border-subtle); background: var(--bg-card); color: var(--text-main); font-size: 0.9rem; cursor: pointer;">
+              <option value="todas">Todas las Formas</option>
+              <option value="circular">Circulares</option>
+              <option value="cuadrada">Cuadradas</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Botones de Filtro por Categoría (Requerimiento de la pauta) -->
+        <div class="filters-wrapper" aria-label="Filtrar por categoría">
+          <button type="button" class="filter-btn active" data-categoria="todos">Todos (16)</button>
+          <button type="button" class="filter-btn" data-categoria="cuadradas">Tortas Cuadradas</button>
+          <button type="button" class="filter-btn" data-categoria="circulares">Tortas Circulares</button>
+          <button type="button" class="filter-btn" data-categoria="individuales">Postres Individuales</button>
+          <button type="button" class="filter-btn" data-categoria="sin-azucar">Sin Azúcar</button>
+          <button type="button" class="filter-btn" data-categoria="tradicional">Pastelería Tradicional</button>
+          <button type="button" class="filter-btn" data-categoria="sin-gluten">Sin Gluten</button>
+          <button type="button" class="filter-btn" data-categoria="vegana">Vegana</button>
+          <button type="button" class="filter-btn" data-categoria="especiales">Tortas Especiales</button>
+        </div>
+
+        <!-- Información de Resultados -->
+        <div class="catalog-results-info">
+          <span id="total-mostrados">16 producto(s) en catálogo</span>
+          <span>Precios oficiales en Pesos Chilenos (CLP)</span>
+        </div>
+      </section>
+
+      <!-- Grilla de Productos (16 Productos del Caso Duoc UC) -->
+      <section class="catalog-grid" aria-label="Listado de productos">
+
+        <!-- 1. TC001: Torta Cuadrada de Chocolate -->
+        <article class="catalog-item product-card" data-codigo="TC001" data-categoria="cuadradas" data-nombre="Torta Cuadrada de Chocolate" data-precio="45000">
+          <a href="producto.html?id=TC001" class="catalog-img-box" aria-label="Ver detalle de Torta Cuadrada de Chocolate">
+            <span class="catalog-code-badge">TC001</span>
+            <img src="img/producto_TC001.avif" alt="Torta Cuadrada de Chocolate" loading="lazy">
+          </a>
+          <div class="catalog-item-info">
+            <span class="catalog-item-category">Tortas Cuadradas</span>
+            <h3 class="catalog-item-title"><a href="producto.html?id=TC001">Torta Cuadrada de Chocolate</a></h3>
+            <p class="catalog-item-desc">Deliciosa torta de chocolate con capas de ganache y un toque de avellanas. Personalizable con mensajes especiales.</p>
+            <div class="catalog-item-footer">
+              <span class="catalog-item-price">$45.000 CLP</span>
+              <button type="button" class="btn-add-cart" aria-label="Añadir Torta Cuadrada de Chocolate">+ Añadir</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- 2. TC002: Torta Cuadrada de Frutas -->
+        <article class="catalog-item product-card" data-codigo="TC002" data-categoria="cuadradas" data-nombre="Torta Cuadrada de Frutas" data-precio="50000">
+          <a href="producto.html?id=TC002" class="catalog-img-box" aria-label="Ver detalle de Torta Cuadrada de Frutas">
+            <span class="catalog-code-badge">TC002</span>
+            <img src="img/producto_TC002.avif" alt="Torta Cuadrada de Frutas" loading="lazy">
+          </a>
+          <div class="catalog-item-info">
+            <span class="catalog-item-category">Tortas Cuadradas</span>
+            <h3 class="catalog-item-title"><a href="producto.html?id=TC002">Torta Cuadrada de Frutas</a></h3>
+            <p class="catalog-item-desc">Una mezcla de frutas frescas de la estación y crema chantilly sobre un suave bizcocho de vainilla.</p>
+            <div class="catalog-item-footer">
+              <span class="catalog-item-price">$50.000 CLP</span>
+              <button type="button" class="btn-add-cart" aria-label="Añadir Torta Cuadrada de Frutas">+ Añadir</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- 3. TT001: Torta Circular de Vainilla -->
+        <article class="catalog-item product-card" data-codigo="TT001" data-categoria="circulares" data-nombre="Torta Circular de Vainilla" data-precio="40000">
+          <a href="producto.html?id=TT001" class="catalog-img-box" aria-label="Ver detalle de Torta Circular de Vainilla">
+            <span class="catalog-code-badge">TT001</span>
+            <img src="img/producto_TT001.avif" alt="Torta Circular de Vainilla" loading="lazy">
+          </a>
+          <div class="catalog-item-info">
+            <span class="catalog-item-category">Tortas Circulares</span>
+            <h3 class="catalog-item-title"><a href="producto.html?id=TT001">Torta Circular de Vainilla</a></h3>
+            <p class="catalog-item-desc">Bizcocho de vainilla clásico relleno con crema pastelera y cubierto con un glaseado dulce tradicional.</p>
+            <div class="catalog-item-footer">
+              <span class="catalog-item-price">$40.000 CLP</span>
+              <button type="button" class="btn-add-cart" aria-label="Añadir Torta Circular de Vainilla">+ Añadir</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- 4. TT002: Torta Circular de Manjar -->
+        <article class="catalog-item product-card" data-codigo="TT002" data-categoria="circulares" data-nombre="Torta Circular de Manjar" data-precio="42000">
+          <a href="producto.html?id=TT002" class="catalog-img-box" aria-label="Ver detalle de Torta Circular de Manjar">
+            <span class="catalog-code-badge">TT002</span>
+            <img src="img/producto_TT002.avif" alt="Torta Circular de Manjar" loading="lazy">
+          </a>
+          <div class="catalog-item-info">
+            <span class="catalog-item-category">Tortas Circulares</span>
+            <h3 class="catalog-item-title"><a href="producto.html?id=TT002">Torta Circular de Manjar</a></h3>
+            <p class="catalog-item-desc">Torta tradicional chilena con manjar artesanal y nueces seleccionadas, un deleite para ocasiones especiales.</p>
+            <div class="catalog-item-footer">
+              <span class="catalog-item-price">$42.000 CLP</span>
+              <button type="button" class="btn-add-cart" aria-label="Añadir Torta Circular de Manjar">+ Añadir</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- 5. PI001: Mousse de Chocolate -->
+        <article class="catalog-item product-card" data-codigo="PI001" data-categoria="individuales" data-nombre="Mousse de Chocolate" data-precio="5000">
+          <a href="producto.html?id=PI001" class="catalog-img-box" aria-label="Ver detalle de Mousse de Chocolate">
+            <span class="catalog-code-badge">PI001</span>
+            <img src="img/producto_PI001.jpg" alt="Mousse de Chocolate" loading="lazy">
+          </a>
+          <div class="catalog-item-info">
+            <span class="catalog-item-category">Postres Individuales</span>
+            <h3 class="catalog-item-title"><a href="producto.html?id=PI001">Mousse de Chocolate</a></h3>
+            <p class="catalog-item-desc">Postre individual cremoso y suave, hecho con chocolate de alta calidad, ideal para amantes del cacao.</p>
+            <div class="catalog-item-footer">
+              <span class="catalog-item-price">$5.000 CLP</span>
+              <button type="button" class="btn-add-cart" aria-label="Añadir Mousse de Chocolate">+ Añadir</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- 6. PI002: Tiramisú Clásico -->
+        <article class="catalog-item product-card" data-codigo="PI002" data-categoria="individuales" data-nombre="Tiramisú Clásico" data-precio="5500">
+          <a href="producto.html?id=PI002" class="catalog-img-box" aria-label="Ver detalle de Tiramisú Clásico">
+            <span class="catalog-code-badge">PI002</span>
+            <img src="img/producto_PI002.avif" alt="Tiramisú Clásico" loading="lazy">
+          </a>
+          <div class="catalog-item-info">
+            <span class="catalog-item-category">Postres Individuales</span>
+            <h3 class="catalog-item-title"><a href="producto.html?id=PI002">Tiramisú Clásico</a></h3>
+            <p class="catalog-item-desc">Un postre italiano individual con capas de café, queso mascarpone y cacao en polvo fino.</p>
+            <div class="catalog-item-footer">
+              <span class="catalog-item-price">$5.500 CLP</span>
+              <button type="button" class="btn-add-cart" aria-label="Añadir Tiramisú Clásico">+ Añadir</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- 7. PSA001: Torta Sin Azúcar de Naranja -->
+        <article class="catalog-item product-card" data-codigo="PSA001" data-categoria="sin-azucar" data-nombre="Torta Sin Azúcar de Naranja" data-precio="48000">
+          <a href="producto.html?id=PSA001" class="catalog-img-box" aria-label="Ver detalle de Torta Sin Azúcar de Naranja">
+            <span class="catalog-code-badge">PSA001</span>
+            <img src="img/producto_PSA001.avif" alt="Torta Sin Azúcar de Naranja" loading="lazy">
+          </a>
+          <div class="catalog-item-info">
+            <span class="catalog-item-category">Sin Azúcar</span>
+            <h3 class="catalog-item-title"><a href="producto.html?id=PSA001">Torta Sin Azúcar de Naranja</a></h3>
+            <p class="catalog-item-desc">Torta ligera y deliciosa con toques cítricos, endulzada naturalmente para quienes buscan cuidarse.</p>
+            <div class="catalog-item-footer">
+              <span class="catalog-item-price">$48.000 CLP</span>
+              <button type="button" class="btn-add-cart" aria-label="Añadir Torta Sin Azúcar de Naranja">+ Añadir</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- 8. PSA002: Cheesecake Sin Azúcar -->
+        <article class="catalog-item product-card" data-codigo="PSA002" data-categoria="sin-azucar" data-nombre="Cheesecake Sin Azúcar" data-precio="47000">
+          <a href="producto.html?id=PSA002" class="catalog-img-box" aria-label="Ver detalle de Cheesecake Sin Azúcar">
+            <span class="catalog-code-badge">PSA002</span>
+            <img src="img/producto_PSA002.avif" alt="Cheesecake Sin Azúcar" loading="lazy">
+          </a>
+          <div class="catalog-item-info">
+            <span class="catalog-item-category">Sin Azúcar</span>
+            <h3 class="catalog-item-title"><a href="producto.html?id=PSA002">Cheesecake Sin Azúcar</a></h3>
+            <p class="catalog-item-desc">Suave y cremoso sobre base de almendras tostadas, este cheesecake es ideal para disfrutar sin culpa.</p>
+            <div class="catalog-item-footer">
+              <span class="catalog-item-price">$47.000 CLP</span>
+              <button type="button" class="btn-add-cart" aria-label="Añadir Cheesecake Sin Azúcar">+ Añadir</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- 9. PT001: Empanada de Manzana -->
+        <article class="catalog-item product-card" data-codigo="PT001" data-categoria="tradicional" data-nombre="Empanada de Manzana" data-precio="3000">
+          <a href="producto.html?id=PT001" class="catalog-img-box" aria-label="Ver detalle de Empanada de Manzana">
+            <span class="catalog-code-badge">PT001</span>
+            <img src="img/producto_PT001.avif" alt="Empanada de Manzana" loading="lazy">
+          </a>
+          <div class="catalog-item-info">
+            <span class="catalog-item-category">Pastelería Tradicional</span>
+            <h3 class="catalog-item-title"><a href="producto.html?id=PT001">Empanada de Manzana</a></h3>
+            <p class="catalog-item-desc">Pastelería tradicional rellena de manzanas del sur especiadas con canela, perfecta para la once chilena.</p>
+            <div class="catalog-item-footer">
+              <span class="catalog-item-price">$3.000 CLP</span>
+              <button type="button" class="btn-add-cart" aria-label="Añadir Empanada de Manzana">+ Añadir</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- 10. PT002: Tarta de Santiago -->
+        <article class="catalog-item product-card" data-codigo="PT002" data-categoria="tradicional" data-nombre="Tarta de Santiago" data-precio="6000">
+          <a href="producto.html?id=PT002" class="catalog-img-box" aria-label="Ver detalle de Tarta de Santiago">
+            <span class="catalog-code-badge">PT002</span>
+            <img src="img/producto_PT002.avif" alt="Tarta de Santiago" loading="lazy">
+          </a>
+          <div class="catalog-item-info">
+            <span class="catalog-item-category">Pastelería Tradicional</span>
+            <h3 class="catalog-item-title"><a href="producto.html?id=PT002">Tarta de Santiago</a></h3>
+            <p class="catalog-item-desc">Tradicional tarta española hecha con almendras molidas, azúcar y huevos, una delicia clásica insustituible.</p>
+            <div class="catalog-item-footer">
+              <span class="catalog-item-price">$6.000 CLP</span>
+              <button type="button" class="btn-add-cart" aria-label="Añadir Tarta de Santiago">+ Añadir</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- 11. PG001: Brownie Sin Gluten -->
+        <article class="catalog-item product-card" data-codigo="PG001" data-categoria="sin-gluten" data-nombre="Brownie Sin Gluten" data-precio="4000">
+          <a href="producto.html?id=PG001" class="catalog-img-box" aria-label="Ver detalle de Brownie Sin Gluten">
+            <span class="catalog-code-badge">PG001</span>
+            <img src="img/producto_PG001.avif" alt="Brownie Sin Gluten" loading="lazy">
+          </a>
+          <div class="catalog-item-info">
+            <span class="catalog-item-category">Sin Gluten</span>
+            <h3 class="catalog-item-title"><a href="producto.html?id=PG001">Brownie Sin Gluten</a></h3>
+            <p class="catalog-item-desc">Rico, denso y chocolatoso. Certificado para personas con celiaquía sin sacrificar el auténtico sabor.</p>
+            <div class="catalog-item-footer">
+              <span class="catalog-item-price">$4.000 CLP</span>
+              <button type="button" class="btn-add-cart" aria-label="Añadir Brownie Sin Gluten">+ Añadir</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- 12. PG002: Pan Sin Gluten -->
+        <article class="catalog-item product-card" data-codigo="PG002" data-categoria="sin-gluten" data-nombre="Pan Sin Gluten" data-precio="3500">
+          <a href="producto.html?id=PG002" class="catalog-img-box" aria-label="Ver detalle de Pan Sin Gluten">
+            <span class="catalog-code-badge">PG002</span>
+            <img src="img/producto_PG002.avif" alt="Pan Sin Gluten" loading="lazy">
+          </a>
+          <div class="catalog-item-info">
+            <span class="catalog-item-category">Sin Gluten</span>
+            <h3 class="catalog-item-title"><a href="producto.html?id=PG002">Pan Sin Gluten</a></h3>
+            <p class="catalog-item-desc">Suave y esponjoso, horneado diariamente con harinas libres de gluten, ideal para acompañar tus comidas.</p>
+            <div class="catalog-item-footer">
+              <span class="catalog-item-price">$3.500 CLP</span>
+              <button type="button" class="btn-add-cart" aria-label="Añadir Pan Sin Gluten">+ Añadir</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- 13. PV001: Torta Vegana de Chocolate -->
+        <article class="catalog-item product-card" data-codigo="PV001" data-categoria="vegana" data-nombre="Torta Vegana de Chocolate" data-precio="50000">
+          <a href="producto.html?id=PV001" class="catalog-img-box" aria-label="Ver detalle de Torta Vegana de Chocolate">
+            <span class="catalog-code-badge">PV001</span>
+            <img src="img/producto_PV001.avif" alt="Torta Vegana de Chocolate" loading="lazy">
+          </a>
+          <div class="catalog-item-info">
+            <span class="catalog-item-category">Productos Veganos</span>
+            <h3 class="catalog-item-title"><a href="producto.html?id=PV001">Torta Vegana de Chocolate</a></h3>
+            <p class="catalog-item-desc">Torta húmeda y deliciosa, elaborada 100% con ingredientes de origen vegetal de primera calidad.</p>
+            <div class="catalog-item-footer">
+              <span class="catalog-item-price">$50.000 CLP</span>
+              <button type="button" class="btn-add-cart" aria-label="Añadir Torta Vegana de Chocolate">+ Añadir</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- 14. PV002: Galletas Veganas de Avena -->
+        <article class="catalog-item product-card" data-codigo="PV002" data-categoria="vegana" data-nombre="Galletas Veganas de Avena" data-precio="4500">
+          <a href="producto.html?id=PV002" class="catalog-img-box" aria-label="Ver detalle de Galletas Veganas de Avena">
+            <span class="catalog-code-badge">PV002</span>
+            <img src="img/producto_PV002.avif" alt="Galletas Veganas de Avena" loading="lazy">
+          </a>
+          <div class="catalog-item-info">
+            <span class="catalog-item-category">Productos Veganos</span>
+            <h3 class="catalog-item-title"><a href="producto.html?id=PV002">Galletas Veganas de Avena</a></h3>
+            <p class="catalog-item-desc">Crujientes, nutritivas y sabrosas galletas de avena integral, ideales para un snack saludable.</p>
+            <div class="catalog-item-footer">
+              <span class="catalog-item-price">$4.500 CLP</span>
+              <button type="button" class="btn-add-cart" aria-label="Añadir Galletas Veganas de Avena">+ Añadir</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- 15. TE001: Torta Especial de Cumpleaños -->
+        <article class="catalog-item product-card" data-codigo="TE001" data-categoria="especiales" data-nombre="Torta Especial de Cumpleaños" data-precio="55000">
+          <a href="producto.html?id=TE001" class="catalog-img-box" aria-label="Ver detalle de Torta Especial de Cumpleaños">
+            <span class="catalog-code-badge">TE001</span>
+            <img src="img/producto_TE001.avif" alt="Torta Especial de Cumpleaños" loading="lazy">
+          </a>
+          <div class="catalog-item-info">
+            <span class="catalog-item-category">Tortas Especiales</span>
+            <h3 class="catalog-item-title"><a href="producto.html?id=TE001">Torta Especial Cumpleaños</a></h3>
+            <p class="catalog-item-desc">Diseñada especialmente para celebraciones, personalizable con forma, tamaño y dedicatorias únicas.</p>
+            <div class="catalog-item-footer">
+              <span class="catalog-item-price">$55.000 CLP</span>
+              <button type="button" class="btn-add-cart" aria-label="Añadir Torta Especial de Cumpleaños">+ Añadir</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- 16. TE002: Torta Especial de Boda -->
+        <article class="catalog-item product-card" data-codigo="TE002" data-categoria="especiales" data-nombre="Torta Especial de Boda" data-precio="60000">
+          <a href="producto.html?id=TE002" class="catalog-img-box" aria-label="Ver detalle de Torta Especial de Boda">
+            <span class="catalog-code-badge">TE002</span>
+            <img src="img/producto_TE002.jpg" alt="Torta Especial de Boda" loading="lazy">
+          </a>
+          <div class="catalog-item-info">
+            <span class="catalog-item-category">Tortas Especiales</span>
+            <h3 class="catalog-item-title"><a href="producto.html?id=TE002">Torta Especial de Boda</a></h3>
+            <p class="catalog-item-desc">Elegante y deliciosa, diseñada artesanalmente para ser el centro de atención inolvidable en matrimonios.</p>
+            <div class="catalog-item-footer">
+              <span class="catalog-item-price">$60.000 CLP</span>
+              <button type="button" class="btn-add-cart" aria-label="Añadir Torta Especial de Boda">+ Añadir</button>
+            </div>
+          </div>
+        </article>
+
+      </section>
+
+
+
+    </div>
+  </main>
+
+  <!-- ======================================================================= -->
+  <!-- 5. PIE DE PÁGINA (FOOTER INFORMATIVO COMPARTIDO)                        -->
+  <!-- ======================================================================= -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Columna 1: Identidad de Marca -->
+        <div class="footer-col">
+          <h4>Pastelería Mil Sabores</h4>
+          <p>
+            Celebrando medio siglo de tradición pastelera en Chile. Entregamos momentos dulces con la máxima calidad, higiene y pasión artesanal.
+          </p>
+        </div>
+
+        <!-- Columna 2: Navegación Rápida -->
+        <div class="footer-col">
+          <h4>Navegación</h4>
+          <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="categoria.html">Catálogo Completo</a></li>
+            <li><a href="producto.html">Detalle de Producto</a></li>
+            <li><a href="carrito.html">Carrito de Compras</a></li>
+            <li><a href="nosotros.html">Sobre Nosotros</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+          </ul>
+        </div>
+
+        <!-- Columna 3: Categorías Rápidas -->
+        <div class="footer-col">
+          <h4>Especialidades</h4>
+          <ul>
+            <li><a href="categoria.html?cat=cuadradas">Tortas Cuadradas</a></li>
+            <li><a href="categoria.html?cat=circulares">Tortas Circulares</a></li>
+            <li><a href="categoria.html?cat=individuales">Postres Individuales</a></li>
+            <li><a href="categoria.html?cat=sin-azucar">Productos Sin Azúcar</a></li>
+            <li><a href="categoria.html?cat=sin-gluten">Productos Sin Gluten</a></li>
+            <li><a href="categoria.html?cat=vegana">Productos Veganos</a></li>
+          </ul>
+        </div>
+
+        <!-- Columna 4: Atención y Horarios -->
+        <div class="footer-col">
+          <h4>Horarios y Atención</h4>
+          <p>📍 Av. Concha y Toro #1234, Santiago, Chile</p>
+          <p>🕒 Lunes a Sábado: 09:00 - 20:00 hrs</p>
+          <p>🕒 Domingo: 10:00 - 16:00 hrs</p>
+          <p>📞 Teléfono: +56 2 2987 6543</p>
+          <p>✉️ contacto@pasteleriamilsabores.cl</p>
+        </div>
+      </div>
+
+      <!-- Barra de Copyright Inferior -->
+      <div class="footer-bottom">
+        <p>&copy; 2024 Pastelería Mil Sabores - 50 Aniversario. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>

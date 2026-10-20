@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Boleta Electrónica Oficial de Compra - Pastelería Mil Sabores. Comprobante tributario válido con detalle de productos, IVA y descuentos.">
+  <meta name="author" content="Estudiantes Duoc UC - Desarrollo Full Stack II">
+  <title>Boleta Electrónica de Venta | Pastelería Mil Sabores</title>
+
+  <!-- Hojas de Estilos Externas -->
+  <link rel="stylesheet" href="css/estilos.css">
+  <link rel="stylesheet" href="css/cabecera.css">
+
+  <style>
+    @media print {
+      .top-announcement, header, footer, .no-print, .breadcrumb-section {
+        display: none;
+      }
+      body {
+        background: #fff;
+        color: #000;
+      }
+      .boleta-card {
+        border: 1px solid #000;
+        box-shadow: none;
+        padding: 0;
+      }
+    }
+  </style>
+
+  <!-- Scripts Modulares Diferidos -->
+  <script src="js/productos.js" defer></script>
+  <script src="js/usuarios.js" defer></script>
+  <script src="js/carrito.js" defer></script>
+  <script src="js/main.js" defer></script>
+</head>
+
+<body>
+
+  <!-- ======================================================================= -->
+  <!-- 1. BARRA SUPERIOR DE AVISOS Y ACCESOS RÁPIDOS                         -->
+  <!-- ======================================================================= -->
+  <aside class="top-announcement no-print" aria-label="Avisos destacados">
+    <div class="container">
+      <div>
+        <span>🎉 Celebramos 50 años: Descuento del <strong>50%</strong> para mayores de 50 años | Código <strong>FELICES50</strong></span>
+      </div>
+      <div class="top-user-links">
+        <a href="login.html">Iniciar sesión</a>
+        <span>|</span>
+        <a href="registro.html">Registrar usuario</a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ======================================================================= -->
+  <!-- 2. CABECERA PRINCIPAL Y NAVEGACIÓN                                      -->
+  <!-- ======================================================================= -->
+  <header class="no-print">
+    <div class="container barra-superior">
+      <a href="index.html" class="logo" aria-label="Ir a inicio de Pastelería Mil Sabores">
+        <span class="logo-icon">🧁</span>
+        <span class="logo-title">Pastelería Mil Sabores</span>
+        <span class="badge-50">50 AÑOS</span>
+      </a>
+
+      <nav aria-label="Navegación principal del sitio">
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="categoria.html">Catálogo</a></li>
+          <li><a href="producto.html">Producto</a></li>
+          <li><a href="nosotros.html">Nosotros</a></li>
+          <li><a href="blogs.html">Blogs</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <a href="carrito.html" class="boton-carro" aria-label="Ver carrito de compras">
+          <span>🛒 Carrito</span>
+          <span class="cont-carrito" id="num-cont-carrito">0</span>
+        </a>
+        <button class="menu-toggle" aria-label="Abrir menú de navegación" aria-expanded="false">
+          ☰
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ======================================================================= -->
+  <!-- 3. RUTA DE NAVEGACIÓN (BREADCRUMB)                                      -->
+  <!-- ======================================================================= -->
+  <nav class="breadcrumb-section no-print" aria-label="Miga de pan" style="background-color: var(--bg-card-soft); padding: 1rem 0; border-bottom: 1px solid var(--border-subtle);">
+    <div class="container">
+      <div style="font-size: 0.88rem; color: var(--text-secondary); display: flex; gap: 0.5rem;">
+        <a href="index.html" style="color: var(--color-chocolate); font-weight: 600;">Inicio</a>
+        <span style="color: var(--text-muted);">/</span>
+        <a href="carrito.html" style="color: var(--color-chocolate); font-weight: 600;">Carrito</a>
+        <span style="color: var(--text-muted);">/</span>
+        <span style="color: var(--text-main); font-weight: 700;">Boleta Electrónica</span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ======================================================================= -->
+  <!-- 4. CONTENIDO PRINCIPAL: BOLETA ELECTRÓNICA DE VENTA                     -->
+  <!-- ======================================================================= -->
+  <main id="boleta-container" style="padding: 3rem 0 5rem;">
+    <div class="container" style="max-width: 800px;">
+
+      <!-- Acciones Superiores -->
+      <div class="no-print" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
+        <div style="display: flex; gap: 0.8rem; align-items: center;">
+          <span style="font-size: 1.5rem;">🎉</span>
+          <div>
+            <h2 style="font-family: var(--font-serif); color: var(--color-chocolate); margin: 0; font-size: 1.25rem;">¡Tu pedido fue procesado con éxito!</h2>
+            <p style="margin: 0; font-size: 0.88rem; color: var(--text-secondary);">Hemos enviado una copia de este comprobante a tu correo electrónico.</p>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 0.6rem;">
+          <button type="button" id="btn-imprimir-boleta" class="btn btn-outline btn-sm" style="display: inline-flex; align-items: center; gap: 0.3rem;">
+            🖨️ Imprimir / Guardar PDF
+          </button>
+          <a href="seguimiento.html" class="btn btn-primary btn-sm" style="display: inline-flex; align-items: center; gap: 0.3rem;">
+            🚚 Rastrear Pedido en Vivo
+          </a>
+        </div>
+      </div>
+
+      <!-- Documento Tributario Boleta -->
+      <div class="boleta-card" style="background: var(--bg-card); border: 2px solid var(--color-chocolate); border-radius: 16px; padding: 2.5rem; box-shadow: 0 10px 30px rgba(93, 64, 55, 0.08);">
+
+        <!-- Encabezado de la Empresa y Timbre SII -->
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid var(--color-chocolate); padding-bottom: 1.5rem; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1.5rem;">
+          <div>
+            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.4rem;">
+              <span style="font-size: 1.8rem;">🧁</span>
+              <h1 style="font-family: var(--font-cursive); font-size: 2rem; color: var(--color-chocolate); margin: 0;">Pastelería Mil Sabores</h1>
+            </div>
+            <p style="margin: 0; font-size: 0.85rem; color: var(--text-secondary);">PASTELERÍA Y CONFITERÍA MIL SABORES S.A.</p>
+            <p style="margin: 0; font-size: 0.85rem; color: var(--text-secondary);">R.U.T.: 76.543.210-K</p>
+            <p style="margin: 0; font-size: 0.85rem; color: var(--text-secondary);">Giro: Elaboración y Venta de Productos de Panadería y Pastelería Fina</p>
+            <p style="margin: 0; font-size: 0.85rem; color: var(--text-secondary);">Casa Matriz: Av. Concha y Toro #1234, Santiago, Chile</p>
+            <p style="margin: 0; font-size: 0.85rem; color: var(--text-secondary);">Teléfono: +56 2 2987 6543 | www.pasteleriamilsabores.cl</p>
+          </div>
+
+          <!-- Cuadro Oficial de Boleta Electrónica -->
+          <div style="border: 2px solid #d32f2f; padding: 1rem 1.5rem; border-radius: 6px; text-align: center; min-width: 220px; background: #fff;">
+            <p style="margin: 0; color: #d32f2f; font-weight: 800; font-size: 0.95rem;">R.U.T.: 76.543.210-K</p>
+            <p style="margin: 0.4rem 0; color: #d32f2f; font-weight: 900; font-size: 1.05rem; letter-spacing: 0.5px;">BOLETA ELECTRÓNICA</p>
+            <p style="margin: 0; color: #d32f2f; font-weight: 800; font-size: 1.15rem;" id="bol-folio">MS-000000</p>
+            <p style="margin: 0.4rem 0 0; color: #666; font-size: 0.75rem;">S.I.I. - SANTIAGO ORIENTE</p>
+          </div>
+        </div>
+
+        <!-- Datos del Cliente y Despacho -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-bottom: 2rem; background: var(--bg-card-soft); padding: 1.2rem; border-radius: 10px; border: 1px solid var(--border-subtle); font-size: 0.9rem;">
+          <div>
+            <p style="margin: 0 0 0.4rem;"><strong>Señor(a):</strong> <span id="bol-cliente">Cliente</span></p>
+            <p style="margin: 0 0 0.4rem;"><strong>Correo:</strong> <span id="bol-email">correo@ejemplo.com</span></p>
+            <p style="margin: 0;"><strong>Teléfono:</strong> <span id="bol-telefono">+56 9 1234 5678</span></p>
+          </div>
+          <div>
+            <p style="margin: 0 0 0.4rem;"><strong>Fecha de Emisión:</strong> <span id="bol-fecha">Hoy</span></p>
+            <p style="margin: 0 0 0.4rem;"><strong>Dirección Despacho:</strong> <span id="bol-direccion">Av. Concha y Toro #1234</span></p>
+            <p style="margin: 0;"><strong>Entrega Programada:</strong> <span id="bol-fecha-entrega">Mañana</span></p>
+          </div>
+        </div>
+
+        <!-- Tabla de Items Detallada -->
+        <div style="overflow-x: auto; margin-bottom: 2rem;">
+          <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem;">
+            <thead>
+              <tr style="background: var(--color-chocolate); color: #FFF5E1;">
+                <th style="padding: 0.8rem 0.5rem; text-align: center; border-radius: 6px 0 0 0;">Cód.</th>
+                <th style="padding: 0.8rem 0.5rem; text-align: left;">Descripción y Personalizaciones</th>
+                <th style="padding: 0.8rem 0.5rem; text-align: center;">Cant.</th>
+                <th style="padding: 0.8rem 0.5rem; text-align: right;">Unitario</th>
+                <th style="padding: 0.8rem 0.5rem; text-align: right; border-radius: 0 6px 0 0;">Total</th>
+              </tr>
+            </thead>
+            <tbody id="bol-items-body">
+              <!-- Inyectado por main.js -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Resumen Financiero: Subtotal, Descuento, Envio, IVA y Total -->
+        <div style="display: flex; justify-content: flex-end;">
+          <div style="min-width: 280px; font-size: 0.95rem;">
+            <div style="display: flex; justify-content: space-between; padding: 0.4rem 0;">
+              <span style="color: var(--text-secondary);">Subtotal Neto:</span>
+              <strong id="bol-subtotal">$0 CLP</strong>
+            </div>
+
+            <div id="bol-fila-descuento" style="display: none; justify-content: space-between; padding: 0.4rem 0; color: #2e7d32;">
+              <span id="bol-motivo-desc">-Descuento Aplicado:</span>
+              <strong id="bol-monto-desc">-$0 CLP</strong>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; padding: 0.4rem 0;">
+              <span style="color: var(--text-secondary);">Despacho Refrigerado:</span>
+              <span id="bol-envio">$3.500 CLP</span>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; padding: 0.4rem 0; color: var(--text-muted); font-size: 0.88rem;">
+              <span>IVA Incluido (19%):</span>
+              <span id="bol-iva">$0 CLP</span>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; padding: 0.8rem 0 0; margin-top: 0.4rem; border-top: 2px solid var(--color-chocolate); font-size: 1.25rem; font-weight: 800; color: var(--color-chocolate);">
+              <span>TOTAL:</span>
+              <span id="bol-total">$0 CLP</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pie de Boleta -->
+        <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px dashed var(--border-subtle); text-align: center; font-size: 0.8rem; color: var(--text-muted);">
+          <p style="margin: 0 0 0.3rem;">🎂 <strong>Gracias por celebrar 50 años de dulzura junto a Pastelería Mil Sabores.</strong></p>
+          <p style="margin: 0;">Timbre Electrónico D.T.E. - Resolución S.I.I. N° 80 de 2014. Verifique documento en www.sii.cl</p>
+        </div>
+
+      </div>
+
+      <!-- Enlace para volver -->
+      <div class="no-print" style="text-align: center; margin-top: 2rem;">
+        <a href="categoria.html" class="link-seguir">&larr; Volver al Catálogo de Productos</a>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ======================================================================= -->
+  <!-- 5. PIE DE PÁGINA (FOOTER INFORMATIVO)                                   -->
+  <!-- ======================================================================= -->
+  <footer class="no-print">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>Pastelería Mil Sabores</h4>
+          <p>
+            Celebrando medio siglo de tradición pastelera en Chile. Entregamos momentos dulces con la máxima calidad, higiene y pasión artesanal.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Navegación</h4>
+          <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="categoria.html">Catálogo Completo</a></li>
+            <li><a href="producto.html">Detalle de Producto</a></li>
+            <li><a href="carrito.html">Carrito de Compras</a></li>
+            <li><a href="nosotros.html">Sobre Nosotros</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Especialidades</h4>
+          <ul>
+            <li><a href="categoria.html?cat=cuadradas">Tortas Cuadradas</a></li>
+            <li><a href="categoria.html?cat=circulares">Tortas Circulares</a></li>
+            <li><a href="categoria.html?cat=individuales">Postres Individuales</a></li>
+            <li><a href="categoria.html?cat=sin-azucar">Productos Sin Azúcar</a></li>
+            <li><a href="categoria.html?cat=sin-gluten">Productos Sin Gluten</a></li>
+            <li><a href="categoria.html?cat=vegana">Productos Veganos</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Horarios y Atención</h4>
+          <p>📍 Av. Concha y Toro #1234, Santiago, Chile</p>
+          <p>🕒 Lunes a Sábado: 09:00 - 20:00 hrs</p>
+          <p>🕒 Domingo: 10:00 - 16:00 hrs</p>
+          <p>📞 Teléfono: +56 2 2987 6543</p>
+          <p>✉️ contacto@pasteleriamilsabores.cl</p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2024 Pastelería Mil Sabores - 50 Aniversario. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>

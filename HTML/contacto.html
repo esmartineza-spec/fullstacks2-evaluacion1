@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Ponte en contacto con Pastelería Mil Sabores. Consultas, pedidos especiales para eventos y cotizaciones.">
+  <meta name="author" content="Estudiantes Duoc UC - Desarrollo Full Stack II">
+  <title>Contacto | Pastelería Mil Sabores</title>
+
+  <!-- Hojas de Estilos Externas (Rubro IE1.1.2) -->
+  <link rel="stylesheet" href="css/estilos.css">
+  <link rel="stylesheet" href="css/contacto.css">
+
+  <!-- Scripts Modulares Diferidos -->
+  <script src="js/productos.js" defer></script>
+  <script src="js/usuarios.js" defer></script>
+  <script src="js/carrito.js" defer></script>
+  <script src="js/main.js" defer></script>
+</head>
+
+<body>
+
+  <!-- ======================================================================= -->
+  <!-- 1. BARRA SUPERIOR DE AVISOS Y ACCESOS RÁPIDOS                         -->
+  <!-- ETIQUETA: <aside> para avisos complementarios                           -->
+  <!-- ======================================================================= -->
+  <aside class="top-announcement" aria-label="Avisos destacados">
+    <div class="container">
+      <div>
+        <span>🎉 Celebramos 50 años: Usa el código <strong>FELICES50</strong> para 10% de descuento</span>
+      </div>
+      <div class="top-user-links">
+        <a href="login.html">Iniciar sesión</a>
+        <span>|</span>
+        <a href="registro.html">Registrar usuario</a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ======================================================================= -->
+  <!-- 2. CABECERA PRINCIPAL Y NAVEGACIÓN                                      -->
+  <!-- ETIQUETA: <header> para el logo y la barra de navegación                -->
+  <!-- ======================================================================= -->
+  <header>
+    <div class="container barra-superior">
+      <!-- Logotipo -->
+      <a href="index.html" class="logo" aria-label="Ir a inicio de Pastelería Mil Sabores">
+        <span class="logo-icon">🧁</span>
+        <span class="logo-title">Pastelería Mil Sabores</span>
+        <span class="badge-50">50 AÑOS</span>
+      </a>
+
+      <nav aria-label="Navegación principal del sitio">
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="categoria.html">Catálogo</a></li>
+          <li><a href="producto.html">Producto</a></li>
+          <li><a href="carrito.html">Carrito</a></li>
+          <li><a href="nosotros.html">Nosotros</a></li>
+          <li><a href="blogs.html">Blogs</a></li>
+          <li><a href="contacto.html" class="active">Contacto</a></li>
+        </ul>
+      </nav>
+
+
+      <!-- Botón del Carrito con su contador -->
+      <div class="header-actions">
+        <a href="carrito.html" class="boton-carro" aria-label="Ver carrito de compras">
+          <span>🛒 Carrito</span>
+          <span class="cont-carrito" id="num-cont-carrito">0</span>
+        </a>
+        <button class="menu-toggle" aria-label="Abrir menú de navegación" aria-expanded="false">
+          ☰
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ======================================================================= -->
+  <!-- 3. RUTA DE NAVEGACIÓN (BREADCRUMB)                                      -->
+  <!-- ======================================================================= -->
+  <nav class="breadcrumb-section" aria-label="Miga de pan" style="background-color: rgba(22, 14, 10, 0.5); padding: 1rem 0; border-bottom: 1px solid var(--border-subtle);">
+    <div class="container">
+      <div style="font-size: 0.88rem; color: var(--text-secondary); display: flex; gap: 0.5rem;">
+        <a href="index.html" style="color: var(--accent-gold);">Inicio</a>
+        <span style="color: var(--text-muted);">/</span>
+        <span style="color: var(--text-main); font-weight: 600;">Contacto</span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ======================================================================= -->
+  <!-- 4. CONTENIDO PRINCIPAL: FORMULARIO Y DATOS DE CONTACTO                  -->
+  <!-- ETIQUETA: <main> núcleo central de la página                            -->
+  <!-- ======================================================================= -->
+  <main>
+    <div class="container">
+
+      <!-- Encabezado de la página -->
+      <section class="contacto-header">
+        <h1 class="contacto-title">Contáctanos y <span>Cotiza tu Pedido</span></h1>
+        <p class="contacto-subtitle">
+          ¿Tienes dudas, deseas una torta personalizada o requieres cotizar para un evento especial? Escríbenos y te responderemos a la brevedad.
+        </p>
+      </section>
+
+      <!-- Grilla de dos columnas: Formulario a la izquierda, Datos y Mapa a la derecha -->
+      <div class="contacto-layout">
+
+        <!-- Columna 1: Formulario de Contacto -->
+        <section class="contacto-form-col" aria-label="Formulario de contacto">
+          <div class="contacto-card">
+            <h2>Envíanos un Mensaje</h2>
+            <p class="form-instruction">Completa los campos y nos comunicaremos contigo.</p>
+
+            <form id="form-contacto" action="#" method="post">
+              
+              <!-- Campo Nombre Completo -->
+              <div class="form-group">
+                <label for="contacto-nombre">Nombre Completo <span class="required">*</span></label>
+                <input type="text" 
+                       id="contacto-nombre" 
+                       name="nombre" 
+                       placeholder="Ej: Juan Pérez González" 
+                       required>
+              </div>
+
+              <!-- Campo Correo Electrónico -->
+              <div class="form-group">
+                <label for="contacto-email">Correo Electrónico <span class="required">*</span></label>
+                <input type="email" 
+                       id="contacto-email" 
+                       name="email" 
+                       placeholder="ejemplo@correo.cl" 
+                       required>
+              </div>
+
+              <!-- Campo Teléfono -->
+              <div class="form-group">
+                <label for="contacto-telefono">Teléfono de Contacto</label>
+                <input type="tel" 
+                       id="contacto-telefono" 
+                       name="telefono" 
+                       placeholder="+56 9 1234 5678">
+              </div>
+
+              <!-- Selector de Asunto -->
+              <div class="form-group">
+                <label for="contacto-asunto">Motivo de tu Consulta <span class="required">*</span></label>
+                <select id="contacto-asunto" name="asunto" required>
+                  <option value="" disabled selected>Selecciona un motivo...</option>
+                  <option value="cotizacion">Cotización de Torta para Evento / Matrimonio</option>
+                  <option value="especiales">Consulta por Productos Sin Gluten / Veganos</option>
+                  <option value="duoc">Convenio / Beneficio Estudiantes Duoc UC</option>
+                  <option value="mayor">Descuento Adulto Mayor (+60 años)</option>
+                  <option value="felicitacion">Felicitaciones o Sugerencias</option>
+                  <option value="otro">Otro motivo</option>
+                </select>
+              </div>
+
+              <!-- Campo Mensaje -->
+              <div class="form-group">
+                <label for="contacto-mensaje">Detalle de tu Mensaje <span class="required">*</span></label>
+                <textarea id="contacto-mensaje" 
+                          name="mensaje" 
+                          rows="5" 
+                          placeholder="Cuéntanos fecha estimada de entrega, cantidad de porciones o cualquier detalle especial..." 
+                          required></textarea>
+              </div>
+
+              <!-- Botón Enviar -->
+              <button type="submit" class="btn-primary btn-submit">
+                Enviar Consulta ✉️
+              </button>
+
+            </form>
+          </div>
+        </section>
+
+        <!-- Columna 2: Información de Contacto y Horarios -->
+        <aside class="contacto-info-col" aria-label="Información de atención">
+          
+          <!-- Tarjeta de Datos Rápidos -->
+          <div class="info-card">
+            <h2>Información de Atención</h2>
+
+            <div class="info-item">
+              <span class="info-icon">📍</span>
+              <div>
+                <strong>Dirección del Local:</strong>
+                <p>Av. Concha y Toro #1234, Santiago, Chile</p>
+                <span class="info-detail">(A pasos del Metro, con estacionamiento propio)</span>
+              </div>
+            </div>
+
+            <div class="info-item">
+              <span class="info-icon">📞</span>
+              <div>
+                <strong>Teléfono y WhatsApp:</strong>
+                <p>+56 2 2987 6543 / +56 9 8765 4321</p>
+              </div>
+            </div>
+
+            <div class="info-item">
+              <span class="info-icon">✉️</span>
+              <div>
+                <strong>Correo Electrónico:</strong>
+                <p>contacto@pasteleriamilsabores.cl</p>
+              </div>
+            </div>
+
+            <div class="info-item">
+              <span class="info-icon">🕒</span>
+              <div>
+                <strong>Horarios de Apertura:</strong>
+                <p>Lunes a Sábado: 09:00 - 20:00 hrs</p>
+                <p>Domingo y Feriados: 10:00 - 16:00 hrs</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tarjeta Informativa: Beneficios en Tienda -->
+          <div class="info-promo-card">
+            <h3>🎉 Beneficios en Pastelería</h3>
+            <ul>
+              <li><strong>Adultos mayores (+60 años):</strong> 50% de descuento permanente en tortas seleccionadas.</li>
+              <li><strong>Alumnos Duoc UC:</strong> Torta gratis en tu cumpleaños mostrando tu credencial estudiantil vigente.</li>
+              <li><strong>Código WEB:</strong> 10% con el cupón <em>FELICES50</em> en tu carrito.</li>
+            </ul>
+          </div>
+
+        </aside>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ======================================================================= -->
+  <!-- 5. PIE DE PÁGINA (FOOTER INFORMATIVO COMPARTIDO)                        -->
+  <!-- ======================================================================= -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Columna 1: Identidad de Marca -->
+        <div class="footer-col">
+          <h4>Pastelería Mil Sabores</h4>
+          <p>
+            Celebrando medio siglo de tradición pastelera en Chile. Entregamos momentos dulces con la máxima calidad, higiene y pasión artesanal.
+          </p>
+        </div>
+
+        <!-- Columna 2: Navegación Rápida -->
+        <div class="footer-col">
+          <h4>Navegación</h4>
+          <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="categoria.html">Catálogo Completo</a></li>
+            <li><a href="producto.html">Detalle de Producto</a></li>
+            <li><a href="carrito.html">Carrito de Compras</a></li>
+            <li><a href="nosotros.html">Sobre Nosotros</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+          </ul>
+        </div>
+
+        <!-- Columna 3: Categorías Rápidas -->
+        <div class="footer-col">
+          <h4>Especialidades</h4>
+          <ul>
+            <li><a href="categoria.html?cat=cuadradas">Tortas Cuadradas</a></li>
+            <li><a href="categoria.html?cat=circulares">Tortas Circulares</a></li>
+            <li><a href="categoria.html?cat=individuales">Postres Individuales</a></li>
+            <li><a href="categoria.html?cat=sin-azucar">Productos Sin Azúcar</a></li>
+            <li><a href="categoria.html?cat=sin-gluten">Productos Sin Gluten</a></li>
+            <li><a href="categoria.html?cat=vegana">Productos Veganos</a></li>
+          </ul>
+        </div>
+
+        <!-- Columna 4: Atención y Horarios -->
+        <div class="footer-col">
+          <h4>Horarios y Atención</h4>
+          <p>📍 Av. Concha y Toro #1234, Santiago, Chile</p>
+          <p>🕒 Lunes a Sábado: 09:00 - 20:00 hrs</p>
+          <p>🕒 Domingo: 10:00 - 16:00 hrs</p>
+          <p>📞 Teléfono: +56 2 2987 6543</p>
+          <p>✉️ contacto@pasteleriamilsabores.cl</p>
+        </div>
+      </div>
+
+      <!-- Barra de Copyright Inferior -->
+      <div class="footer-bottom">
+        <p>&copy; 2024 Pastelería Mil Sabores - 50 Aniversario. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>
