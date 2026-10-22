@@ -5,6 +5,7 @@ const links = [
     { to: '/categorias', label: 'Categorías' },
     { to: '/ofertas', label: 'Ofertas' },
     { to: '/carrito', label: 'Carrito' },
+    { to: '/admin', label: 'Administración' },
 ];
 
 export default function SiteLayout() {
