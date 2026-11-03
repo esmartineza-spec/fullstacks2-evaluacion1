@@ -36,7 +36,36 @@ export default function OrderSuccessPage() {
                 </p>
             ))}
 
-            <p className="fs-5 fw-bold">Total: {formatPrice(order.total)}</p>
+            <div className="border-top mt-3 pt-3">
+                <p className="d-flex justify-content-between mb-2">
+                    <span>Subtotal:</span>
+                    <span>{formatPrice(order.subtotal ?? 0)}</span>
+                </p>
+
+                {order.discountAmount > 0 && (
+                    <p className="d-flex justify-content-between text-success mb-2">
+            <span>
+                Descuento ({order.discountPercentage}% · {order.discountReason}):
+            </span>
+                        <span>-{formatPrice(order.discountAmount)}</span>
+                    </p>
+                )}
+
+                <p className="d-flex justify-content-between mb-2">
+                    <span>Despacho:</span>
+                    <span>{formatPrice(order.shipping ?? 0)}</span>
+                </p>
+
+                <p className="d-flex justify-content-between text-secondary mb-2">
+                    <span>IVA incluido:</span>
+                    <span>{formatPrice(order.iva ?? 0)}</span>
+                </p>
+
+                <p className="fs-5 fw-bold d-flex justify-content-between mb-0">
+                    <span>Total:</span>
+                    <span>{formatPrice(order.total)}</span>
+                </p>
+            </div>
             <p className="text-secondary">Medio de pago: {order.customer.paymentMethod}</p>
 
             <Link to="/categorias" className="btn btn-primary align-self-start">

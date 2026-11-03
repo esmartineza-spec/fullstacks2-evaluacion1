@@ -3,6 +3,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import { formatPrice } from '../data/products.js';
 import { clearCart, getCart } from '../services/cartRepository.js';
 import { getProductById } from '../services/productRepository.js';
+import { getCurrentUser } from '../services/authRepository.js';
+import { calculateDiscount } from '../services/discountRules.js';
+import { saveOrderToHistory } from '../services/orderRepository.js';
+
 
 function FormField({ label, name, value, onChange, error, type = 'text' }) {
     const inputId = `checkout-${name}`;
@@ -25,15 +29,17 @@ function FormField({ label, name, value, onChange, error, type = 'text' }) {
 
 export default function CheckoutPage() {
     const navigate = useNavigate();
+    const currentUser = getCurrentUser();
     const [form, setForm] = useState({
-        name: '',
-        email: '',
-        phone: '',
-        address: '',
+        name: currentUser?.nombre || '',
+        email: currentUser?.email || '',
+        phone: currentUser?.telefono || '',
+        address: currentUser?.direccion || '',
         commune: '',
         paymentMethod: '',
     });
     const [errors, setErrors] = useState({});
+    const [couponCode, setCouponCode] = useState('');
 
     const items = getCart()
         .map((item) => ({
@@ -42,10 +48,19 @@ export default function CheckoutPage() {
         }))
         .filter((item) => item.product);
 
-    const total = items.reduce(
+    const subtotal = items.reduce(
         (sum, item) => sum + item.product.price * item.quantity,
         0
     );
+
+    const discount = calculateDiscount(subtotal, currentUser, couponCode);
+
+    const shipping = subtotal > 0 ? 3500 : 0;
+    const total = Math.max(0, subtotal - discount.amount) + shipping;
+
+// El subtotal ya incluye IVA; este cálculo lo separa para mostrarlo
+// en el detalle, igual que hacía el HTML original.
+    const iva = Math.round(total * 0.19 / 1.19);
 
     function handleChange(event) {
         const { name, value } = event.target;
@@ -89,10 +104,19 @@ export default function CheckoutPage() {
                 unitPrice: product.price,
                 quantity,
             })),
+            subtotal,
+            discountPercentage: discount.percentage,
+            discountAmount: discount.amount,
+            discountReason: discount.reason,
+            shipping,
+            iva,
+            couponCode: couponCode.trim().toUpperCase(),
             total,
+            accountEmail: currentUser?.email || form.email,
         };
 
         localStorage.setItem('mil-sabores-last-order', JSON.stringify(order));
+        saveOrderToHistory(order);
         clearCart();
         navigate('/compra/exito');
     }
@@ -188,14 +212,69 @@ export default function CheckoutPage() {
             <aside className="col-lg-5">
                 <div className="card border-0 shadow-sm p-4">
                     <h2 className="h4">Resumen</h2>
+
                     {items.map(({ product, quantity }) => (
-                        <div key={product.id} className="d-flex justify-content-between gap-3 py-2">
+                        <div
+                            key={product.id}
+                            className="d-flex justify-content-between gap-3 py-2"
+                        >
                             <span>{product.name} × {quantity}</span>
                             <span>{formatPrice(product.price * quantity)}</span>
                         </div>
                     ))}
+
+                    <div className="mb-3">
+                        <label htmlFor="checkout-coupon" className="form-label">
+                            Código de descuento
+                        </label>
+                        <input
+                            id="checkout-coupon"
+                            type="text"
+                            className="form-control"
+                            value={couponCode}
+                            onChange={(event) => setCouponCode(event.target.value)}
+                            placeholder="Ej.: FELICES50"
+                        />
+
+                        {couponCode.trim() && (
+                            <small className={discount.couponValid ? 'text-success' : 'text-danger'}>
+                                {discount.couponValid
+                                    ? 'Código reconocido.'
+                                    : 'Código inválido o no disponible para esta cuenta.'}
+                            </small>
+                        )}
+                    </div>
+
                     <hr />
-                    <p className="fs-5 fw-bold mb-0">Total: {formatPrice(total)}</p>
+
+                    <p className="d-flex justify-content-between mb-2">
+                        <span>Subtotal:</span>
+                        <span>{formatPrice(subtotal)}</span>
+                    </p>
+
+                    {discount.amount > 0 && (
+                        <p className="d-flex justify-content-between text-success mb-2">
+                <span>
+                    Descuento ({discount.percentage}% · {discount.reason}):
+                </span>
+                            <span>-{formatPrice(discount.amount)}</span>
+                        </p>
+                    )}
+
+                    <p className="d-flex justify-content-between mb-2">
+                        <span>Despacho:</span>
+                        <span>{formatPrice(shipping)}</span>
+                    </p>
+
+                    <p className="d-flex justify-content-between text-secondary mb-2">
+                        <span>IVA incluido:</span>
+                        <span>{formatPrice(iva)}</span>
+                    </p>
+
+                    <p className="fs-5 fw-bold d-flex justify-content-between mb-0">
+                        <span>Total:</span>
+                        <span>{formatPrice(total)}</span>
+                    </p>
                 </div>
             </aside>
         </section>
