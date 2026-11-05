@@ -13,6 +13,14 @@ function saveOrders(orders) {
     localStorage.setItem(ORDERS_KEY, JSON.stringify(orders));
 }
 
+export function listAllOrders() {
+    return readOrders().sort(
+        (a, b) =>
+            new Date(b.createdAt || 0).getTime() -
+            new Date(a.createdAt || 0).getTime()
+    );
+}
+
 export function saveOrderToHistory(order) {
     if (!order?.code || !order?.customer?.email) {
         throw new Error('El pedido necesita un código y un correo de cliente.');

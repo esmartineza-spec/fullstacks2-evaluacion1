@@ -61,7 +61,11 @@ describe('CategoriesPage', () => {
         );
 
         expect(
-            screen.getByText('No encontramos productos con esos criterios.')
+            screen.getByRole('heading', { name: 'No encontramos productos' })
+        ).toBeTruthy();
+
+        expect(
+            screen.getByText('Prueba con otra búsqueda o categoría.')
         ).toBeTruthy();
     });
 });
