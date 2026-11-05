@@ -23,21 +23,21 @@ const offers = [
 
 export default function OffersPage() {
     return (
-        <main>
+        <main className="offers-page">
             <div className="mb-4">
-                <h1 className="h2">Ofertas y beneficios</h1>
+                <h1 className="h2 offer-title">Ofertas y beneficios</h1>
                 <p className="text-secondary">
                     Revisa los descuentos disponibles antes de realizar tu compra.
                 </p>
             </div>
 
-            <div className="row g-4">
+            <div className="row g-4 offers-grid">
                 {offers.map((offer) => (
                     <div className="col-12 col-md-6 col-lg-4" key={offer.title}>
-                        <article className="card h-100 shadow-sm">
+                        <article className="card h-100 shadow-sm offer-card">
                             <div className="card-body d-flex flex-column">
                                 <h2 className="h4">{offer.title}</h2>
-                                <p className="fs-5 fw-bold text-success">
+                                <p className="fs-5 fw-bold text-success offer-discount">
                                     {offer.discount}
                                 </p>
                                 <p>{offer.description}</p>

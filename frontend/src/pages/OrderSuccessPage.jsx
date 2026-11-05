@@ -14,9 +14,9 @@ export default function OrderSuccessPage() {
 
     if (!order) {
         return (
-            <section className="card border-0 shadow-sm p-4">
+            <section className="receipt-empty">
                 <h1 className="h2">No hay una compra reciente</h1>
-                <Link to="/categorias" className="btn btn-primary align-self-start">
+                <Link to="/categorias" className="btn btn-primary">
                     Volver a la tienda
                 </Link>
             </section>
@@ -24,53 +24,116 @@ export default function OrderSuccessPage() {
     }
 
     return (
-        <section className="card border-0 shadow-sm p-4 p-md-5">
-            <p className="text-success fw-bold">¡Compra registrada!</p>
-            <h1 className="h2">Gracias, {order.customer.name}</h1>
-            <p>Tu número de pedido es <strong>{order.code}</strong>.</p>
-
-            <h2 className="h5 mt-3">Productos</h2>
-            {order.items.map((item) => (
-                <p key={item.productId}>
-                    {item.name} × {item.quantity} — {formatPrice(item.unitPrice * item.quantity)}
-                </p>
-            ))}
-
-            <div className="border-top mt-3 pt-3">
-                <p className="d-flex justify-content-between mb-2">
-                    <span>Subtotal:</span>
-                    <span>{formatPrice(order.subtotal ?? 0)}</span>
-                </p>
-
-                {order.discountAmount > 0 && (
-                    <p className="d-flex justify-content-between text-success mb-2">
-            <span>
-                Descuento ({order.discountPercentage}% · {order.discountReason}):
-            </span>
-                        <span>-{formatPrice(order.discountAmount)}</span>
+        <section className="receipt-page">
+            <div className="receipt-actions no-print">
+                <div>
+                    <p className="catalog-eyebrow">Compra registrada</p>
+                    <h1 className="h2">Gracias, {order.customer.name}</h1>
+                    <p className="text-secondary">
+                        Guarda el número de pedido para consultar su registro.
                     </p>
-                )}
+                </div>
 
-                <p className="d-flex justify-content-between mb-2">
-                    <span>Despacho:</span>
-                    <span>{formatPrice(order.shipping ?? 0)}</span>
-                </p>
-
-                <p className="d-flex justify-content-between text-secondary mb-2">
-                    <span>IVA incluido:</span>
-                    <span>{formatPrice(order.iva ?? 0)}</span>
-                </p>
-
-                <p className="fs-5 fw-bold d-flex justify-content-between mb-0">
-                    <span>Total:</span>
-                    <span>{formatPrice(order.total)}</span>
-                </p>
+                <div className="d-flex flex-wrap gap-2">
+                    <button
+                        type="button"
+                        className="btn btn-outline-primary"
+                        onClick={() => window.print()}
+                    >
+                        Imprimir / Guardar PDF
+                    </button>
+                    <Link to="/pedido" className="btn btn-primary">
+                        Consultar pedido
+                    </Link>
+                </div>
             </div>
-            <p className="text-secondary">Medio de pago: {order.customer.paymentMethod}</p>
 
-            <Link to="/categorias" className="btn btn-primary align-self-start">
-                Volver a la tienda
-            </Link>
+            <article className="receipt-card">
+                <header className="receipt-header">
+                    <div>
+                        <p className="catalog-eyebrow mb-1">Comprobante de compra</p>
+                        <h2 className="receipt-brand">Pastelería Mil Sabores</h2>
+                        <p className="text-secondary mb-0">
+                            Resumen de la compra realizada en esta tienda.
+                        </p>
+                    </div>
+
+                    <div className="receipt-order-code">
+                        <span>Número de pedido</span>
+                        <strong>{order.code}</strong>
+                    </div>
+                </header>
+
+                <section className="receipt-customer">
+                    <h3 className="h5">Datos de compra</h3>
+                    <p><strong>Cliente:</strong> {order.customer.name}</p>
+                    <p><strong>Correo:</strong> {order.customer.email}</p>
+                    <p><strong>Teléfono:</strong> {order.customer.phone}</p>
+                    <p className="mb-0">
+                        <strong>Despacho:</strong> {order.customer.address}, {order.customer.commune}
+                    </p>
+                </section>
+
+                <section className="receipt-products">
+                    <h3 className="h5">Productos</h3>
+
+                    {order.items.map((item) => (
+                        <div className="receipt-product-row" key={item.productId}>
+                            <span>
+                                {item.name} × {item.quantity}
+                            </span>
+                            <span>
+                                {formatPrice(item.unitPrice * item.quantity)}
+                            </span>
+                        </div>
+                    ))}
+                </section>
+
+                <section className="receipt-totals">
+                    <p>
+                        <span>Subtotal:</span>
+                        <span>{formatPrice(order.subtotal ?? 0)}</span>
+                    </p>
+
+                    {order.discountAmount > 0 && (
+                        <p className="receipt-discount">
+                            <span>
+                                Descuento ({order.discountPercentage}% · {order.discountReason}):
+                            </span>
+                            <span>-{formatPrice(order.discountAmount)}</span>
+                        </p>
+                    )}
+
+                    <p>
+                        <span>Despacho:</span>
+                        <span>{formatPrice(order.shipping ?? 0)}</span>
+                    </p>
+
+                    <p className="receipt-iva">
+                        <span>IVA incluido:</span>
+                        <span>{formatPrice(order.iva ?? 0)}</span>
+                    </p>
+
+                    <p className="receipt-total">
+                        <strong>Total:</strong>
+                        <strong>{formatPrice(order.total)}</strong>
+                    </p>
+
+                    <p className="text-secondary mb-0">
+                        Medio de pago: {order.customer.paymentMethod}
+                    </p>
+                </section>
+
+                <footer className="receipt-footer">
+                    Comprobante demostrativo generado por la aplicación para la evaluación.
+                </footer>
+            </article>
+
+            <div className="text-center mt-4 no-print">
+                <Link to="/categorias" className="btn btn-outline-primary">
+                    Volver a la tienda
+                </Link>
+            </div>
         </section>
     );
 }

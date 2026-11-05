@@ -23,7 +23,7 @@ export default function BlogDetailPage() {
 
     if (!article) {
         return (
-            <main>
+            <main className="blog-detail-page">
                 <h1 className="h2">Artículo no encontrado</h1>
                 <Link to="/blogs" className="btn btn-primary mt-3">
                     Volver al blog
@@ -33,12 +33,12 @@ export default function BlogDetailPage() {
     }
 
     return (
-        <main>
-            <article>
-                <h1 className="h2 mb-4">{article.title}</h1>
+        <main className="blog-detail-page">
+            <article className="blog-detail-page">
+                <h1 className="h2 mb-4 blog-detail-title">{article.title}</h1>
 
                 {article.paragraphs.map((paragraph) => (
-                    <p key={paragraph}>{paragraph}</p>
+                    <p className="blog-detail-paragraph" key={paragraph}>{paragraph}</p>
                 ))}
             </article>
 

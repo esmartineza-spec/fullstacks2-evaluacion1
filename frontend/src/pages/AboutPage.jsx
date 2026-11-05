@@ -1,9 +1,9 @@
 export default function AboutPage() {
     return (
-        <main>
+        <main className="about-page">
             <h1 className="h2 mb-4">Nosotros</h1>
 
-            <section className="card shadow-sm">
+            <section className="card shadow-sm about-card">
                 <div className="card-body">
                     <h2 className="h4">Pastelería Mil Sabores</h2>
                     <p>

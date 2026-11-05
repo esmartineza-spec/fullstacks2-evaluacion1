@@ -1,13 +1,32 @@
 import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { formatPrice } from '../data/products.js';
-import { getProductById } from '../services/productRepository.js';
+import { categories, formatPrice } from '../data/products.js';
 import { addToCart } from '../services/cartRepository.js';
+import { getProductById } from '../services/productRepository.js';
 
 export default function ProductDetailPage() {
     const { id } = useParams();
     const [message, setMessage] = useState('');
     const product = getProductById(id);
+
+    if (!product) {
+        return (
+            <section className="product-not-found">
+                <p className="catalog-eyebrow">Mil Sabores</p>
+                <h1 className="h2">Producto no encontrado</h1>
+                <p className="text-secondary">
+                    No encontramos un producto con ese código.
+                </p>
+                <Link to="/categorias" className="btn btn-primary">
+                    Volver al catálogo
+                </Link>
+            </section>
+        );
+    }
+
+    const categoryLabel =
+        categories.find((category) => category.id === product.category)?.label
+        ?? product.category;
 
     function handleAddToCart() {
         try {
@@ -18,58 +37,36 @@ export default function ProductDetailPage() {
         }
     }
 
-    if (!product) {
-        return (
-            <section className="card border-0 shadow-sm p-4">
-                <h1 className="h3">Producto no encontrado</h1>
-                <p className="text-secondary">
-                    No encontramos un producto con ese código.
-                </p>
-                <Link to="/categorias" className="btn btn-outline-primary align-self-start">
-                    Volver a categorías
-                </Link>
-            </section>
-        );
-    }
-
     return (
-        <section className="card border-0 shadow-sm overflow-hidden">
-            <div className="row g-0">
-                <div className="col-md-6">
-                    <img
-                        src={product.image}
-                        alt={product.name}
-                        className="w-100 h-100"
-                        style={{ objectFit: 'cover', minHeight: 320 }}
-                    />
-                </div>
+        <section className="product-detail-card">
+            <div className="product-detail-image">
+                <img src={product.image} alt={product.name} />
+                <span className="product-card-code">{product.id}</span>
+            </div>
 
-                <div className="col-md-6">
-                    <div className="card-body p-4 p-lg-5">
-                        <p className="small text-secondary">{product.category}</p>
-                        <h1 className="h2">{product.name}</h1>
-                        <p>{product.description}</p>
-                        <p className="fs-4 fw-bold">{formatPrice(product.price)}</p>
+            <div className="product-detail-content">
+                <Link to="/categorias" className="product-back-link">
+                    ← Volver al catálogo
+                </Link>
 
-                        <button
-                            type="button"
-                            className="btn btn-primary me-2"
-                            onClick={handleAddToCart}
-                        >
-                            Agregar al carrito
-                        </button>
+                <p className="product-card-category mt-4">{categoryLabel}</p>
+                <h1 className="product-detail-title">{product.name}</h1>
+                <p className="product-detail-description">{product.description}</p>
+                <p className="product-detail-price">{formatPrice(product.price)}</p>
 
-                        <Link to="/categorias" className="btn btn-outline-primary">
-                            Volver a categorías
-                        </Link>
+                <button
+                    type="button"
+                    className="btn btn-primary btn-lg"
+                    onClick={handleAddToCart}
+                >
+                    Agregar al carrito
+                </button>
 
-                        {message && (
-                            <p className="mt-3 mb-0 text-success" role="status">
-                                {message}
-                            </p>
-                        )}
-                    </div>
-                </div>
+                {message && (
+                    <p className="alert alert-success mt-3 mb-0" role="status">
+                        {message}
+                    </p>
+                )}
             </div>
         </section>
     );

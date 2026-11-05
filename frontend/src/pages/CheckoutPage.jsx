@@ -133,9 +133,9 @@ export default function CheckoutPage() {
     }
 
     return (
-        <section className="row g-4">
+        <section className="row g-4 checkout-layout">
             <div className="col-lg-7">
-                <div className="card border-0 shadow-sm p-4">
+                <div className="card checkout-panel checkout-form-card">
                     <h1 className="h2 mb-4">Datos de compra</h1>
 
                     <form noValidate onSubmit={handleSubmit}>
@@ -202,28 +202,28 @@ export default function CheckoutPage() {
                             )}
                         </div>
 
-                        <button type="submit" className="btn btn-primary">
+                        <button type="submit" className="btn btn-primary w-100">
                             Confirmar compra
                         </button>
                     </form>
                 </div>
             </div>
 
-            <aside className="col-lg-5">
-                <div className="card border-0 shadow-sm p-4">
+            <aside className="col-lg-5 checkout-summary-column">
+                <div className="card checkout-panel checkout-summary-card">
                     <h2 className="h4">Resumen</h2>
 
                     {items.map(({ product, quantity }) => (
                         <div
                             key={product.id}
-                            className="d-flex justify-content-between gap-3 py-2"
+                            className="d-flex justify-content-between gap-3 py-2 checkout-summary-item"
                         >
                             <span>{product.name} × {quantity}</span>
                             <span>{formatPrice(product.price * quantity)}</span>
                         </div>
                     ))}
 
-                    <div className="mb-3">
+                    <div className="mb-3 checkout-coupon">
                         <label htmlFor="checkout-coupon" className="form-label">
                             Código de descuento
                         </label>

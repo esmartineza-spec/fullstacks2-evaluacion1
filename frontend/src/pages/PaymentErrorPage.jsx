@@ -2,9 +2,9 @@ import { Link } from 'react-router-dom';
 
 export default function PaymentErrorPage() {
     return (
-        <main className="container py-5 text-center">
-            <div className="alert alert-warning mx-auto" role="alert">
-                <h1 className="h2">No se pudo completar la compra</h1>
+        <main className="container py-5 text-center payment-error-page">
+            <div className="alert alert-warning mx-auto payment-error-card" role="alert">
+                <h1 className="h2 payment-error-title">No se pudo completar la compra</h1>
                 <p className="mb-0">
                     El pago no fue confirmado. Puedes revisar tu carrito e intentarlo nuevamente.
                 </p>

@@ -23,16 +23,16 @@ export default function ProfilePage() {
     const user = getCurrentUser();
 
     if (!user) {
-        return <Navigate to="/acceso" replace />;
+        return <Navigate to="/login" replace />;
     }
 
     const orders = getOrderHistory(user.email);
 
     return (
-        <main className="container py-4">
+        <div className="profile-page">
             <h1 className="mb-4">Mi perfil</h1>
 
-            <section className="card mb-4">
+            <section className="card mb-4 profile-info">
                 <div className="card-body">
                     <h2 className="h4">Mis datos</h2>
                     <p className="mb-1"><strong>Nombre:</strong> {user.nombre}</p>
@@ -40,7 +40,7 @@ export default function ProfilePage() {
                 </div>
             </section>
 
-            <section>
+            <section className="profile-orders">
                 <h2 className="h3 mb-3">Historial de compras</h2>
 
                 {orders.length === 0 ? (
@@ -48,7 +48,7 @@ export default function ProfilePage() {
                 ) : (
                     <div className="d-grid gap-3">
                         {orders.map((order) => (
-                            <article className="card" key={order.code}>
+                            <article className="card profile-order" key={order.code}>
                                 <div className="card-body">
                                     <div className="d-flex flex-wrap justify-content-between gap-2">
                                         <h3 className="h5 mb-0">
@@ -78,6 +78,6 @@ export default function ProfilePage() {
             <Link className="btn btn-primary mt-4" to="/categorias">
                 Volver a la tienda
             </Link>
-        </main>
+        </div>
     );
 }

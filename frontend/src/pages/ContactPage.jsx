@@ -10,9 +10,9 @@ export default function ContactPage() {
     }
 
     return (
-        <main>
-            <h1 className="h2 mb-3">Contáctanos</h1>
-            <p className="text-secondary">
+        <main className="contact-page">
+            <h1 className="h2 mb-3 contact-title">Contáctanos</h1>
+            <p className="text-secondary contact-description">
                 Déjanos tu consulta y te ayudaremos.
             </p>
 
@@ -22,7 +22,7 @@ export default function ContactPage() {
                 </div>
             )}
 
-            <form className="card card-body shadow-sm" onSubmit={handleSubmit}>
+            <form className="card card-body shadow-sm contact-card" onSubmit={handleSubmit}>
                 <div className="mb-3">
                     <label htmlFor="contact-name" className="form-label">
                         Nombre

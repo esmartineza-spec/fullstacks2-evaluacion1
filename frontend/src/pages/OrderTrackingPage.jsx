@@ -15,13 +15,13 @@ export default function OrderTrackingPage() {
     }
 
     return (
-        <main>
+        <main className="tracking-page">
             <h1 className="h2 mb-3">Seguimiento de pedido</h1>
             <p className="text-secondary">
                 Ingresa el número que aparece en tu boleta.
             </p>
 
-            <form className="card card-body shadow-sm" onSubmit={handleSubmit}>
+            <form className="card card-body shadow-sm tracking-form" onSubmit={handleSubmit}>
                 <label htmlFor="order-code" className="form-label">
                     Número de pedido
                 </label>
@@ -47,7 +47,7 @@ export default function OrderTrackingPage() {
             )}
 
             {order && (
-                <section className="card mt-4">
+                <section className="card mt-4 tracking-result">
                     <div className="card-body">
                         <h2 className="h4">Pedido {order.code}</h2>
                         <p>

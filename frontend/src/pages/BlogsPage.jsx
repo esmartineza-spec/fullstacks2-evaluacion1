@@ -17,8 +17,8 @@ const articles = [
 
 export default function BlogsPage() {
     return (
-        <main>
-            <h1 className="h2 mb-3">Blog Mil Sabores</h1>
+        <main className="blog-page">
+            <h1 className="h2 mb-3 blog-card-title">Blog Mil Sabores</h1>
             <p className="text-secondary mb-4">
                 Ideas y consejos para disfrutar la pastelería.
             </p>
@@ -26,7 +26,7 @@ export default function BlogsPage() {
             <div className="row g-4">
                 {articles.map((article) => (
                     <div className="col-12 col-md-6" key={article.id}>
-                        <article className="card h-100 shadow-sm">
+                        <article className="card h-100 shadow-sm blog-card">
                             <div className="card-body d-flex flex-column">
                                 <h2 className="h4">{article.title}</h2>
                                 <p>{article.summary}</p>

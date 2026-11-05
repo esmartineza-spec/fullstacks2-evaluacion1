@@ -121,10 +121,10 @@ export default function AdminPage() {
     }
 
     return (
-        <section>
+        <section className="admin-page">
             <h1 className="h2 mb-4">Administración de productos</h1>
 
-            <div className="card border-0 shadow-sm p-4 mb-4">
+            <div className="card admin-panel admin-form-panel">
                 <h2 className="h4">
                     {editingId ? 'Editar producto' : 'Crear producto'}
                 </h2>
@@ -248,11 +248,11 @@ export default function AdminPage() {
                 </form>
             </div>
 
-            <div className="card border-0 shadow-sm p-3">
+            <div className="card admin-panel admin-products-panel">
                 <h2 className="h4">Productos registrados ({products.length})</h2>
 
                 <div className="table-responsive">
-                    <table className="table table-striped align-middle">
+                    <table className="table admin-table align-middle">
                         <thead>
                         <tr>
                             <th>Código</th>

@@ -7,6 +7,7 @@ import {
     subscribeProducts,
 } from '../services/productRepository.js';
 
+
 export default function HomePage() {
     const [products, setProducts] = useState(() => listProducts());
 
@@ -17,36 +18,53 @@ export default function HomePage() {
     const featuredProducts = products.slice(0, 3);
 
     return (
-        <main>
-            <section className="row align-items-center g-4 mb-5">
-                <div className="col-12 col-lg-6">
-                    <p className="text-primary fw-semibold mb-2">
-                        Pastelería Mil Sabores
-                    </p>
-                    <h1 className="display-5 fw-bold">
-                        Un dulce momento para compartir
-                    </h1>
-                    <p className="lead text-secondary">
-                        Encuentra tortas, postres y preparaciones para cada ocasión.
-                    </p>
-                    <Link to="/categorias" className="btn btn-primary btn-lg">
-                        Ver productos
-                    </Link>
-                </div>
+        <div className="home-page">
+            <section className="hero-section">
+                <div className="hero-grid">
+                    <div className="hero-content">
+                        <p className="hero-kicker">Pastelería Mil Sabores</p>
+                        <h1 className="hero-title">
+                            Un dulce momento
+                            <span className="highlight-cursive">
+                                para compartir
+                            </span>
+                        </h1>
+                        <p className="hero-description">
+                            Encuentra tortas, postres y preparaciones para cada ocasión.
+                        </p>
+                        <div className="hero-buttons">
+                            <Link to="/categorias" className="btn btn-primary btn-lg">
+                                Ver productos
+                            </Link>
+                            <Link to="/ofertas" className="btn btn-outline-primary btn-lg">
+                                Ver beneficios
+                            </Link>
+                        </div>
+                    </div>
 
-                <div className="col-12 col-lg-6">
-                    <img
-                        src={heroImage}
-                        alt="Preparaciones de Pastelería Mil Sabores"
-                        className="img-fluid rounded shadow-sm"
-                    />
+                    <div className="hero-image-wrapper">
+                        <div className="hero-card">
+                            <img
+                                src="/img/hero_mockup.png"
+                                alt="Torta de chocolate decorada para una celebración"
+                            />
+                            <span className="ribbon-discount">
+                                10% · FELICES50
+                            </span>
+                        </div>
+                    </div>
                 </div>
             </section>
 
-            <section>
-                <div className="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
-                    <h2 className="h3 mb-0">Algunos de nuestros productos</h2>
-                    <Link to="/categorias">Ver catálogo completo</Link>
+            <section className="featured-section">
+                <div className="home-section-heading">
+                    <div>
+                        <p className="hero-kicker">Conoce la tienda</p>
+                        <h2 className="section-title">Algunos de nuestros productos</h2>
+                    </div>
+                    <Link to="/categorias" className="home-catalog-link">
+                        Ver catálogo completo
+                    </Link>
                 </div>
 
                 {featuredProducts.length > 0 ? (
@@ -58,17 +76,24 @@ export default function HomePage() {
                         ))}
                     </div>
                 ) : (
-                    <p>Pronto encontrarás productos en nuestro catálogo.</p>
+                    <p className="text-secondary">
+                        Pronto encontrarás productos en nuestro catálogo.
+                    </p>
                 )}
             </section>
 
-            <section className="alert alert-light border mt-5">
-                <h2 className="h4">Conoce nuestros beneficios</h2>
-                <p>Revisa los descuentos disponibles para tus compras.</p>
-                <Link to="/ofertas" className="btn btn-outline-primary">
-                    Ver ofertas
+            <section className="home-promo-section">
+                <div>
+                    <p className="hero-kicker">Beneficios disponibles</p>
+                    <h2>Un detalle dulce para tu próxima compra</h2>
+                    <p>
+                        Revisa los descuentos y sus condiciones antes de realizar tu pedido.
+                    </p>
+                </div>
+                <Link to="/ofertas" className="btn btn-primary">
+                    Conocer ofertas
                 </Link>
             </section>
-        </main>
+        </div>
     );
 }
