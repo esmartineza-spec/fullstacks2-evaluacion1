@@ -56,3 +56,13 @@ export function getOrderHistory(email) {
                 new Date(a.createdAt || 0).getTime()
         );
 }
+
+export function getOrderByCode(code) {
+    const normalizedCode = String(code || '').trim().toUpperCase();
+
+    if (!normalizedCode) return null;
+
+    return readOrders().find(
+        (order) => String(order.code || '').toUpperCase() === normalizedCode
+    ) ?? null;
+}
