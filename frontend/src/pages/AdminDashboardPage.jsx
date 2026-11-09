@@ -4,6 +4,7 @@ import { listProducts } from '../services/productRepository.js';
 import { listUsers } from '../services/authRepository.js';
 import { listAllOrders } from '../services/orderRepository.js';
 
+
 function formatDate(value) {
     if (!value) return 'Sin fecha';
 
@@ -41,9 +42,30 @@ export default function AdminDashboardPage() {
                     </p>
                 </div>
 
-                <Link to="/admin/productos" className="btn btn-primary">
-                    Administrar productos
-                </Link>
+                //BOTONES ADMIN
+                <div className="d-flex flex-wrap gap-2">
+                    <Link to="/admin/productos" className="btn btn-primary">
+                        Administrar productos
+                    </Link>
+                    <Link
+                        to="/admin/productos/criticos"
+                        className="btn btn-outline-primary"
+                    >
+                        Productos críticos
+                    </Link>
+                    <Link to="/admin/pedidos" className="btn btn-outline-primary">
+                        Ver pedidos
+                    </Link>
+                    <Link to="/admin/categorias" className="btn btn-outline-primary">
+                        Gestionar categorías
+                    </Link>
+                    <Link to="/admin/usuarios" className="btn btn-outline-primary">
+                        Gestionar usuarios
+                    </Link>
+                    <Link to="/admin/reportes" className="btn btn-outline-primary">
+                        Ver reportes
+                    </Link>
+                </div>
             </header>
 
             <div className="row g-3 mb-4">

@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
-import { categories, formatPrice } from '../../data/products.js';
+import { formatPrice } from '../../data/products.js';
+import { getCategoryById } from '../../services/categoryRepository.js';
 
 export default function ProductCard({ product }) {
     const categoryLabel =
-        categories.find((category) => category.id === product.category)?.label
-        ?? product.category;
+        getCategoryById(product.category)?.label ?? product.category;
 
     return (
         <article className="card product-card h-100">

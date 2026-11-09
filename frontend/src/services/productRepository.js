@@ -2,6 +2,22 @@ import { initialProducts } from '../data/products.js';
 
 const STORAGE_KEY = 'mil-sabores-products';
 const CHANGE_EVENT = 'mil-sabores:products-changed';
+const DEFAULT_STOCK = 10;
+
+function addDefaultStock(products) {
+    let changed = false;
+
+    const normalizedProducts = products.map((product) => {
+        if (Number.isInteger(product.stock) && product.stock >= 0) {
+            return product;
+        }
+
+        changed = true;
+        return { ...product, stock: DEFAULT_STOCK };
+    });
+
+    return { products: normalizedProducts, changed };
+}
 
 function saveProducts(products) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(products));
@@ -12,16 +28,39 @@ export function listProducts() {
     const savedProducts = localStorage.getItem(STORAGE_KEY);
 
     if (savedProducts === null) {
-        const seed = [...initialProducts];
+        const seed = initialProducts.map((product) => ({
+            ...product,
+            stock: DEFAULT_STOCK,
+        }));
         localStorage.setItem(STORAGE_KEY, JSON.stringify(seed));
         return seed;
     }
 
     try {
-        const products = JSON.parse(savedProducts);
-        return Array.isArray(products) ? products : [...initialProducts];
+        const parsedProducts = JSON.parse(savedProducts);
+
+        if (!Array.isArray(parsedProducts)) {
+            return initialProducts.map((product) => ({
+                ...product,
+                stock: DEFAULT_STOCK,
+            }));
+        }
+
+        const result = addDefaultStock(parsedProducts);
+
+        if (result.changed) {
+            localStorage.setItem(
+                STORAGE_KEY,
+                JSON.stringify(result.products)
+            );
+        }
+
+        return result.products;
     } catch {
-        return [...initialProducts];
+        return initialProducts.map((product) => ({
+            ...product,
+            stock: DEFAULT_STOCK,
+        }));
     }
 }
 
@@ -31,9 +70,16 @@ export function getProductById(id) {
 
 export function createProduct(product) {
     const products = listProducts();
+    const stock = Number(product.stock ?? DEFAULT_STOCK);
+
+    if (!Number.isInteger(stock) || stock < 0) {
+        throw new Error('El stock debe ser un número entero igual o mayor que cero.');
+    }
+
     const newProduct = {
         ...product,
         id: product.id?.trim() || `MS-${Date.now()}`,
+        stock,
     };
 
     if (products.some((item) => item.id === newProduct.id)) {
@@ -46,12 +92,22 @@ export function createProduct(product) {
 
 export function updateProduct(id, changes) {
     const products = listProducts();
+    const nextChanges = { ...changes };
+
+    if (nextChanges.stock !== undefined) {
+        nextChanges.stock = Number(nextChanges.stock);
+
+        if (!Number.isInteger(nextChanges.stock) || nextChanges.stock < 0) {
+            throw new Error('El stock debe ser un número entero igual o mayor que cero.');
+        }
+    }
+
     let updatedProduct = null;
 
     const updatedProducts = products.map((product) => {
         if (product.id !== id) return product;
 
-        updatedProduct = { ...product, ...changes, id };
+        updatedProduct = { ...product, ...nextChanges, id };
         return updatedProduct;
     });
 

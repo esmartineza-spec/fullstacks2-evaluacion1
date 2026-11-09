@@ -13,6 +13,7 @@ function renderCategoriesPage() {
 describe('CategoriesPage', () => {
     beforeEach(() => {
         localStorage.removeItem('mil-sabores-products');
+        localStorage.removeItem('mil-sabores-categories');
     });
 
     it('muestra los 16 productos del catálogo', () => {

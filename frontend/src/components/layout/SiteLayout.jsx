@@ -25,14 +25,6 @@ export default function SiteLayout() {
     useEffect(() => {
         const refreshUser = () => setUser(getCurrentUser());
 
-        window.addEventListener('mil-sabores:auth-changed', refreshUser);
-        window.addEventListener('storage', refreshUser);
-
-        return () => {
-            window.removeEventListener('mil-sabores:auth-changed', refreshUser);
-            window.removeEventListener('storage', refreshUser);
-        };
-
         const refreshCartCount = () => {
             const count = getCart().reduce(
                 (total, item) => total + item.quantity,
@@ -41,11 +33,23 @@ export default function SiteLayout() {
             setCartCount(count);
         };
 
-        return subscribeCart(refreshCartCount);
+        window.addEventListener('mil-sabores:auth-changed', refreshUser);
+        window.addEventListener('storage', refreshUser);
+
+        const unsubscribeCart = subscribeCart(refreshCartCount);
+
+        return () => {
+            window.removeEventListener('mil-sabores:auth-changed', refreshUser);
+            window.removeEventListener('storage', refreshUser);
+            unsubscribeCart();
+        };
     }, []);
 
     const accountLinks = user?.role === 'admin'
-        ? [{ to: '/admin', label: 'Administración' }]
+        ? [
+            { to: '/admin', label: 'Administración' },
+            { to: '/perfil', label: 'Mi perfil' },
+        ]
         : user
             ? [{ to: '/perfil', label: 'Mi perfil' }]
             : [

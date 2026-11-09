@@ -80,4 +80,71 @@ describe('productRepository', () => {
         expect(callback).toHaveBeenCalledTimes(1);
         unsubscribe();
     });
+
+    it('completa el stock de productos guardados antiguos y conserva el stock válido', () => {
+        const productoConStock = {
+            ...sampleProduct,
+            id: 'STOCK001',
+            stock: 4,
+        };
+
+        const productoSinStock = {
+            ...sampleProduct,
+            id: 'STOCK002',
+        };
+
+        localStorage.setItem(
+            STORAGE_KEY,
+            JSON.stringify([productoConStock, productoSinStock])
+        );
+
+        const products = listProducts();
+
+        expect(products[0].stock).toBe(4);
+        expect(products[1].stock).toBe(10);
+
+        const productosGuardados = JSON.parse(localStorage.getItem(STORAGE_KEY));
+        expect(productosGuardados[1].stock).toBe(10);
+    });
+
+    it('rechaza stock negativo o fraccionario al crear un producto', () => {
+        expect(() => createProduct({
+            ...sampleProduct,
+            id: 'STOCKNEG',
+            stock: -1,
+        })).toThrowError(
+            'El stock debe ser un número entero igual o mayor que cero.'
+        );
+
+        expect(() => createProduct({
+            ...sampleProduct,
+            id: 'STOCKDEC',
+            stock: 1.5,
+        })).toThrowError(
+            'El stock debe ser un número entero igual o mayor que cero.'
+        );
+    });
+
+    it('permite actualizar el stock de un producto a cero', () => {
+        createProduct({ ...sampleProduct, stock: 5 });
+
+        const updated = updateProduct('TEST001', { stock: 0 });
+
+        expect(updated.stock).toBe(0);
+        expect(getProductById('TEST001').stock).toBe(0);
+    });
+    it('rechaza stock negativo o fraccionario al actualizar un producto', () => {
+        createProduct({ ...sampleProduct, stock: 5 });
+
+        expect(() => updateProduct('TEST001', { stock: -1 }))
+            .toThrowError(
+                'El stock debe ser un número entero igual o mayor que cero.'
+            );
+
+        expect(() => updateProduct('TEST001', { stock: 1.5 }))
+            .toThrowError(
+                'El stock debe ser un número entero igual o mayor que cero.'
+            );
+    });
+
 });

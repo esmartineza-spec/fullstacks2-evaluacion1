@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import ProductCard from '../components/products/ProductCard.jsx';
-import { categories } from '../data/products.js';
+import {
+    listCategories,
+    subscribeCategories,
+} from '../services/categoryRepository.js';
 import {
     listProducts,
     subscribeProducts,
@@ -10,9 +13,13 @@ import {
 export default function CategoryDetailsPage() {
     const { id } = useParams();
     const [products, setProducts] = useState(() => listProducts());
+    const [categories, setCategories] = useState(() => listCategories());
 
     useEffect(() => {
         return subscribeProducts(() => setProducts(listProducts()));
+    }, []);
+    useEffect(() => {
+        return subscribeCategories(() => setCategories(listCategories()));
     }, []);
 
     const category = categories.find((item) => item.id === id);

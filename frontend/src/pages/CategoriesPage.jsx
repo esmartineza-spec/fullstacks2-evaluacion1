@@ -1,19 +1,35 @@
 import { useEffect, useState } from 'react';
 import ProductCard from '../components/products/ProductCard.jsx';
-import { categories } from '../data/products.js';
 import {
     listProducts,
     subscribeProducts,
 } from '../services/productRepository.js';
+import {
+    listCategories,
+    subscribeCategories,
+} from '../services/categoryRepository.js';
 
 export default function CategoriesPage() {
     const [products, setProducts] = useState(() => listProducts());
     const [selectedCategory, setSelectedCategory] = useState('todas');
     const [search, setSearch] = useState('');
+    const [categories, setCategories] = useState(() => [
+        { id: 'todas', label: 'Todas' },
+        ...listCategories(),
+    ]);
 
     useEffect(() => {
         return subscribeProducts(() => setProducts(listProducts()));
     }, []);
+    useEffect(() => {
+        return subscribeCategories(() => {
+            setCategories([
+                { id: 'todas', label: 'Todas' },
+                ...listCategories(),
+            ]);
+        });
+    }, []);
+
 
     const visibleProducts = products.filter((product) => {
         const matchesCategory =

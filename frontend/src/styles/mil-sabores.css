@@ -1812,3 +1812,58 @@ main.container {
         flex-direction: column;
     }
 }
+
+/*DISEÑO ORDEN ADMIN*/
+.admin-orders-page {
+    padding: 1rem 0 3rem;
+}
+
+.admin-orders-panel,
+.admin-order-receipt {
+    border-color: var(--ms-border);
+    border-radius: 16px;
+    background: var(--ms-card);
+}
+
+.admin-orders-panel {
+    padding: 1rem;
+}
+
+.admin-order-receipt {
+    padding: clamp(1.2rem, 3vw, 2rem);
+}
+
+.admin-order-receipt h2 {
+    color: var(--ms-gold);
+}
+
+.admin-order-receipt p,
+.admin-order-receipt li {
+    color: var(--ms-muted);
+}
+
+.admin-order-receipt strong {
+    color: var(--ms-cream);
+}
+
+.admin-order-totals {
+    max-width: 420px;
+    margin: 1rem 0 0 auto;
+}
+
+.admin-order-totals p {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0.55rem;
+}
+
+.admin-order-total {
+    border-top: 1px solid var(--ms-border);
+    padding-top: 0.8rem;
+    font-size: 1.15rem;
+}
+
+.admin-order-total strong:last-child {
+    color: var(--ms-gold);
+}

@@ -4,6 +4,7 @@ module.exports = function (config) {
         frameworks: ['jasmine', 'webpack'],
         files: [
             { pattern: 'src/tests/**/*.spec.jsx', watched: false },
+            { pattern: 'public/img/**/*', included: false, served: true, watched: false },
         ],
         preprocessors: {
             'src/tests/**/*.spec.jsx': ['webpack'],
@@ -23,19 +24,34 @@ module.exports = function (config) {
                                     ['@babel/preset-env', { modules: false }],
                                     ['@babel/preset-react', { runtime: 'automatic' }],
                                 ],
+                                plugins: [
+                                    ['istanbul', {
+                                        exclude: ['**/*.spec.jsx', '**/tests/**'],
+                                    }],
+                                ],
                             },
                         },
                     },
                 ],
             },
         },
-        reporters: ['progress'],
+        reporters: ['progress', 'coverage'],
+        coverageReporter: {
+            reporters: [
+                { type: 'html', dir: 'coverage', subdir: '.' },
+                { type: 'text-summary' },
+            ],
+        },
         browsers: [],
         singleRun: false,
         plugins: [
             require('karma-jasmine'),
             require('karma-chrome-launcher'),
             require('karma-webpack'),
+            require('karma-coverage'),
         ],
+        proxies: {
+            '/img/': '/base/public/img/',
+        },
     });
 };

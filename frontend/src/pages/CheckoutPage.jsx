@@ -2,10 +2,10 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { formatPrice } from '../data/products.js';
 import { clearCart, getCart } from '../services/cartRepository.js';
-import { getProductById } from '../services/productRepository.js';
 import { getCurrentUser } from '../services/authRepository.js';
 import { calculateDiscount } from '../services/discountRules.js';
 import { saveOrderToHistory } from '../services/orderRepository.js';
+import { getProductById, updateProduct } from '../services/productRepository.js';
 
 
 function FormField({ label, name, value, onChange, error, type = 'text' }) {
@@ -95,6 +95,23 @@ export default function CheckoutPage() {
         setErrors(nextErrors);
         if (Object.keys(nextErrors).length > 0) return;
 
+        const currentItems = items.map(({ product, quantity }) => ({
+            product: getProductById(product.id),
+            quantity,
+        }));
+
+        const unavailableItem = currentItems.find(
+            ({ product, quantity }) =>
+                !product || Number(product.stock ?? 0) < quantity
+        );
+
+        if (unavailableItem) {
+            setErrors({
+                stock: `No hay stock suficiente para ${unavailableItem.product?.name || 'un producto del carrito'}.`,
+            });
+            return;
+        }
+
         const order = {
             code: `MS-${Date.now()}`,
             customer: form,
@@ -117,6 +134,11 @@ export default function CheckoutPage() {
 
         localStorage.setItem('mil-sabores-last-order', JSON.stringify(order));
         saveOrderToHistory(order);
+        currentItems.forEach(({ product, quantity }) => {
+            updateProduct(product.id, {
+                stock: Number(product.stock ?? 0) - quantity,
+            });
+        });
         clearCart();
         navigate('/compra/exito');
     }
@@ -137,6 +159,11 @@ export default function CheckoutPage() {
             <div className="col-lg-7">
                 <div className="card checkout-panel checkout-form-card">
                     <h1 className="h2 mb-4">Datos de compra</h1>
+                    {errors.stock && (
+                        <div className="alert alert-warning" role="alert">
+                            {errors.stock}
+                        </div>
+                    )}
 
                     <form noValidate onSubmit={handleSubmit}>
                         <FormField

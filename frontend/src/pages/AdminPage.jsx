@@ -1,5 +1,9 @@
 import { useEffect, useState } from 'react';
-import { categories, formatPrice } from '../data/products.js';
+import { formatPrice } from '../data/products.js';
+import {
+    listCategories,
+    subscribeCategories,
+} from '../services/categoryRepository.js';
 import {
     createProduct,
     deleteProduct,
@@ -15,6 +19,7 @@ const emptyForm = {
     price: '',
     description: '',
     image: '',
+    stock: '10',
 };
 
 export default function AdminPage() {
@@ -23,9 +28,14 @@ export default function AdminPage() {
     const [editingId, setEditingId] = useState(null);
     const [error, setError] = useState('');
     const [message, setMessage] = useState('');
+    const [categories, setCategories] = useState(() => listCategories());
+    const stock = Number(form.stock);
 
     useEffect(() => {
         return subscribeProducts(() => setProducts(listProducts()));
+    }, []);
+    useEffect(() => {
+        return subscribeCategories(() => setCategories(listCategories()));
     }, []);
 
     function handleChange(event) {
@@ -37,6 +47,7 @@ export default function AdminPage() {
 
     function resetForm() {
         setForm(emptyForm);
+
         setEditingId(null);
     }
 
@@ -65,6 +76,10 @@ export default function AdminPage() {
             setError('Ingresa la ruta de la imagen.');
             return;
         }
+        if (form.stock.trim() === '' || !Number.isInteger(stock) || stock < 0) {
+            setError('El stock debe ser un número entero igual o mayor que cero.');
+            return;
+        }
 
         const productData = {
             id: form.id.trim(),
@@ -73,6 +88,7 @@ export default function AdminPage() {
             price,
             description: form.description.trim(),
             image: form.image.trim(),
+            stock,
         };
 
         try {
@@ -100,6 +116,7 @@ export default function AdminPage() {
             price: String(product.price),
             description: product.description,
             image: product.image,
+            stock: String(product.stock ?? 0),
         });
         setError('');
         setMessage('');
@@ -119,7 +136,7 @@ export default function AdminPage() {
             resetForm();
         }
     }
-
+//FORMULARIOS
     return (
         <section className="admin-page">
             <h1 className="h2 mb-4">Administración de productos</h1>
@@ -202,6 +219,23 @@ export default function AdminPage() {
                     </div>
 
                     <div className="mb-3">
+                        <label htmlFor="product-stock" className="form-label">
+                            Stock disponible
+                        </label>
+                        <input
+                            id="product-stock"
+                            name="stock"
+                            type="number"
+                            min="0"
+                            step="1"
+                            value={form.stock}
+                            onChange={handleChange}
+                            className="form-control"
+                            required
+                        />
+                    </div>
+
+                    <div className="mb-3">
                         <label htmlFor="product-description" className="form-label">
                             Descripción
                         </label>
@@ -259,7 +293,9 @@ export default function AdminPage() {
                             <th>Producto</th>
                             <th>Categoría</th>
                             <th>Precio</th>
+                            <th>Stock</th>
                             <th>Acciones</th>
+
                         </tr>
                         </thead>
                         <tbody>
@@ -269,6 +305,7 @@ export default function AdminPage() {
                                 <td>{product.name}</td>
                                 <td>{product.category}</td>
                                 <td>{formatPrice(product.price)}</td>
+                                <td>{product.stock}</td>
                                 <td>
                                     <button
                                         type="button"
